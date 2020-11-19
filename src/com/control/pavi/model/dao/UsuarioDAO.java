@@ -66,4 +66,14 @@ public class UsuarioDAO extends ClaseDAO {
 		resultado = (List<Usuario>) query.getResultList();
 		return resultado;
 	}
+	//para recuperar usuario
+	@SuppressWarnings("unchecked")
+	public List<Usuario> buscarPorNombreApellido(String nombreApellido){
+		List<Usuario> resultado = new ArrayList<Usuario>();
+		Query query = getEntityManager().createNamedQuery("Usuario.buscarPorPatron");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		query.setParameter("patron", "%" + nombreApellido.toLowerCase() + "%");
+		resultado = (List<Usuario>) query.getResultList();
+		return resultado;
+	}
 }

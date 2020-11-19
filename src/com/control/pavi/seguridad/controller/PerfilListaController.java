@@ -175,7 +175,7 @@ public class PerfilListaController {
 					llenarDatos("");
 				}
 			}else {
-				helper.mostrarAlertaError("Debe Seleccionar un Cliente a Dar de Baja", Context.getInstance().getStage());
+				helper.mostrarAlertaError("Debe Seleccionar un Perfil a Dar de Baja", Context.getInstance().getStage());
 			}
 		}catch(Exception ex) {
 			System.out.println(ex.getMessage());

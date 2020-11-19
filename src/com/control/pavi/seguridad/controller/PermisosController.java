@@ -27,7 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
-public class Permisos {
+public class PermisosController {
 	@FXML private TableView<Permiso> tvPermiso;
 	@FXML private Button btnGuardar;
 	@FXML private TableView<Menu> tvMenu;

@@ -20,6 +20,7 @@ public class Context {
 	private AnchorPane apInicioSesion;
 	
 	private Usuario usuario;
+	private Usuario usuarioEditar;
 	private Perfil perfil;
 	
 	public static Context getInstance() {
@@ -87,6 +88,14 @@ public class Context {
 
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
+	}
+
+	public Usuario getUsuarioEditar() {
+		return usuarioEditar;
+	}
+
+	public void setUsuarioEditar(Usuario usuarioEditar) {
+		this.usuarioEditar = usuarioEditar;
 	}
 	
 }

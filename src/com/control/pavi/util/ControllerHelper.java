@@ -348,7 +348,7 @@ public class ControllerHelper {
 
 		return result;
 	}
-	public static boolean validarEmail(String email) {
+	public boolean validarEmail(String email) {
 		try{
 			// Compiles the given regular expression into a pattern.
 			Pattern pattern = Pattern.compile(EMAIL_PATTERN);

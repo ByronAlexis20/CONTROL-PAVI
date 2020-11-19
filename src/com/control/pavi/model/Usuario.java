@@ -12,6 +12,9 @@ import javax.persistence.*;
 			+ "u.usuario = (:usu) and u.clave = (:cla) and u.estado = 1"),
 	@NamedQuery(name="Usuario.validarUsuario", query="SELECT u FROM Usuario u "
 			+ "WHERE u.usuario = (:usuario) AND u.idUsuario <> (:idUsuario) and u.estado = 1"),
+	@NamedQuery(name="Usuario.buscarPorPatron", query="SELECT u FROM Usuario u "
+			+ "WHERE u.estado = 1 AND (lower(u.nombres) like (:patron) OR lower(u.apellidos) like (:patron))"),
+	
 	@NamedQuery(name="Usuario.buscarPorRol", query="SELECT u FROM Usuario u WHERE u.perfil.idPerfil = :idRol and u.estado = 1"),
 	@NamedQuery(name="Usuario.recuperaUsuario", query="SELECT u FROM Usuario u WHERE u.cedula = (:cedula) and u.estado = 1"),
 	@NamedQuery(name="Usuario.recuperaUsuarioPorId", query="SELECT u FROM Usuario u WHERE u.idUsuario = (:idUsuario) and u.estado = 1"),
@@ -22,7 +25,7 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_usuario")
-	private int idUsuario;
+	private Integer idUsuario;
 
 	private String apellidos;
 
@@ -53,11 +56,11 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
-	public int getIdUsuario() {
+	public Integer getIdUsuario() {
 		return this.idUsuario;
 	}
 
-	public void setIdUsuario(int idUsuario) {
+	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
