@@ -19,7 +19,7 @@ public class Menu implements Serializable, Comparable<Menu> {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_menu")
-	private int idMenu;
+	private Integer idMenu;
 
 	private String descripcion;
 
@@ -28,7 +28,7 @@ public class Menu implements Serializable, Comparable<Menu> {
 	private String formulario;
 
 	@Column(name="id_menu_padre")
-	private int idMenuPadre;
+	private Integer idMenuPadre;
 
 	private int posicion;
 	
@@ -41,11 +41,11 @@ public class Menu implements Serializable, Comparable<Menu> {
 	public Menu() {
 	}
 
-	public int getIdMenu() {
+	public Integer getIdMenu() {
 		return this.idMenu;
 	}
 
-	public void setIdMenu(int idMenu) {
+	public void setIdMenu(Integer idMenu) {
 		this.idMenu = idMenu;
 	}
 
@@ -73,11 +73,11 @@ public class Menu implements Serializable, Comparable<Menu> {
 		this.formulario = formulario;
 	}
 
-	public int getIdMenuPadre() {
+	public Integer getIdMenuPadre() {
 		return this.idMenuPadre;
 	}
 
-	public void setIdMenuPadre(int idMenuPadre) {
+	public void setIdMenuPadre(Integer idMenuPadre) {
 		this.idMenuPadre = idMenuPadre;
 	}
 
