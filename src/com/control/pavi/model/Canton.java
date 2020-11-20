@@ -5,12 +5,12 @@ import javax.persistence.*;
 import java.util.List;
 
 
-/**
- * The persistent class for the canton database table.
- * 
- */
 @Entity
-@NamedQuery(name="Canton.findAll", query="SELECT c FROM Canton c")
+@Table(name="canton")
+@NamedQueries({
+	@NamedQuery(name="Canton.findAll", query="SELECT c FROM Canton c"),
+	@NamedQuery(name="Canton.bucarPatron", query="SELECT c FROM Canton c where c.estado = 1 and lower(c.canton) like lower(:patron)")
+})
 public class Canton implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -21,7 +21,7 @@ public class Canton implements Serializable {
 
 	private String canton;
 
-	private byte estado;
+	private boolean estado;
 
 	//bi-directional many-to-one association to Provincia
 	@ManyToOne
@@ -51,11 +51,11 @@ public class Canton implements Serializable {
 		this.canton = canton;
 	}
 
-	public byte getEstado() {
+	public boolean getEstado() {
 		return this.estado;
 	}
 
-	public void setEstado(byte estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 

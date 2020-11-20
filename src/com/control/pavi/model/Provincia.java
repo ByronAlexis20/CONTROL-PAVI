@@ -5,12 +5,12 @@ import javax.persistence.*;
 import java.util.List;
 
 
-/**
- * The persistent class for the provincia database table.
- * 
- */
 @Entity
-@NamedQuery(name="Provincia.findAll", query="SELECT p FROM Provincia p")
+@Table(name="provincia")
+@NamedQueries({
+	@NamedQuery(name="Provincia.findAll", query="SELECT p FROM Provincia p"),
+	@NamedQuery(name="Provincia.bucarPatron", query="SELECT p FROM Provincia p where p.estado = 1 and lower(p.provincia) like lower(:patron)")
+})
 public class Provincia implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,7 @@ public class Provincia implements Serializable {
 	@Column(name="id_provincia")
 	private int idProvincia;
 
-	private byte estado;
+	private boolean estado;
 
 	private String provincia;
 
@@ -38,11 +38,11 @@ public class Provincia implements Serializable {
 		this.idProvincia = idProvincia;
 	}
 
-	public byte getEstado() {
+	public boolean getEstado() {
 		return this.estado;
 	}
 
-	public void setEstado(byte estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 

@@ -2,8 +2,13 @@ package com.control.pavi.util;
 
 import java.sql.Connection;
 
+import com.control.pavi.model.Canton;
+import com.control.pavi.model.Parroquia;
 import com.control.pavi.model.Perfil;
+import com.control.pavi.model.Provincia;
+import com.control.pavi.model.Recinto;
 import com.control.pavi.model.Usuario;
+import com.control.pavi.model.Zona;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -22,6 +27,11 @@ public class Context {
 	private Usuario usuario;
 	private Usuario usuarioEditar;
 	private Perfil perfil;
+	private Provincia provincia;
+	private Canton canton;
+	private Parroquia parroquia;
+	private Zona zona;
+	private Recinto recinto;
 	
 	public static Context getInstance() {
 		return instance;
@@ -96,6 +106,46 @@ public class Context {
 
 	public void setUsuarioEditar(Usuario usuarioEditar) {
 		this.usuarioEditar = usuarioEditar;
+	}
+
+	public Provincia getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(Provincia provincia) {
+		this.provincia = provincia;
+	}
+
+	public Canton getCanton() {
+		return canton;
+	}
+
+	public void setCanton(Canton canton) {
+		this.canton = canton;
+	}
+
+	public Parroquia getParroquia() {
+		return parroquia;
+	}
+
+	public void setParroquia(Parroquia parroquia) {
+		this.parroquia = parroquia;
+	}
+
+	public Zona getZona() {
+		return zona;
+	}
+
+	public void setZona(Zona zona) {
+		this.zona = zona;
+	}
+
+	public Recinto getRecinto() {
+		return recinto;
+	}
+
+	public void setRecinto(Recinto recinto) {
+		this.recinto = recinto;
 	}
 	
 }

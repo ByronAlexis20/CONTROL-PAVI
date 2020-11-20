@@ -5,12 +5,13 @@ import javax.persistence.*;
 import java.util.List;
 
 
-/**
- * The persistent class for the recinto database table.
- * 
- */
 @Entity
-@NamedQuery(name="Recinto.findAll", query="SELECT r FROM Recinto r")
+@Table(name="recinto")
+@NamedQueries({
+	@NamedQuery(name="Recinto.findAll", query="SELECT r FROM Recinto r"),
+	@NamedQuery(name="Recinto.bucarPatron", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.recinto) like lower(:patron)")
+})
+
 public class Recinto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -21,7 +22,7 @@ public class Recinto implements Serializable {
 
 	private String direccion;
 
-	private byte estado;
+	private boolean estado;
 
 	private String recinto;
 
@@ -55,11 +56,11 @@ public class Recinto implements Serializable {
 		this.direccion = direccion;
 	}
 
-	public byte getEstado() {
+	public boolean getEstado() {
 		return this.estado;
 	}
 
-	public void setEstado(byte estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 

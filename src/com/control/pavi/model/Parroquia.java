@@ -5,12 +5,12 @@ import javax.persistence.*;
 import java.util.List;
 
 
-/**
- * The persistent class for the parroquia database table.
- * 
- */
 @Entity
-@NamedQuery(name="Parroquia.findAll", query="SELECT p FROM Parroquia p")
+@Table(name="parroquia")
+@NamedQueries({
+	@NamedQuery(name="Parroquia.findAll", query="SELECT p FROM Parroquia p"),
+	@NamedQuery(name="Parroquia.bucarPatron", query="SELECT p FROM Parroquia p where p.estado = 1 and lower(p.parroquia) like lower(:patron)")
+})
 public class Parroquia implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,7 @@ public class Parroquia implements Serializable {
 	@Column(name="id_parroquia")
 	private int idParroquia;
 
-	private byte estado;
+	private boolean estado;
 
 	private String parroquia;
 
@@ -43,11 +43,11 @@ public class Parroquia implements Serializable {
 		this.idParroquia = idParroquia;
 	}
 
-	public byte getEstado() {
+	public boolean getEstado() {
 		return this.estado;
 	}
 
-	public void setEstado(byte estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 
