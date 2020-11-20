@@ -6,10 +6,22 @@
 		<class>com.control.pavi.model.Perfil</class>
 		<class>com.control.pavi.model.Permiso</class>
 		<class>com.control.pavi.model.Usuario</class>
+		<class>com.control.pavi.model.AsignacionJunta</class>
+		<class>com.control.pavi.model.AsignacionRepresentante</class>
+		<class>com.control.pavi.model.Candidato</class>
+		<class>com.control.pavi.model.Canton</class>
+		<class>com.control.pavi.model.JuntaVoto</class>
+		<class>com.control.pavi.model.Parroquia</class>
+		<class>com.control.pavi.model.PartidoPolitico</class>
+		<class>com.control.pavi.model.Periodo</class>
+		<class>com.control.pavi.model.Provincia</class>
+		<class>com.control.pavi.model.Recinto</class>
+		<class>com.control.pavi.model.Representante</class>
+		<class>com.control.pavi.model.Zona</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/control-pavi?useSSL=false"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>
-			<property name="javax.persistence.jdbc.password" value="admin123"/>
+			<property name="javax.persistence.jdbc.password" value="tricampeon2015"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 		</properties>
 	</persistence-unit>
