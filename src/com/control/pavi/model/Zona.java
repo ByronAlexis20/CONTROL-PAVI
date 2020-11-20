@@ -10,7 +10,11 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Zona.findAll", query="SELECT z FROM Zona z")
+@Table(name="zona")
+@NamedQueries({
+	@NamedQuery(name="Zona.findAll", query="SELECT z FROM Zona z"),
+	@NamedQuery(name="Zona.bucarPatron", query="SELECT z FROM Zona z where z.estado = 1 and lower(z.zona) like lower(:patron)")
+})
 public class Zona implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -19,7 +23,7 @@ public class Zona implements Serializable {
 	@Column(name="id_zona")
 	private int idZona;
 
-	private byte estado;
+	private boolean estado;
 
 	private String zona;
 
@@ -43,11 +47,11 @@ public class Zona implements Serializable {
 		this.idZona = idZona;
 	}
 
-	public byte getEstado() {
+	public boolean getEstado() {
 		return this.estado;
 	}
 
-	public void setEstado(byte estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 
