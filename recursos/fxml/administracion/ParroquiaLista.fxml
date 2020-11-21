@@ -29,14 +29,14 @@
           <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER" prefHeight="42.0" prefWidth="703.0" text="LISTADO DE PERFILES" GridPane.columnSpan="5" GridPane.halignment="CENTER">
+            <Label alignment="CENTER" prefHeight="42.0" prefWidth="703.0" text="LISTADO DE PARROQUIAS" GridPane.columnSpan="5" GridPane.halignment="CENTER">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font></Label>
             <TableView fx:id="tvDatos" prefHeight="171.0" prefWidth="432.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="6" />
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: #bbc8d0; -fx-border-width: 1px; -fx-spacing: 8; -fx-background-radius: 6.0; -fx-max-height: 300" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <Label text="Búsqueda por Perfil">
+                  <Label text="Búsqueda por parroquia: ">
                      <HBox.margin><Insets right="10.0" /></HBox.margin>
                   </Label>
                   <TextField fx:id="txtBuscar" prefHeight="25.0" prefWidth="425.0" />

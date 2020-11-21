@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import com.control.pavi.util.Context;
 import com.control.pavi.util.ControllerHelper;
-import com.control.pavi.util.Encriptado;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -21,7 +20,6 @@ public class ControlPaviApplication extends Application {
 	@Override
 	public void start(Stage stage) {
 		try {
-			System.out.println(Encriptado.Encriptar("sa"));
 			FXMLLoader root = new FXMLLoader();
 			root.setLocation(getClass().getResource("/principal/InicioSesion.fxml"));
 			AnchorPane page = (AnchorPane) root.load();

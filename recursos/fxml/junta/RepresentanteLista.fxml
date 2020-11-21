@@ -48,7 +48,7 @@
                      <HBox.margin><Insets left="5.0" /></HBox.margin></Button>
                   <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminar" prefHeight="40.0" prefWidth="135.0" text="Dar de Baja" HBox.hgrow="ALWAYS">
                      <HBox.margin><Insets left="5.0" /></HBox.margin></Button>
-                  <Button fx:id="btnAsignarPartidos" mnemonicParsing="false" onAction="#asignarPartidosPoliticos" prefHeight="40.0" prefWidth="165.0" text="Asignar Partidos Politicos" />
+                  <Button fx:id="btnAsignarPartidos" mnemonicParsing="false" onAction="#asignarPartidosPoliticos" prefHeight="40.0" prefWidth="165.0" text="Partidos Politicos" />
                </children>
             </HBox>
          </children>
