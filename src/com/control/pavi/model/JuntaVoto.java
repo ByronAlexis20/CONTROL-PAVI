@@ -2,6 +2,7 @@ package com.control.pavi.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -17,15 +18,19 @@ public class JuntaVoto implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_junta")
-	private int idJunta;
+	private Integer idJunta;
 
 	private String descripcion;
 
-	private byte estado;
+	private boolean estado;
 
 	private String genero;
 
 	private int numero;
+
+	//bi-directional many-to-one association to AsignacionSupervisor
+	@OneToMany(mappedBy="juntaVoto")
+	private List<AsignacionSupervisor> asignacionSupervisors;
 
 	//bi-directional many-to-one association to Recinto
 	@ManyToOne
@@ -35,11 +40,11 @@ public class JuntaVoto implements Serializable {
 	public JuntaVoto() {
 	}
 
-	public int getIdJunta() {
+	public Integer getIdJunta() {
 		return this.idJunta;
 	}
 
-	public void setIdJunta(int idJunta) {
+	public void setIdJunta(Integer idJunta) {
 		this.idJunta = idJunta;
 	}
 
@@ -51,11 +56,11 @@ public class JuntaVoto implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public byte getEstado() {
+	public boolean getEstado() {
 		return this.estado;
 	}
 
-	public void setEstado(byte estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 
@@ -73,6 +78,28 @@ public class JuntaVoto implements Serializable {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+
+	public List<AsignacionSupervisor> getAsignacionSupervisors() {
+		return this.asignacionSupervisors;
+	}
+
+	public void setAsignacionSupervisors(List<AsignacionSupervisor> asignacionSupervisors) {
+		this.asignacionSupervisors = asignacionSupervisors;
+	}
+
+	public AsignacionSupervisor addAsignacionSupervisor(AsignacionSupervisor asignacionSupervisor) {
+		getAsignacionSupervisors().add(asignacionSupervisor);
+		asignacionSupervisor.setJuntaVoto(this);
+
+		return asignacionSupervisor;
+	}
+
+	public AsignacionSupervisor removeAsignacionSupervisor(AsignacionSupervisor asignacionSupervisor) {
+		getAsignacionSupervisors().remove(asignacionSupervisor);
+		asignacionSupervisor.setJuntaVoto(null);
+
+		return asignacionSupervisor;
 	}
 
 	public Recinto getRecinto() {

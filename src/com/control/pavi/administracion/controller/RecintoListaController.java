@@ -87,7 +87,7 @@ public class RecintoListaController {
 			provinciaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getZona().getParroquia().getCanton().getProvincia().getProvincia());
+					return new SimpleObjectProperty<String>(param.getValue().getParroquia().getCanton().getProvincia().getProvincia());
 				}
 			});
 			
@@ -97,7 +97,7 @@ public class RecintoListaController {
 			cantonColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getZona().getParroquia().getCanton().getCanton());
+					return new SimpleObjectProperty<String>(param.getValue().getParroquia().getCanton().getCanton());
 				}
 			});
 			
@@ -107,16 +107,7 @@ public class RecintoListaController {
 			parroquiaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getZona().getParroquia().getParroquia());
-				}
-			});
-			TableColumn<Recinto, String> zonaColum = new TableColumn<>("Zona");
-			zonaColum.setMinWidth(10);
-			zonaColum.setPrefWidth(200);
-			zonaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
-				@Override
-				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getZona().getZona());
+					return new SimpleObjectProperty<String>(param.getValue().getParroquia().getParroquia());
 				}
 			});
 			
@@ -147,7 +138,7 @@ public class RecintoListaController {
 			});
 
 			
-			tvDatos.getColumns().addAll(idColum,provinciaColum,cantonColum,parroquiaColum,zonaColum,recintoColum,estadoColum);
+			tvDatos.getColumns().addAll(idColum,provinciaColum,cantonColum,parroquiaColum,recintoColum,estadoColum);
 			tvDatos.setItems(datos);
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());

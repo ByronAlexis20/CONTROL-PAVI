@@ -11,14 +11,13 @@ import java.util.List;
 	@NamedQuery(name="Recinto.findAll", query="SELECT r FROM Recinto r"),
 	@NamedQuery(name="Recinto.bucarPatron", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.recinto) like lower(:patron)")
 })
-
 public class Recinto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_recinto")
-	private int idRecinto;
+	private Integer idRecinto;
 
 	private String direccion;
 
@@ -32,19 +31,19 @@ public class Recinto implements Serializable {
 	@OneToMany(mappedBy="recinto")
 	private List<JuntaVoto> juntaVotos;
 
-	//bi-directional many-to-one association to Zona
+	//bi-directional many-to-one association to Parroquia
 	@ManyToOne
-	@JoinColumn(name="id_zona")
-	private Zona zona;
+	@JoinColumn(name="id_parroquia")
+	private Parroquia parroquia;
 
 	public Recinto() {
 	}
 
-	public int getIdRecinto() {
+	public Integer getIdRecinto() {
 		return this.idRecinto;
 	}
 
-	public void setIdRecinto(int idRecinto) {
+	public void setIdRecinto(Integer idRecinto) {
 		this.idRecinto = idRecinto;
 	}
 
@@ -102,12 +101,12 @@ public class Recinto implements Serializable {
 		return juntaVoto;
 	}
 
-	public Zona getZona() {
-		return this.zona;
+	public Parroquia getParroquia() {
+		return this.parroquia;
 	}
 
-	public void setZona(Zona zona) {
-		this.zona = zona;
+	public void setParroquia(Parroquia parroquia) {
+		this.parroquia = parroquia;
 	}
 
 }

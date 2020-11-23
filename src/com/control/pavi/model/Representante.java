@@ -17,18 +17,20 @@ public class Representante implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_representante")
-	private int idRepresentante;
+	private Integer idRepresentante;
 
 	private String apellidos;
 
 	private int edad;
 
-	private byte estado;
+	private boolean estado;
 
 	@Column(name="no_identificacion")
 	private String noIdentificacion;
 
 	private String nombre;
+
+	private String telefono;
 
 	//bi-directional many-to-one association to AsignacionJunta
 	@OneToMany(mappedBy="representante")
@@ -41,11 +43,11 @@ public class Representante implements Serializable {
 	public Representante() {
 	}
 
-	public int getIdRepresentante() {
+	public Integer getIdRepresentante() {
 		return this.idRepresentante;
 	}
 
-	public void setIdRepresentante(int idRepresentante) {
+	public void setIdRepresentante(Integer idRepresentante) {
 		this.idRepresentante = idRepresentante;
 	}
 
@@ -65,11 +67,11 @@ public class Representante implements Serializable {
 		this.edad = edad;
 	}
 
-	public byte getEstado() {
+	public boolean getEstado() {
 		return this.estado;
 	}
 
-	public void setEstado(byte estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 
@@ -87,6 +89,14 @@ public class Representante implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 	public List<AsignacionJunta> getAsignacionJuntas() {

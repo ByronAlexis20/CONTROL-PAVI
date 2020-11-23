@@ -8,7 +8,6 @@ import com.control.pavi.model.Perfil;
 import com.control.pavi.model.Provincia;
 import com.control.pavi.model.Recinto;
 import com.control.pavi.model.Usuario;
-import com.control.pavi.model.Zona;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -30,7 +29,6 @@ public class Context {
 	private Provincia provincia;
 	private Canton canton;
 	private Parroquia parroquia;
-	private Zona zona;
 	private Recinto recinto;
 	
 	public static Context getInstance() {
@@ -130,14 +128,6 @@ public class Context {
 
 	public void setParroquia(Parroquia parroquia) {
 		this.parroquia = parroquia;
-	}
-
-	public Zona getZona() {
-		return zona;
-	}
-
-	public void setZona(Zona zona) {
-		this.zona = zona;
 	}
 
 	public Recinto getRecinto() {

@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 import java.util.List;
 
+
 @Entity
 @Table(name="menu")
 @NamedQueries({
@@ -27,12 +28,12 @@ public class Menu implements Serializable, Comparable<Menu> {
 
 	private String formulario;
 
+	private String icono;
+
 	@Column(name="id_menu_padre")
 	private Integer idMenuPadre;
 
 	private int posicion;
-	
-	private String icono;
 
 	//bi-directional many-to-one association to Permiso
 	@OneToMany(mappedBy="menu")
@@ -73,6 +74,14 @@ public class Menu implements Serializable, Comparable<Menu> {
 		this.formulario = formulario;
 	}
 
+	public String getIcono() {
+		return this.icono;
+	}
+
+	public void setIcono(String icono) {
+		this.icono = icono;
+	}
+
 	public Integer getIdMenuPadre() {
 		return this.idMenuPadre;
 	}
@@ -110,15 +119,6 @@ public class Menu implements Serializable, Comparable<Menu> {
 
 		return permiso;
 	}
-	
-	public String getIcono() {
-		return icono;
-	}
-
-	public void setIcono(String icono) {
-		this.icono = icono;
-	}
-
 	@Override
     public int compareTo(Menu o) {
         if (this.posicion < o.posicion) {

@@ -18,11 +18,11 @@ public class PartidoPolitico implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_partido")
-	private int idPartido;
+	private Integer idPartido;
 
 	private String descripcion;
 
-	private byte estado;
+	private boolean estado;
 
 	@Column(name="id_periodo")
 	private int idPeriodo;
@@ -43,11 +43,11 @@ public class PartidoPolitico implements Serializable {
 	public PartidoPolitico() {
 	}
 
-	public int getIdPartido() {
+	public Integer getIdPartido() {
 		return this.idPartido;
 	}
 
-	public void setIdPartido(int idPartido) {
+	public void setIdPartido(Integer idPartido) {
 		this.idPartido = idPartido;
 	}
 
@@ -59,11 +59,11 @@ public class PartidoPolitico implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public byte getEstado() {
+	public boolean getEstado() {
 		return this.estado;
 	}
 
-	public void setEstado(byte estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 

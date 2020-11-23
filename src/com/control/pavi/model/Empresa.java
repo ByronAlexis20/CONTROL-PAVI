@@ -25,6 +25,9 @@ public class Empresa implements Serializable {
 
 	private boolean estado;
 
+	@Lob
+	private byte[] logo;
+
 	@Column(name="nombre_sistema")
 	private String nombreSistema;
 
@@ -35,9 +38,6 @@ public class Empresa implements Serializable {
 
 	private String ruc;
 
-	@Lob
-	private byte[] logo;
-	
 	private String telefono;
 
 	public Empresa() {
@@ -73,6 +73,14 @@ public class Empresa implements Serializable {
 
 	public void setEstado(boolean estado) {
 		this.estado = estado;
+	}
+
+	public byte[] getLogo() {
+		return this.logo;
+	}
+
+	public void setLogo(byte[] logo) {
+		this.logo = logo;
 	}
 
 	public String getNombreSistema() {
@@ -113,14 +121,6 @@ public class Empresa implements Serializable {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
-	}
-
-	public byte[] getLogo() {
-		return logo;
-	}
-
-	public void setLogo(byte[] logo) {
-		this.logo = logo;
 	}
 
 }

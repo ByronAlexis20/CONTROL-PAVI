@@ -17,11 +17,11 @@ public class AsignacionJunta implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_asignacion_junta")
-	private int idAsignacionJunta;
+	private Integer idAsignacionJunta;
 
 	private String descripcion;
 
-	private byte estado;
+	private boolean estado;
 
 	//bi-directional many-to-one association to Representante
 	@ManyToOne
@@ -31,11 +31,11 @@ public class AsignacionJunta implements Serializable {
 	public AsignacionJunta() {
 	}
 
-	public int getIdAsignacionJunta() {
+	public Integer getIdAsignacionJunta() {
 		return this.idAsignacionJunta;
 	}
 
-	public void setIdAsignacionJunta(int idAsignacionJunta) {
+	public void setIdAsignacionJunta(Integer idAsignacionJunta) {
 		this.idAsignacionJunta = idAsignacionJunta;
 	}
 
@@ -47,11 +47,11 @@ public class AsignacionJunta implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public byte getEstado() {
+	public boolean getEstado() {
 		return this.estado;
 	}
 
-	public void setEstado(byte estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 

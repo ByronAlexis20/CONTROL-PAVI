@@ -17,13 +17,13 @@ public class Candidato implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_candidato")
-	private int idCandidato;
+	private Integer idCandidato;
 
 	private String apellido;
 
 	private int edad;
 
-	private byte estado;
+	private boolean estado;
 
 	private String genero;
 
@@ -36,11 +36,11 @@ public class Candidato implements Serializable {
 	public Candidato() {
 	}
 
-	public int getIdCandidato() {
+	public Integer getIdCandidato() {
 		return this.idCandidato;
 	}
 
-	public void setIdCandidato(int idCandidato) {
+	public void setIdCandidato(Integer idCandidato) {
 		this.idCandidato = idCandidato;
 	}
 
@@ -60,11 +60,11 @@ public class Candidato implements Serializable {
 		this.edad = edad;
 	}
 
-	public byte getEstado() {
+	public boolean getEstado() {
 		return this.estado;
 	}
 
-	public void setEstado(byte estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 

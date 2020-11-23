@@ -17,11 +17,11 @@ public class AsignacionRepresentante implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_asignacion")
-	private int idAsignacion;
+	private Integer idAsignacion;
 
 	private String descripcion;
 
-	private byte estado;
+	private boolean estado;
 
 	//bi-directional many-to-one association to PartidoPolitico
 	@ManyToOne
@@ -36,11 +36,11 @@ public class AsignacionRepresentante implements Serializable {
 	public AsignacionRepresentante() {
 	}
 
-	public int getIdAsignacion() {
+	public Integer getIdAsignacion() {
 		return this.idAsignacion;
 	}
 
-	public void setIdAsignacion(int idAsignacion) {
+	public void setIdAsignacion(Integer idAsignacion) {
 		this.idAsignacion = idAsignacion;
 	}
 
@@ -52,11 +52,11 @@ public class AsignacionRepresentante implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public byte getEstado() {
+	public boolean getEstado() {
 		return this.estado;
 	}
 
-	public void setEstado(byte estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 

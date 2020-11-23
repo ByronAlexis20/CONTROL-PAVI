@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="CONTROL-PAVI" transaction-type="RESOURCE_LOCAL">
-		<class>com.control.pavi.model.Empresa</class>
-		<class>com.control.pavi.model.Menu</class>
-		<class>com.control.pavi.model.Perfil</class>
-		<class>com.control.pavi.model.Permiso</class>
-		<class>com.control.pavi.model.Usuario</class>
 		<class>com.control.pavi.model.AsignacionJunta</class>
 		<class>com.control.pavi.model.AsignacionRepresentante</class>
+		<class>com.control.pavi.model.AsignacionSupervisor</class>
 		<class>com.control.pavi.model.Candidato</class>
 		<class>com.control.pavi.model.Canton</class>
+		<class>com.control.pavi.model.Empresa</class>
 		<class>com.control.pavi.model.JuntaVoto</class>
+		<class>com.control.pavi.model.Menu</class>
 		<class>com.control.pavi.model.Parroquia</class>
 		<class>com.control.pavi.model.PartidoPolitico</class>
+		<class>com.control.pavi.model.Perfil</class>
 		<class>com.control.pavi.model.Periodo</class>
+		<class>com.control.pavi.model.Permiso</class>
 		<class>com.control.pavi.model.Provincia</class>
 		<class>com.control.pavi.model.Recinto</class>
 		<class>com.control.pavi.model.Representante</class>
-		<class>com.control.pavi.model.Zona</class>
+		<class>com.control.pavi.model.Supervisor</class>
+		<class>com.control.pavi.model.TipoSupervisor</class>
+		<class>com.control.pavi.model.Usuario</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/control-pavi?useSSL=false"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>
-			<property name="javax.persistence.jdbc.password" value="tricampeon2015"/>
+			<property name="javax.persistence.jdbc.password" value="admin123"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 		</properties>
 	</persistence-unit>

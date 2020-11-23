@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
 @Table(name="parroquia")
 @NamedQueries({
@@ -17,7 +16,7 @@ public class Parroquia implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_parroquia")
-	private int idParroquia;
+	private Integer idParroquia;
 
 	private boolean estado;
 
@@ -28,18 +27,18 @@ public class Parroquia implements Serializable {
 	@JoinColumn(name="id_canton")
 	private Canton canton;
 
-	//bi-directional many-to-one association to Zona
+	//bi-directional many-to-one association to Recinto
 	@OneToMany(mappedBy="parroquia")
-	private List<Zona> zonas;
+	private List<Recinto> recintos;
 
 	public Parroquia() {
 	}
 
-	public int getIdParroquia() {
+	public Integer getIdParroquia() {
 		return this.idParroquia;
 	}
 
-	public void setIdParroquia(int idParroquia) {
+	public void setIdParroquia(Integer idParroquia) {
 		this.idParroquia = idParroquia;
 	}
 
@@ -67,26 +66,26 @@ public class Parroquia implements Serializable {
 		this.canton = canton;
 	}
 
-	public List<Zona> getZonas() {
-		return this.zonas;
+	public List<Recinto> getRecintos() {
+		return this.recintos;
 	}
 
-	public void setZonas(List<Zona> zonas) {
-		this.zonas = zonas;
+	public void setRecintos(List<Recinto> recintos) {
+		this.recintos = recintos;
 	}
 
-	public Zona addZona(Zona zona) {
-		getZonas().add(zona);
-		zona.setParroquia(this);
+	public Recinto addRecinto(Recinto recinto) {
+		getRecintos().add(recinto);
+		recinto.setParroquia(this);
 
-		return zona;
+		return recinto;
 	}
 
-	public Zona removeZona(Zona zona) {
-		getZonas().remove(zona);
-		zona.setParroquia(null);
+	public Recinto removeRecinto(Recinto recinto) {
+		getRecintos().remove(recinto);
+		recinto.setParroquia(null);
 
-		return zona;
+		return recinto;
 	}
 
 }

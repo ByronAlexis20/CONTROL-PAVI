@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 
 
+
 @Entity
 @Table(name="provincia")
 @NamedQueries({
@@ -17,7 +18,7 @@ public class Provincia implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_provincia")
-	private int idProvincia;
+	private Integer idProvincia;
 
 	private boolean estado;
 
@@ -30,11 +31,11 @@ public class Provincia implements Serializable {
 	public Provincia() {
 	}
 
-	public int getIdProvincia() {
+	public Integer getIdProvincia() {
 		return this.idProvincia;
 	}
 
-	public void setIdProvincia(int idProvincia) {
+	public void setIdProvincia(Integer idProvincia) {
 		this.idProvincia = idProvincia;
 	}
 

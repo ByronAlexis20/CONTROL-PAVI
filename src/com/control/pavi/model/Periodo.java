@@ -2,6 +2,7 @@ package com.control.pavi.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -16,21 +17,25 @@ public class Periodo implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_periodo")
-	private int idPeriodo;
+	private Integer idPeriodo;
 
 	@Column(name="anio_eleccion")
 	private int anioEleccion;
 
-	private byte estado;
+	private boolean estado;
+
+	//bi-directional many-to-one association to AsignacionSupervisor
+	@OneToMany(mappedBy="periodo")
+	private List<AsignacionSupervisor> asignacionSupervisors;
 
 	public Periodo() {
 	}
 
-	public int getIdPeriodo() {
+	public Integer getIdPeriodo() {
 		return this.idPeriodo;
 	}
 
-	public void setIdPeriodo(int idPeriodo) {
+	public void setIdPeriodo(Integer idPeriodo) {
 		this.idPeriodo = idPeriodo;
 	}
 
@@ -42,12 +47,34 @@ public class Periodo implements Serializable {
 		this.anioEleccion = anioEleccion;
 	}
 
-	public byte getEstado() {
+	public boolean getEstado() {
 		return this.estado;
 	}
 
-	public void setEstado(byte estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
+	}
+
+	public List<AsignacionSupervisor> getAsignacionSupervisors() {
+		return this.asignacionSupervisors;
+	}
+
+	public void setAsignacionSupervisors(List<AsignacionSupervisor> asignacionSupervisors) {
+		this.asignacionSupervisors = asignacionSupervisors;
+	}
+
+	public AsignacionSupervisor addAsignacionSupervisor(AsignacionSupervisor asignacionSupervisor) {
+		getAsignacionSupervisors().add(asignacionSupervisor);
+		asignacionSupervisor.setPeriodo(this);
+
+		return asignacionSupervisor;
+	}
+
+	public AsignacionSupervisor removeAsignacionSupervisor(AsignacionSupervisor asignacionSupervisor) {
+		getAsignacionSupervisors().remove(asignacionSupervisor);
+		asignacionSupervisor.setPeriodo(null);
+
+		return asignacionSupervisor;
 	}
 
 }
