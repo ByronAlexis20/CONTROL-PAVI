@@ -17,4 +17,14 @@ public class ParroquiaDAO extends ClaseDAO{
 		resultado = (List<Parroquia>) query.getResultList();
 		return resultado;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Parroquia> buscarPorIdCanton(Integer id){
+		List<Parroquia> resultado = new ArrayList<Parroquia>();
+		Query query = getEntityManager().createNamedQuery("Parroquia.bucarPorCanton");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		query.setParameter("id", id);
+		resultado = (List<Parroquia>) query.getResultList();
+		return resultado;
+	}
 }

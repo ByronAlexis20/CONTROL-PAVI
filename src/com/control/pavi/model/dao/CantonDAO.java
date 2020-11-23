@@ -18,4 +18,13 @@ public class CantonDAO extends ClaseDAO{
 		resultado = (List<Canton>) query.getResultList();
 		return resultado;
 	}
+	@SuppressWarnings("unchecked")
+	public List<Canton> buscarPorIdProvincia(Integer id){
+		List<Canton> resultado = new ArrayList<Canton>();
+		Query query = getEntityManager().createNamedQuery("Canton.bucarPorProvincia");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		query.setParameter("id", id);
+		resultado = (List<Canton>) query.getResultList();
+		return resultado;
+	}
 }

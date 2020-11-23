@@ -9,7 +9,8 @@ import java.util.List;
 @Table(name="canton")
 @NamedQueries({
 	@NamedQuery(name="Canton.findAll", query="SELECT c FROM Canton c"),
-	@NamedQuery(name="Canton.bucarPatron", query="SELECT c FROM Canton c where c.estado = 1 and lower(c.canton) like lower(:patron)")
+	@NamedQuery(name="Canton.bucarPatron", query="SELECT c FROM Canton c where c.estado = 1 and lower(c.canton) like lower(:patron)"),
+	@NamedQuery(name="Canton.bucarPorProvincia", query="SELECT c FROM Canton c where c.estado = 1 and c.provincia.idProvincia = :id")
 })
 public class Canton implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -87,6 +88,11 @@ public class Canton implements Serializable {
 		parroquia.setCanton(null);
 
 		return parroquia;
+	}
+
+	@Override
+	public String toString() {
+		return this.canton;
 	}
 
 }

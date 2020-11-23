@@ -77,4 +77,9 @@ public class Provincia implements Serializable {
 		return canton;
 	}
 
+	@Override
+	public String toString() {
+		return this.provincia;
+	}
+
 }

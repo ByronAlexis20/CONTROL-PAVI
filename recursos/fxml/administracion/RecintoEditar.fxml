@@ -19,42 +19,42 @@
                   </Label>
                   <TextField fx:id="txtCodigo" GridPane.columnIndex="2" />
                   
-                  <Label text="Descripción:" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Label text="Recinto:" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtRecinto" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-                  <Label text="Estado:" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <CheckBox fx:id="chkEstado" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+                  <TextField fx:id="txtRecinto" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
                   <Label text="Provincia:" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="cboProvincia" prefHeight="25.0" prefWidth="244.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cboProvincia" onAction="#cambiarCanton" prefHeight="25.0" prefWidth="244.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                   <Label prefHeight="17.0" prefWidth="67.0" text="Canton:" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="cboCanton" prefHeight="25.0" prefWidth="244.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="cboCanton" onAction="#cambiarParroquia" prefHeight="25.0" prefWidth="244.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
                   <Label prefHeight="17.0" prefWidth="67.0" text="Parroquia:" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
                   <ComboBox fx:id="cboParroquia" prefHeight="25.0" prefWidth="244.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-                  <Label prefHeight="17.0" prefWidth="67.0" text="Zona:" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Label text="Teléfono:" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="cboZona" prefHeight="25.0" prefWidth="244.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                  <Label text="Dirección:" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtTelefono" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+                  <TextField fx:id="txtDireccion" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="6" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
