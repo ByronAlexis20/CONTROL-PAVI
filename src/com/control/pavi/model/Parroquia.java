@@ -89,4 +89,9 @@ public class Parroquia implements Serializable {
 		return recinto;
 	}
 
+	@Override
+	public String toString() {
+		return this.parroquia;
+	}
+
 }

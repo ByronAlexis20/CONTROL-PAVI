@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="688.0" prefWidth="783.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.control.pavi.junta.controller.RepresentanteListaController">
+<AnchorPane prefHeight="688.0" prefWidth="783.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.control.pavi.partido.controller.PartidoListaController">
    <children>
       <GridPane layoutX="31.0" layoutY="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -48,7 +48,6 @@
                      <HBox.margin><Insets left="5.0" /></HBox.margin></Button>
                   <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminar" prefHeight="40.0" prefWidth="135.0" text="Dar de Baja" HBox.hgrow="ALWAYS">
                      <HBox.margin><Insets left="5.0" /></HBox.margin></Button>
-                  <Button fx:id="btnCandidato" mnemonicParsing="false" onAction="#asignarCandidato" prefHeight="40.0" prefWidth="165.0" text="Candidato" />
                </children>
             </HBox>
          </children>

@@ -109,4 +109,9 @@ public class Recinto implements Serializable {
 		this.parroquia = parroquia;
 	}
 
+	@Override
+	public String toString() {
+		return this.recinto;
+	}
+
 }

@@ -11,7 +11,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="partido_politico")
-@NamedQuery(name="PartidoPolitico.findAll", query="SELECT p FROM PartidoPolitico p")
+@NamedQueries({
+	@NamedQuery(name="PartidoPolitico.findAll", query="SELECT p FROM PartidoPolitico p"),
+	@NamedQuery(name="PartidoPolitico.bucarPatron", query="SELECT p FROM PartidoPolitico p where p.estado = 1 and lower(p.descripcion) like lower(:patron)")
+})
 public class PartidoPolitico implements Serializable {
 	private static final long serialVersionUID = 1L;
 
