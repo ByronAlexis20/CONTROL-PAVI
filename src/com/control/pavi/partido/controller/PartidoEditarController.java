@@ -1,12 +1,15 @@
 package com.control.pavi.partido.controller;
 
-import com.control.pavi.model.Candidato;
+import java.util.Optional;
+
 import com.control.pavi.model.PartidoPolitico;
 import com.control.pavi.model.dao.PartidoPoliticoDAO;
 import com.control.pavi.util.Context;
+import com.control.pavi.util.ControllerHelper;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 
 public class PartidoEditarController {
@@ -15,29 +18,25 @@ public class PartidoEditarController {
 	@FXML private TextField txtSlogan;
 	@FXML private TextField txtLista;
 	@FXML private TextField txtCodigo;
-	@FXML private Button btnAgregar;
 	@FXML private TextField txtDescripcion;
 	@FXML private Button btnGrabar;
 	@FXML private TextField txtApellidosCandidato;
-	@FXML private Button btnQuitar;
+	@FXML private TextField txtEdad;
 
 	PartidoPoliticoDAO partidoDAO = new PartidoPoliticoDAO();
+	ControllerHelper helper = new ControllerHelper();
 	PartidoPolitico partido;
-	Candidato candidato;
-	
+
 	public void initialize() {
 		try {
 			btnGrabar.setStyle("-fx-cursor: hand;");
 			btnSalir.setStyle("-fx-cursor: hand;");
-			btnAgregar.setStyle("-fx-cursor: hand;");
-			btnQuitar.setStyle("-fx-cursor: hand;");
+
 			txtCodigo.setText("0");
 			txtCodigo.setDisable(true);
-			txtNombresCandidato.setDisable(true);
-			txtApellidosCandidato.setDisable(true);
-			
+
 			txtLista.requestFocus();
-			
+
 			if(Context.getInstance().getPartido() != null) {
 				partido = Context.getInstance().getPartido();
 				cargarDatos();
@@ -46,7 +45,7 @@ public class PartidoEditarController {
 				partido = new PartidoPolitico();
 			}
 		}catch(Exception ex) {
-			
+
 		}
 	}
 	private void cargarDatos() {
@@ -55,27 +54,53 @@ public class PartidoEditarController {
 		txtSlogan.setText(partido.getSlogan());
 		txtDescripcion.setText(partido.getDescripcion());
 		//datos del candidato
-		if(partido.getCandidato() != null) {
-			candidato = partido.getCandidato();
-			txtNombresCandidato.setText(candidato.getNombre());
-			txtApellidosCandidato.setText(candidato.getApellido());
-		}
-	}
-	
-	public void grabar() {
 
+		txtNombresCandidato.setText(partido.getNombreCandidato());
+		txtApellidosCandidato.setText(partido.getApellidoCandidato());
+		txtEdad.setText(String.valueOf(partido.getEdad()));
+
+	}
+
+	public void grabar() {
+		try {
+			if(txtLista.getText().toString().isEmpty()) {
+				helper.mostrarAlertaAdvertencia("Ingresar Lista del partido politico", Context.getInstance().getStage());
+				txtLista.requestFocus();
+				return;
+			}
+
+			Optional<ButtonType> result = helper.mostrarAlertaConfirmacion("Desea Grabar los Datos?",Context.getInstance().getStage());
+			if(result.get() == ButtonType.OK){
+				partidoDAO.getEntityManager().getTransaction().begin();
+
+				partido.setDescripcion(txtDescripcion.getText());
+				partido.setEstado(true);
+				partido.setLista(txtLista.getText());
+				partido.setSlogan(txtSlogan.getText());
+				partido.setEdad(Integer.parseInt(txtEdad.getText()));
+				partido.setNombreCandidato(txtNombresCandidato.getText());
+				partido.setApellidoCandidato(txtApellidosCandidato.getText());
+
+				if(partido.getIdPartido()== null)
+					partidoDAO.getEntityManager().persist(partido);
+				else
+					partidoDAO.getEntityManager().merge(partido);
+
+				partidoDAO.getEntityManager().getTransaction().commit();
+
+				Context.getInstance().getStageModal().close();
+				helper.mostrarAlertaInformacion("Datos Grabados", Context.getInstance().getStage());
+			}
+		}catch(Exception ex) {
+			partidoDAO.getEntityManager().getTransaction().rollback();
+		}
 	}
 
 	public void salir() {
+		try {
+			Context.getInstance().getStageModal().close();
+		}catch(Exception ex) {
 
-	}
-
-	public void agregarCandidato() {
-
-	}
-
-	
-	public void quitarCandidato() {
-
+		}
 	}
 }

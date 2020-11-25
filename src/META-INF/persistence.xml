@@ -2,7 +2,6 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="CONTROL-PAVI" transaction-type="RESOURCE_LOCAL">
 		<class>com.control.pavi.model.AsignacionJunta</class>
-		<class>com.control.pavi.model.AsignacionRepresentante</class>
 		<class>com.control.pavi.model.AsignacionSupervisor</class>
 		<class>com.control.pavi.model.Candidato</class>
 		<class>com.control.pavi.model.Canton</class>
@@ -23,7 +22,7 @@
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/control-pavi?useSSL=false"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>
-			<property name="javax.persistence.jdbc.password" value="tricampeon2015"/>
+			<property name="javax.persistence.jdbc.password" value="admin123"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 		</properties>
 	</persistence-unit>

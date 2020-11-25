@@ -92,8 +92,12 @@
                      </font>
                   </Label>
                   <TextField fx:id="txtNombresCandidato" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="2" GridPane.columnSpan="2" />
-                  <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregarCandidato" text="Agregar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Button fx:id="btnQuitar" mnemonicParsing="false" onAction="#quitarCandidato" text="Quitar" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label text="Edad:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtEdad" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />

@@ -36,9 +36,10 @@ public class Representante implements Serializable {
 	@OneToMany(mappedBy="representante")
 	private List<AsignacionJunta> asignacionJuntas;
 
-	//bi-directional many-to-one association to AsignacionRepresentante
-	@OneToMany(mappedBy="representante")
-	private List<AsignacionRepresentante> asignacionRepresentantes;
+	//bi-directional many-to-one association to PartidoPolitico
+	@ManyToOne
+	@JoinColumn(name="id_partido")
+	private PartidoPolitico partidoPolitico;
 
 	public Representante() {
 	}
@@ -121,26 +122,12 @@ public class Representante implements Serializable {
 		return asignacionJunta;
 	}
 
-	public List<AsignacionRepresentante> getAsignacionRepresentantes() {
-		return this.asignacionRepresentantes;
+	public PartidoPolitico getPartidoPolitico() {
+		return this.partidoPolitico;
 	}
 
-	public void setAsignacionRepresentantes(List<AsignacionRepresentante> asignacionRepresentantes) {
-		this.asignacionRepresentantes = asignacionRepresentantes;
-	}
-
-	public AsignacionRepresentante addAsignacionRepresentante(AsignacionRepresentante asignacionRepresentante) {
-		getAsignacionRepresentantes().add(asignacionRepresentante);
-		asignacionRepresentante.setRepresentante(this);
-
-		return asignacionRepresentante;
-	}
-
-	public AsignacionRepresentante removeAsignacionRepresentante(AsignacionRepresentante asignacionRepresentante) {
-		getAsignacionRepresentantes().remove(asignacionRepresentante);
-		asignacionRepresentante.setRepresentante(null);
-
-		return asignacionRepresentante;
+	public void setPartidoPolitico(PartidoPolitico partidoPolitico) {
+		this.partidoPolitico = partidoPolitico;
 	}
 
 }

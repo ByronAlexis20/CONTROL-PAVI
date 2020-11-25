@@ -5,10 +5,6 @@ import javax.persistence.*;
 import java.util.List;
 
 
-/**
- * The persistent class for the partido_politico database table.
- * 
- */
 @Entity
 @Table(name="partido_politico")
 @NamedQueries({
@@ -23,7 +19,12 @@ public class PartidoPolitico implements Serializable {
 	@Column(name="id_partido")
 	private Integer idPartido;
 
+	@Column(name="apellido_candidato")
+	private String apellidoCandidato;
+
 	private String descripcion;
+
+	private int edad;
 
 	private boolean estado;
 
@@ -32,16 +33,19 @@ public class PartidoPolitico implements Serializable {
 
 	private String lista;
 
-	private String slogan;
+	@Column(name="nombre_candidato")
+	private String nombreCandidato;
 
-	//bi-directional many-to-one association to AsignacionRepresentante
-	@OneToMany(mappedBy="partidoPolitico")
-	private List<AsignacionRepresentante> asignacionRepresentantes;
+	private String slogan;
 
 	//bi-directional many-to-one association to Candidato
 	@ManyToOne
 	@JoinColumn(name="id_candidato")
 	private Candidato candidato;
+
+	//bi-directional many-to-one association to Representante
+	@OneToMany(mappedBy="partidoPolitico")
+	private List<Representante> representantes;
 
 	public PartidoPolitico() {
 	}
@@ -54,12 +58,28 @@ public class PartidoPolitico implements Serializable {
 		this.idPartido = idPartido;
 	}
 
+	public String getApellidoCandidato() {
+		return this.apellidoCandidato;
+	}
+
+	public void setApellidoCandidato(String apellidoCandidato) {
+		this.apellidoCandidato = apellidoCandidato;
+	}
+
 	public String getDescripcion() {
 		return this.descripcion;
 	}
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public int getEdad() {
+		return this.edad;
+	}
+
+	public void setEdad(int edad) {
+		this.edad = edad;
 	}
 
 	public boolean getEstado() {
@@ -86,6 +106,14 @@ public class PartidoPolitico implements Serializable {
 		this.lista = lista;
 	}
 
+	public String getNombreCandidato() {
+		return this.nombreCandidato;
+	}
+
+	public void setNombreCandidato(String nombreCandidato) {
+		this.nombreCandidato = nombreCandidato;
+	}
+
 	public String getSlogan() {
 		return this.slogan;
 	}
@@ -94,34 +122,34 @@ public class PartidoPolitico implements Serializable {
 		this.slogan = slogan;
 	}
 
-	public List<AsignacionRepresentante> getAsignacionRepresentantes() {
-		return this.asignacionRepresentantes;
-	}
-
-	public void setAsignacionRepresentantes(List<AsignacionRepresentante> asignacionRepresentantes) {
-		this.asignacionRepresentantes = asignacionRepresentantes;
-	}
-
-	public AsignacionRepresentante addAsignacionRepresentante(AsignacionRepresentante asignacionRepresentante) {
-		getAsignacionRepresentantes().add(asignacionRepresentante);
-		asignacionRepresentante.setPartidoPolitico(this);
-
-		return asignacionRepresentante;
-	}
-
-	public AsignacionRepresentante removeAsignacionRepresentante(AsignacionRepresentante asignacionRepresentante) {
-		getAsignacionRepresentantes().remove(asignacionRepresentante);
-		asignacionRepresentante.setPartidoPolitico(null);
-
-		return asignacionRepresentante;
-	}
-
 	public Candidato getCandidato() {
 		return this.candidato;
 	}
 
 	public void setCandidato(Candidato candidato) {
 		this.candidato = candidato;
+	}
+
+	public List<Representante> getRepresentantes() {
+		return this.representantes;
+	}
+
+	public void setRepresentantes(List<Representante> representantes) {
+		this.representantes = representantes;
+	}
+
+	public Representante addRepresentante(Representante representante) {
+		getRepresentantes().add(representante);
+		representante.setPartidoPolitico(this);
+
+		return representante;
+	}
+
+	public Representante removeRepresentante(Representante representante) {
+		getRepresentantes().remove(representante);
+		representante.setPartidoPolitico(null);
+
+		return representante;
 	}
 
 }

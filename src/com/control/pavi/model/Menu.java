@@ -2,7 +2,6 @@ package com.control.pavi.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
 import java.util.List;
 
 
@@ -14,7 +13,7 @@ import java.util.List;
 	@NamedQuery(name="Menu.BuscarPadre", query="SELECT s FROM Menu s where s.idMenuPadre = 0"),
 	@NamedQuery(name="Menu.BuscarPadrePorId", query="SELECT s FROM Menu s where (s.idMenu = :patron) ORDER BY s.posicion")
 })
-public class Menu implements Serializable, Comparable<Menu> {
+public class Menu implements Serializable, Comparable<Menu>  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -120,13 +119,13 @@ public class Menu implements Serializable, Comparable<Menu> {
 		return permiso;
 	}
 	@Override
-    public int compareTo(Menu o) {
-        if (this.posicion < o.posicion) {
-            return -1;
-        }
-        if (this.posicion  > o.posicion) {
-            return 1;
-        }
-        return 0;
-    }
+	public int compareTo(Menu o) {
+		if (this.posicion < o.posicion) {
+			return -1;
+		}
+		if (this.posicion  > o.posicion) {
+			return 1;
+		}
+		return 0;
+	}
 }
