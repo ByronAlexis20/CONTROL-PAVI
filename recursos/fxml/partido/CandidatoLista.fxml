@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="688.0" prefWidth="783.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.control.pavi.junta.controller.RepresentanteListaController">
+<AnchorPane prefHeight="313.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.control.pavi.partido.controller.CandidatoListaController">
    <children>
       <GridPane layoutX="31.0" layoutY="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -19,7 +19,6 @@
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="10.0" prefWidth="18.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
@@ -28,12 +27,8 @@
           <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER" prefHeight="42.0" prefWidth="703.0" text="LISTADO DE CANDIDATOS A PRESIDENTE" GridPane.columnSpan="5" GridPane.halignment="CENTER">
-               <font>
-                  <Font name="Arial Bold" size="24.0" />
-               </font></Label>
-            <TableView fx:id="tvDatos" prefHeight="171.0" prefWidth="432.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" />
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: #bbc8d0; -fx-border-width: 1px; -fx-spacing: 8; -fx-background-radius: 6.0; -fx-max-height: 300" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <TableView fx:id="tvDatos" prefHeight="171.0" prefWidth="432.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: #bbc8d0; -fx-border-width: 1px; -fx-spacing: 8; -fx-background-radius: 6.0; -fx-max-height: 300" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
                   <Label text="Búsqueda por Nombres o Apellidos">
                      <HBox.margin><Insets right="10.0" /></HBox.margin>
@@ -41,16 +36,17 @@
                   <TextField fx:id="txtBuscar" prefHeight="25.0" prefWidth="425.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: #bbc8d0; -fx-border-width: 1px; -fx-spacing: 8; -fx-background-radius: 6.0; -fx-max-height: 300" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: #bbc8d0; -fx-border-width: 1px; -fx-spacing: 8; -fx-background-radius: 6.0; -fx-max-height: 300" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1">
                <children>
                   <Button fx:id="btnNuevo" mnemonicParsing="false" onAction="#nuevo" prefHeight="40.0" prefWidth="135.0" text="Nuevo" />
                   <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editar" prefHeight="40.0" prefWidth="123.0" text="Editar" textAlignment="RIGHT">
                      <HBox.margin><Insets left="5.0" /></HBox.margin></Button>
                   <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminar" prefHeight="40.0" prefWidth="135.0" text="Dar de Baja" HBox.hgrow="ALWAYS">
                      <HBox.margin><Insets left="5.0" /></HBox.margin></Button>
-                  <Button fx:id="btnAsignarPartidos" mnemonicParsing="false" onAction="#asignarPartidosPoliticos" prefHeight="40.0" prefWidth="165.0" text="Partido Politico" />
+                  <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#salir" prefHeight="40.0" prefWidth="135.0" text="Salir" />
                </children>
             </HBox>
+            <Label GridPane.columnIndex="4" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>

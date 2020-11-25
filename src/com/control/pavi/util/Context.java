@@ -2,8 +2,10 @@ package com.control.pavi.util;
 
 import java.sql.Connection;
 
+import com.control.pavi.model.Candidato;
 import com.control.pavi.model.Canton;
 import com.control.pavi.model.Parroquia;
+import com.control.pavi.model.PartidoPolitico;
 import com.control.pavi.model.Perfil;
 import com.control.pavi.model.Provincia;
 import com.control.pavi.model.Recinto;
@@ -30,6 +32,8 @@ public class Context {
 	private Canton canton;
 	private Parroquia parroquia;
 	private Recinto recinto;
+	private PartidoPolitico partido;
+	private Candidato candidato;
 	
 	public static Context getInstance() {
 		return instance;
@@ -136,6 +140,22 @@ public class Context {
 
 	public void setRecinto(Recinto recinto) {
 		this.recinto = recinto;
+	}
+
+	public PartidoPolitico getPartido() {
+		return partido;
+	}
+
+	public void setPartido(PartidoPolitico partido) {
+		this.partido = partido;
+	}
+
+	public Candidato getCandidato() {
+		return candidato;
+	}
+
+	public void setCandidato(Candidato candidato) {
+		this.candidato = candidato;
 	}
 	
 }
