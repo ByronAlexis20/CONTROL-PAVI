@@ -31,7 +31,7 @@
           <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER" prefHeight="42.0" prefWidth="703.0" text="LISTADO DE JUNTAS" GridPane.columnSpan="5" GridPane.halignment="CENTER">
+            <Label alignment="CENTER" prefHeight="42.0" prefWidth="703.0" text="REGISTRO DE JUNTAS" GridPane.columnSpan="5" GridPane.halignment="CENTER">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font></Label>
@@ -43,20 +43,15 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: #bbc8d0; -fx-border-width: 1px; -fx-spacing: 8; -fx-background-radius: 6.0; -fx-max-height: 300" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="btnNuevo" mnemonicParsing="false" onAction="#nuevo" prefHeight="40.0" prefWidth="135.0" text="Nuevo" />
-                  <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editar" prefHeight="40.0" prefWidth="123.0" text="Editar" textAlignment="RIGHT">
-                     <HBox.margin><Insets left="5.0" /></HBox.margin></Button>
-                  <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminar" prefHeight="40.0" prefWidth="135.0" text="Dar de Baja" HBox.hgrow="ALWAYS">
-                     <HBox.margin><Insets left="5.0" /></HBox.margin></Button>
+                  <Button fx:id="btnJuntas" mnemonicParsing="false" onAction="#juntas" prefHeight="40.0" prefWidth="135.0" text="Agregar Juntas" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: #bbc8d0; -fx-border-width: 1px; -fx-spacing: 8; -fx-background-radius: 6.0; -fx-max-height: 300" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4">
                <children>
-                  <RadioButton fx:id="rbProvincia" mnemonicParsing="false" text="Provincia" />
-                  <RadioButton fx:id="rbCanton" mnemonicParsing="false" text="Cantón" />
-                  <RadioButton fx:id="rbParroquia" mnemonicParsing="false" text="Parroquia" />
-                  <RadioButton fx:id="rbZona" mnemonicParsing="false" text="Zona" />
-                  <RadioButton fx:id="rbRecinto" mnemonicParsing="false" text="Recinto" />
+                  <RadioButton fx:id="rbProvincia" mnemonicParsing="false" onAction="#cambiaProvincia" text="Provincia" />
+                  <RadioButton fx:id="rbCanton" mnemonicParsing="false" onAction="#cambiaCanton" text="Cantón" />
+                  <RadioButton fx:id="rbParroquia" mnemonicParsing="false" onAction="#cambiaParroquia" text="Parroquia" />
+                  <RadioButton fx:id="rbRecinto" mnemonicParsing="false" onAction="#cambiaRecinto" text="Recinto" />
                   <Group />
                </children>
             </HBox>

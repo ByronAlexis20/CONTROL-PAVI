@@ -116,8 +116,7 @@ public class PartidoListaController {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<PartidoPolitico, String> param) {
 					String candidato = "";
-					if(param.getValue().getCandidato() != null)
-						candidato = param.getValue().getNombreCandidato() + " " + param.getValue().getApellidoCandidato();
+					candidato = param.getValue().getNombreCandidato() + " " + param.getValue().getApellidoCandidato();
 					return new SimpleObjectProperty<String>(candidato);
 				}
 			});
