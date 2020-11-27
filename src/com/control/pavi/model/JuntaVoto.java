@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="junta_voto")
-@NamedQuery(name="JuntaVoto.findAll", query="SELECT j FROM JuntaVoto j")
+@NamedQuery(name="JuntaVoto.bucarPorRecinto", query="SELECT j FROM JuntaVoto j where j.recinto.idRecinto = :id")
 public class JuntaVoto implements Serializable {
 	private static final long serialVersionUID = 1L;
 

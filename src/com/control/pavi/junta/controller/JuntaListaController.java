@@ -55,6 +55,7 @@ public class JuntaListaController {
 				} 
 			} 
 		}); 
+		rbProvincia.setSelected(true);
 		llenarDatos("");
 	}
 	public void buscar() {
