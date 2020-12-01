@@ -134,6 +134,16 @@ public class JuntaRecintoController {
 				helper.mostrarAlertaAdvertencia("Debe seleccionar un registro", Context.getInstance().getStage());
 				return;
 			}
+			
+			boolean bandera = false;
+			for(AsignacionJunta asig : tvDatos.getSelectionModel().getSelectedItem().getAsignacionJuntas()) {
+				if(asig.getEstado() == true)
+					bandera = true;
+			}
+			if(bandera == true) {
+				helper.mostrarAlertaAdvertencia("Ya existe un delegado para la Junta", Context.getInstance().getStage());
+				return;
+			}
 			Context.getInstance().setJuntaVoto(tvDatos.getSelectionModel().getSelectedItem());
 			helper.abrirPantallaModal("/junta/AsignarDelegado.fxml","Datos Delegados", Context.getInstance().getStageModal());
 			llenarDatos();

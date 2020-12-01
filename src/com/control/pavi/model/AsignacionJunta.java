@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="asignacion_junta")
-@NamedQuery(name="AsignacionJunta.findAll", query="SELECT a FROM AsignacionJunta a")
+@NamedQuery(name="AsignacionJunta.buscarDelegadoJunta", query="SELECT a FROM AsignacionJunta a where a.representante.idRepresentante = :idRep and a.estado = 1")
 public class AsignacionJunta implements Serializable {
 	private static final long serialVersionUID = 1L;
 

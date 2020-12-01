@@ -8,11 +8,14 @@ import com.control.pavi.model.AsignacionJunta;
 import com.control.pavi.model.JuntaVoto;
 import com.control.pavi.model.PartidoPolitico;
 import com.control.pavi.model.Representante;
+import com.control.pavi.model.dao.AsignacionJuntaDAO;
 import com.control.pavi.model.dao.PartidoPoliticoDAO;
 import com.control.pavi.model.dao.RepresentanteDAO;
 import com.control.pavi.util.Context;
 import com.control.pavi.util.ControllerHelper;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -34,43 +37,35 @@ public class AsignarDelegadosController {
 
     RepresentanteDAO representanteDAO = new RepresentanteDAO();
     PartidoPoliticoDAO partidoDAO = new PartidoPoliticoDAO();
+    AsignacionJuntaDAO asignacionDAO = new AsignacionJuntaDAO();
     ControllerHelper helper = new ControllerHelper();
     
     JuntaVoto junta;
-    Representante representante;
+    Representante representante = new Representante();
     
     public void initialize() {
     	try {
     		btnGrabar.setStyle("-fx-cursor: hand;");
 			btnSalir.setStyle("-fx-cursor: hand;");
 			llenarComboPartido();
-			if(Context.getInstance().getRepresentante() != null) {
-				representante = Context.getInstance().getRepresentante();
-				recuperarDatos();
-				Context.getInstance().setRepresentante(null);
-			}else {
-				representante = new Representante();
-			}
 			if(Context.getInstance().getJuntaVoto() != null) {
 				junta = Context.getInstance().getJuntaVoto();
 				Context.getInstance().setJuntaVoto(null);
 			}
+			txtCedula.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			    @Override
+			    public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
+			        if (newPropertyValue) {
+			        }
+			        else {
+			        	recuperarDelegado(txtCedula.getText());
+			        }
+			    }
+			});
     	}catch(Exception ex) {
-    		
     	}
     }
-    public void recuperarDatos(){
-		try{
-			txtCedula.setText(representante.getNoIdentificacion());
-			txtNombres.setText(representante.getNombre());
-			txtApellidos.setText(representante.getApellidos());
-			txtEdad.setText(String.valueOf(representante.getEdad()));
-			cboPartidoPolitico.getSelectionModel().select(representante.getPartidoPolitico());
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-    
+  
     
     private void llenarComboPartido(){
 		try{
@@ -84,6 +79,22 @@ public class AsignarDelegadosController {
 			System.out.println(ex.getMessage());
 		}
 	}
+    
+    private void recuperarDelegado(String cedula) {
+    	try {
+    		List<Representante> lista = representanteDAO.buscarPorCedula(cedula);
+    		if(lista.size() > 0) {//si tiene datos
+    			txtCedula.setText(lista.get(0).getNoIdentificacion());
+    			txtNombres.setText(lista.get(0).getNombre());
+    			txtApellidos.setText(lista.get(0).getApellidos());
+    			txtEdad.setText(String.valueOf(lista.get(0).getEdad()));
+    			representante =lista.get(0);
+    		}
+    	}catch(Exception ex) {
+    		System.out.println(ex.getMessage());
+    	}
+    }
+    
     public void grabar() {
     	try {
 			if(validarDatos() == false)
@@ -153,12 +164,22 @@ public class AsignarDelegadosController {
 				helper.mostrarAlertaAdvertencia("Debe seleccionar el partido politico", Context.getInstance().getStage());
 				return false;
 			}
+			//validar si el delegado ya esta en otra junta
+			if(representante.getIdRepresentante() != null) {
+				List<AsignacionJunta> lista = asignacionDAO.buscarPordelegadoJunta(representante.getIdRepresentante());
+				if(lista.size() > 0) {
+					helper.mostrarAlertaAdvertencia("Delegado ya esta asignado en otra junta", Context.getInstance().getStage());
+					return false;
+				}
+			}
+			
 			return true;
 		}catch(Exception ex) {
 			System.out.println(ex.getMessage());
 			return false;
 		}
 	}
+    
     public void salir() {
     	Context.getInstance().getStageModal().close();
     }

@@ -10,7 +10,10 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Representante.buscarPorPatron", query="SELECT r FROM Representante r where r.estado = 1 and (lower(r.nombre) like lower(:patron) or lower(r.apellidos) like lower(:patron))")
+@NamedQueries({
+	@NamedQuery(name="Representante.buscarPorPatron", query="SELECT r FROM Representante r where r.estado = 1 and (lower(r.nombre) like lower(:patron) or lower(r.apellidos) like lower(:patron))"),
+	@NamedQuery(name="Representante.buscarPorCedula", query="SELECT r FROM Representante r where r.estado = 1 and r.noIdentificacion = :cedula")
+})
 public class Representante implements Serializable {
 	private static final long serialVersionUID = 1L;
 
