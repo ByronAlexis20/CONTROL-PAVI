@@ -25,7 +25,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Callback;
 
-public class JuntaListaController {
+public class AsignarListaController {
 	@FXML private TableView<Recinto> tvDatos;
 	@FXML private RadioButton rbParroquia;
 	@FXML private RadioButton rbProvincia;
@@ -103,7 +103,7 @@ public class JuntaListaController {
 			
 			TableColumn<Recinto, String> parroquiaColum = new TableColumn<>("Parroquia");
 			parroquiaColum.setMinWidth(10);
-			parroquiaColum.setPrefWidth(220);
+			parroquiaColum.setPrefWidth(200);
 			parroquiaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
@@ -113,23 +113,23 @@ public class JuntaListaController {
 			
 			TableColumn<Recinto, String> recintoColum = new TableColumn<>("Recinto");
 			recintoColum.setMinWidth(10);
-			recintoColum.setPrefWidth(300);
+			recintoColum.setPrefWidth(250);
 			recintoColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
 					return new SimpleObjectProperty<String>(param.getValue().getRecinto());
 				}
 			});
-				
-			TableColumn<Recinto, String> juntasColum = new TableColumn<>("Juntas");
+			
+			TableColumn<Recinto, String> juntasColum = new TableColumn<>("No Juntas");
 			juntasColum.setMinWidth(10);
 			juntasColum.setPrefWidth(90);
 			juntasColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
 					int cont = 0;
-					for(JuntaVoto jun : param.getValue().getJuntaVotos()) {
-						if(jun.getEstado() == true)
+					for(JuntaVoto junt : param.getValue().getJuntaVotos()) {
+						if(junt.getEstado() == true)
 							cont ++;
 					}
 					return new SimpleObjectProperty<String>(String.valueOf(cont));
@@ -150,7 +150,7 @@ public class JuntaListaController {
 				return;
 			}
 			Context.getInstance().setRecinto(tvDatos.getSelectionModel().getSelectedItem());
-			helper.abrirPantallaModal("/junta/JuntaEditar.fxml","Juntas Registradas", Context.getInstance().getStage());
+			helper.abrirPantallaModal("/junta/JuntaRecinto.fxml","Juntas Registradas", Context.getInstance().getStage());
 			llenarDatos("");
 		}catch(Exception ex) {
 			System.out.println(ex.getMessage());

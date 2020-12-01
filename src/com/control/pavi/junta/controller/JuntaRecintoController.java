@@ -3,6 +3,7 @@ package com.control.pavi.junta.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.control.pavi.model.AsignacionJunta;
 import com.control.pavi.model.JuntaVoto;
 import com.control.pavi.model.Recinto;
 import com.control.pavi.model.dao.JuntaVotoDAO;
@@ -17,15 +18,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.util.Callback;
 
-public class JuntaEditarController {
+public class JuntaRecintoController {
 	@FXML private TableView<JuntaVoto> tvDatos;
-	@FXML private Button btnEliminar;
-	@FXML private Button btnNuevo;
+	@FXML private Button btnQuitar;
+	@FXML private Button btnAsignar;
 	@FXML private TextField txtRecinto;
 	@FXML private TextField txtProvincia;
 	@FXML private TextField txtCanton;
@@ -37,8 +38,8 @@ public class JuntaEditarController {
 	
 	public void initialize() {
 		try {
-			btnEliminar.setStyle("-fx-cursor: hand;");
-			btnNuevo.setStyle("-fx-cursor: hand;");
+			btnAsignar.setStyle("-fx-cursor: hand;");
+			btnQuitar.setStyle("-fx-cursor: hand;");
 			if(Context.getInstance().getRecinto() != null) {
 				recinto = Context.getInstance().getRecinto();
 				txtCanton.setText(recinto.getParroquia().getCanton().getCanton());
@@ -86,27 +87,55 @@ public class JuntaEditarController {
 				}
 			});
 			
-			TableColumn<JuntaVoto, String> descripcionColum = new TableColumn<>("Descripción");
-			descripcionColum.setMinWidth(10);
-			descripcionColum.setPrefWidth(200);
-			descripcionColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<JuntaVoto,String>, ObservableValue<String>>() {
+			TableColumn<JuntaVoto, String> delegadoColum = new TableColumn<>("Delegado");
+			delegadoColum.setMinWidth(10);
+			delegadoColum.setPrefWidth(200);
+			delegadoColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<JuntaVoto,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<JuntaVoto, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getDescripcion());
+					String nombreDelegado = "SIN DELEGADO";
+					if(param.getValue().getAsignacionJuntas().size() > 0) {
+						for(AsignacionJunta a : param.getValue().getAsignacionJuntas()) {
+							if(a.getEstado() == true)
+								nombreDelegado = a.getRepresentante().getNombre() + " " + a.getRepresentante().getApellidos();
+						}
+					}
+					return new SimpleObjectProperty<String>(nombreDelegado);
 				}
 			});
 			
-			tvDatos.getColumns().addAll(generoColum,numeroColum,descripcionColum);
+			TableColumn<JuntaVoto, String> partidoPoliticoColum = new TableColumn<>("Partido Politico");
+			partidoPoliticoColum.setMinWidth(10);
+			partidoPoliticoColum.setPrefWidth(200);
+			partidoPoliticoColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<JuntaVoto,String>, ObservableValue<String>>() {
+				@Override
+				public ObservableValue<String> call(CellDataFeatures<JuntaVoto, String> param) {
+					String partido = "SIN PARTIDO POLITICO";
+					if(param.getValue().getAsignacionJuntas().size() > 0) {
+						for(AsignacionJunta a : param.getValue().getAsignacionJuntas()) {
+							if(a.getEstado() == true)
+								partido = a.getRepresentante().getPartidoPolitico().getLista();
+						}
+					}
+					return new SimpleObjectProperty<String>(partido);
+				}
+			});
+			
+			tvDatos.getColumns().addAll(generoColum,numeroColum,delegadoColum,partidoPoliticoColum);
 			tvDatos.setItems(datos);
 		}catch(Exception ex) {
 			
 		}
 	}
 	
-	public void nuevo() {
+	public void asignar() {
 		try {
-			Context.getInstance().setRecinto(recinto);
-			helper.abrirPantallaModal("/junta/DatosJunta.fxml","Datos Junta", Context.getInstance().getStageModal());
+			if(tvDatos.getSelectionModel().getSelectedItem() == null) {
+				helper.mostrarAlertaAdvertencia("Debe seleccionar un registro", Context.getInstance().getStage());
+				return;
+			}
+			Context.getInstance().setJuntaVoto(tvDatos.getSelectionModel().getSelectedItem());
+			helper.abrirPantallaModal("/junta/AsignarDelegado.fxml","Datos Delegados", Context.getInstance().getStageModal());
 			llenarDatos();
 		}catch(Exception ex) {
 			
@@ -114,22 +143,29 @@ public class JuntaEditarController {
 	}
 
 	
-	public void eliminar() {
+	public void quitar() {
 		try {
 			if(tvDatos.getSelectionModel().getSelectedItem() != null) {
-				Optional<ButtonType> result = helper.mostrarAlertaConfirmacion("Se procederá a dar de baja la Junta.. Desea Continuar?",Context.getInstance().getStage());
+				Optional<ButtonType> result = helper.mostrarAlertaConfirmacion("Se procederá a quitar el delegado.. Desea Continuar?",Context.getInstance().getStage());
 				if(result.get() == ButtonType.OK){
 					JuntaVoto seleccion = new JuntaVoto();
 					seleccion = tvDatos.getSelectionModel().getSelectedItem();
-					seleccion.setEstado(false);
-					juntaDAO.getEntityManager().getTransaction().begin();
-					juntaDAO.getEntityManager().merge(seleccion);
-					juntaDAO.getEntityManager().getTransaction().commit();
-					helper.mostrarAlertaInformacion("Junta Dado de Baja", Context.getInstance().getStage());
-					llenarDatos();
+					for(AsignacionJunta a : seleccion.getAsignacionJuntas()) {
+						if(a.getEstado() == true) {
+							AsignacionJunta asig = a;
+							asig.setEstado(false);
+							
+							juntaDAO.getEntityManager().getTransaction().begin();
+							juntaDAO.getEntityManager().merge(asig);
+							juntaDAO.getEntityManager().getTransaction().commit();
+							helper.mostrarAlertaInformacion("Delegado quitado", Context.getInstance().getStage());
+							llenarDatos();
+						}						
+					}
+					
 				}
 			}else {
-				helper.mostrarAlertaError("Debe Seleccionar una Junta a Dar de Baja", Context.getInstance().getStage());
+				helper.mostrarAlertaError("Debe Seleccionar un Delegado a Quitar", Context.getInstance().getStage());
 			}
 		}catch(Exception ex) {
 			System.out.println(ex.getMessage());

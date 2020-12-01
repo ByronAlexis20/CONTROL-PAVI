@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -28,6 +29,7 @@ public class ControlPaviApplication extends Application {
 			stage.setTitle("Inicio de Sesion");
 			Context.getInstance().setStagePrincipal(stage);
 			stage.setMaximized(true);
+			stage.getIcons().add(new Image("/icon.png"));
 			stage.show();
 			stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override

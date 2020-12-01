@@ -10,7 +10,7 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Representante.findAll", query="SELECT r FROM Representante r")
+@NamedQuery(name="Representante.buscarPorPatron", query="SELECT r FROM Representante r where r.estado = 1 and (lower(r.nombre) like lower(:patron) or lower(r.apellidos) like lower(:patron))")
 public class Representante implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -33,7 +33,7 @@ public class Representante implements Serializable {
 	private String telefono;
 
 	//bi-directional many-to-one association to AsignacionJunta
-	@OneToMany(mappedBy="representante")
+	@OneToMany(mappedBy="representante",cascade = CascadeType.ALL)
 	private List<AsignacionJunta> asignacionJuntas;
 
 	//bi-directional many-to-one association to PartidoPolitico

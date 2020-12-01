@@ -152,4 +152,9 @@ public class PartidoPolitico implements Serializable {
 		return representante;
 	}
 
+	@Override
+	public String toString() {
+		return this.lista;
+	}
+
 }

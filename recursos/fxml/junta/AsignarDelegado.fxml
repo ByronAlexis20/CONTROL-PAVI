@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="329.0" prefWidth="527.0" stylesheets="/estilo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.control.pavi.junta.controller.RepresentanteEditarController">
+<AnchorPane prefHeight="329.0" prefWidth="527.0" stylesheets="/estilo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.control.pavi.junta.controller.AsignarDelegadosController">
    <children>
       <GridPane alignment="CENTER" layoutX="131.0" layoutY="14.0" maxWidth="500.0" minWidth="0.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>

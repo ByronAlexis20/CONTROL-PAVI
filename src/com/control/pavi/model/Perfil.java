@@ -112,4 +112,9 @@ public class Perfil implements Serializable {
 		return usuario;
 	}
 
+	@Override
+	public String toString() {
+		return this.perfil;
+	}
+
 }

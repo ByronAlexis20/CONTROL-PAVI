@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="junta_voto")
-@NamedQuery(name="JuntaVoto.bucarPorRecinto", query="SELECT j FROM JuntaVoto j where j.recinto.idRecinto = :id")
+@NamedQuery(name="JuntaVoto.bucarPorRecinto", query="SELECT j FROM JuntaVoto j where j.recinto.idRecinto = :id and j.estado = 1")
 public class JuntaVoto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -31,6 +31,9 @@ public class JuntaVoto implements Serializable {
 	//bi-directional many-to-one association to AsignacionSupervisor
 	@OneToMany(mappedBy="juntaVoto")
 	private List<AsignacionSupervisor> asignacionSupervisors;
+	
+	@OneToMany(mappedBy="junta",cascade = CascadeType.ALL)
+	private List<AsignacionJunta> asignacionJuntas;
 
 	//bi-directional many-to-one association to Recinto
 	@ManyToOne
@@ -110,4 +113,24 @@ public class JuntaVoto implements Serializable {
 		this.recinto = recinto;
 	}
 
+	public List<AsignacionJunta> getAsignacionJuntas() {
+		return asignacionJuntas;
+	}
+
+	public void setAsignacionJuntas(List<AsignacionJunta> asignacionJuntas) {
+		this.asignacionJuntas = asignacionJuntas;
+	}
+	public AsignacionJunta addAsignacionJunta(AsignacionJunta asignacionJunta) {
+		getAsignacionJuntas().add(asignacionJunta);
+		asignacionJunta.setJunta(this);
+
+		return asignacionJunta;
+	}
+
+	public AsignacionJunta removeAsignacionJunta(AsignacionJunta asignacionJunta) {
+		getAsignacionJuntas().remove(asignacionJunta);
+		asignacionJunta.setJunta(null);
+
+		return asignacionJunta;
+	}
 }

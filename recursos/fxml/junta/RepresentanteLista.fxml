@@ -22,20 +22,21 @@
           <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="8.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="170.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER" prefHeight="42.0" prefWidth="703.0" text="LISTADO DE REPRESENTANTES POLITICOS" GridPane.columnSpan="5" GridPane.halignment="CENTER">
+            <Label alignment="CENTER" prefHeight="42.0" prefWidth="703.0" text="REGISTRO DE DELEGADO POLITICO" GridPane.columnSpan="5" GridPane.halignment="CENTER">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font></Label>
-            <TableView fx:id="tvDatos" prefHeight="171.0" prefWidth="432.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" />
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: #bbc8d0; -fx-border-width: 1px; -fx-spacing: 8; -fx-background-radius: 6.0; -fx-max-height: 300" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <TableView fx:id="tvDatos" prefHeight="171.0" prefWidth="432.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="6" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: #bbc8d0; -fx-border-width: 1px; -fx-spacing: 8; -fx-background-radius: 6.0; -fx-max-height: 300" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <Label text="Búsqueda por Nombres o Apellidos">
+                  <Label text="Búsqueda por cantón: ">
                      <HBox.margin><Insets right="10.0" /></HBox.margin>
                   </Label>
                   <TextField fx:id="txtBuscar" prefHeight="25.0" prefWidth="425.0" />
@@ -48,7 +49,6 @@
                      <HBox.margin><Insets left="5.0" /></HBox.margin></Button>
                   <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminar" prefHeight="40.0" prefWidth="135.0" text="Dar de Baja" HBox.hgrow="ALWAYS">
                      <HBox.margin><Insets left="5.0" /></HBox.margin></Button>
-                  <Button fx:id="btnAsignarPartidos" mnemonicParsing="false" onAction="#asignarPartidosPoliticos" prefHeight="40.0" prefWidth="165.0" text="Partidos Politicos" />
                </children>
             </HBox>
          </children>

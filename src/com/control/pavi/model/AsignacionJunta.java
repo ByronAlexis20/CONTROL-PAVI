@@ -27,6 +27,11 @@ public class AsignacionJunta implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_representante")
 	private Representante representante;
+	
+	@ManyToOne
+	@JoinColumn(name="id_junta")
+	private JuntaVoto junta;
+	
 
 	public AsignacionJunta() {
 	}
@@ -61,6 +66,14 @@ public class AsignacionJunta implements Serializable {
 
 	public void setRepresentante(Representante representante) {
 		this.representante = representante;
+	}
+
+	public JuntaVoto getJunta() {
+		return junta;
+	}
+
+	public void setJunta(JuntaVoto junta) {
+		this.junta = junta;
 	}
 
 }

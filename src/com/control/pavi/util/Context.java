@@ -4,11 +4,13 @@ import java.sql.Connection;
 
 import com.control.pavi.model.Candidato;
 import com.control.pavi.model.Canton;
+import com.control.pavi.model.JuntaVoto;
 import com.control.pavi.model.Parroquia;
 import com.control.pavi.model.PartidoPolitico;
 import com.control.pavi.model.Perfil;
 import com.control.pavi.model.Provincia;
 import com.control.pavi.model.Recinto;
+import com.control.pavi.model.Representante;
 import com.control.pavi.model.Usuario;
 
 import javafx.scene.layout.AnchorPane;
@@ -34,6 +36,8 @@ public class Context {
 	private Recinto recinto;
 	private PartidoPolitico partido;
 	private Candidato candidato;
+	private Representante representante;
+	private JuntaVoto juntaVoto;
 	
 	public static Context getInstance() {
 		return instance;
@@ -156,6 +160,22 @@ public class Context {
 
 	public void setCandidato(Candidato candidato) {
 		this.candidato = candidato;
+	}
+
+	public Representante getRepresentante() {
+		return representante;
+	}
+
+	public void setRepresentante(Representante representante) {
+		this.representante = representante;
+	}
+
+	public JuntaVoto getJuntaVoto() {
+		return juntaVoto;
+	}
+
+	public void setJuntaVoto(JuntaVoto juntaVoto) {
+		this.juntaVoto = juntaVoto;
 	}
 	
 }
