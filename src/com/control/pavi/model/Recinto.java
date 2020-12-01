@@ -9,7 +9,9 @@ import java.util.List;
 @Table(name="recinto")
 @NamedQueries({
 	@NamedQuery(name="Recinto.findAll", query="SELECT r FROM Recinto r"),
-	@NamedQuery(name="Recinto.bucarPatron", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.recinto) like lower(:patron) order by r.parroquia.idParroquia asc")
+	@NamedQuery(name="Recinto.bucarPatron", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.recinto) like lower(:patron) order by r.parroquia.idParroquia asc"),
+	@NamedQuery(name="Recinto.bucarIdParroquia", query="SELECT r FROM Recinto r where r.estado = 1 and r.parroquia.idParroquia = :id"),
+	
 })
 public class Recinto implements Serializable {
 	private static final long serialVersionUID = 1L;
