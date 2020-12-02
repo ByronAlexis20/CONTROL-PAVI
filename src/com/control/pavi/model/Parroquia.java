@@ -23,6 +23,8 @@ public class Parroquia implements Serializable {
 	private boolean estado;
 
 	private String parroquia;
+	
+	private Zona zona;
 
 	//bi-directional many-to-one association to Canton
 	@ManyToOne
@@ -88,6 +90,14 @@ public class Parroquia implements Serializable {
 		recinto.setParroquia(null);
 
 		return recinto;
+	}
+
+	public Zona getZona() {
+		return zona;
+	}
+
+	public void setZona(Zona zona) {
+		this.zona = zona;
 	}
 
 	@Override

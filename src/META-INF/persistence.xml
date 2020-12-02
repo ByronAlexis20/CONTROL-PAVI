@@ -19,10 +19,11 @@
 		<class>com.control.pavi.model.Supervisor</class>
 		<class>com.control.pavi.model.TipoSupervisor</class>
 		<class>com.control.pavi.model.Usuario</class>
+		<class>com.control.pavi.model.Zona</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/control-pavi?useSSL=false"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>
-			<property name="javax.persistence.jdbc.password" value="admin123"/>
+			<property name="javax.persistence.jdbc.password" value="tricampeon2015"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 		</properties>
 	</persistence-unit>
