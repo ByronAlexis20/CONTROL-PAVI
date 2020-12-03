@@ -24,6 +24,8 @@ public class Parroquia implements Serializable {
 
 	private String parroquia;
 	
+	@ManyToOne
+	@JoinColumn(name="id_zona")
 	private Zona zona;
 
 	//bi-directional many-to-one association to Canton

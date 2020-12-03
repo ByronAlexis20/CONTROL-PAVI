@@ -12,6 +12,11 @@ import java.util.List;
 	@NamedQuery(name="Recinto.bucarPatron", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.recinto) like lower(:patron) order by r.parroquia.idParroquia asc"),
 	@NamedQuery(name="Recinto.bucarIdParroquia", query="SELECT r FROM Recinto r where r.estado = 1 and r.parroquia.idParroquia = :id"),
 	
+	@NamedQuery(name="Recinto.bucarPorProvincia", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.parroquia.canton.provincia.provincia) like lower(:patron)"),
+	@NamedQuery(name="Recinto.bucarPorCanton", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.parroquia.canton.canton) like lower(:patron)"),
+	@NamedQuery(name="Recinto.bucarPorParroquia", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.parroquia.parroquia) like lower(:patron)"),
+	@NamedQuery(name="Recinto.bucarPorRecinto", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.recinto) like lower(:patron)"),
+	
 })
 public class Recinto implements Serializable {
 	private static final long serialVersionUID = 1L;

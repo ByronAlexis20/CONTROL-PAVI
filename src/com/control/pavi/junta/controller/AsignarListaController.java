@@ -1,5 +1,6 @@
 package com.control.pavi.junta.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.control.pavi.model.JuntaVoto;
@@ -60,9 +61,16 @@ public class AsignarListaController {
 	}
 	public void buscar() {
 		try {
-			List<Recinto> lista;
+			List<Recinto> lista = new ArrayList<Recinto>();
 			ObservableList<Recinto> datos = FXCollections.observableArrayList();
-			lista = recintoDAO.buscarPorPatron(txtBuscar.getText().toString());
+			if(rbProvincia.isSelected())
+				lista = recintoDAO.buscarPorProvincia(txtBuscar.getText().toString());
+			else if(rbCanton.isSelected())
+				lista = recintoDAO.buscarPorCanton(txtBuscar.getText().toString());
+			else if(rbParroquia.isSelected())
+				lista = recintoDAO.buscarPorParroquia(txtBuscar.getText().toString());
+			else if(rbRecinto.isSelected())
+				lista = recintoDAO.buscarPorRecinto(txtBuscar.getText().toString());
 			datos.setAll(lista);
 			tvDatos.setItems(datos);
 			tvDatos.refresh();

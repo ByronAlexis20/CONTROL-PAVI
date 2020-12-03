@@ -26,4 +26,40 @@ public class RecintoDAO extends ClaseDAO{
 		resultado = (List<Recinto>) query.getResultList();
 		return resultado;
 	}
+	@SuppressWarnings("unchecked")
+	public List<Recinto> buscarPorProvincia(String patron){
+		List<Recinto> resultado = new ArrayList<Recinto>();
+		Query query = getEntityManager().createNamedQuery("Recinto.bucarPorProvincia");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		query.setParameter("patron", "%" + patron + "%");
+		resultado = (List<Recinto>) query.getResultList();
+		return resultado;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Recinto> buscarPorCanton(String patron){
+		List<Recinto> resultado = new ArrayList<Recinto>();
+		Query query = getEntityManager().createNamedQuery("Recinto.bucarPorCanton");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		query.setParameter("patron", "%" + patron + "%");
+		resultado = (List<Recinto>) query.getResultList();
+		return resultado;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Recinto> buscarPorParroquia(String patron){
+		List<Recinto> resultado = new ArrayList<Recinto>();
+		Query query = getEntityManager().createNamedQuery("Recinto.bucarPorParroquia");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		query.setParameter("patron", "%" + patron + "%");
+		resultado = (List<Recinto>) query.getResultList();
+		return resultado;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Recinto> buscarPorRecinto(String patron){
+		List<Recinto> resultado = new ArrayList<Recinto>();
+		Query query = getEntityManager().createNamedQuery("Recinto.bucarPorRecinto");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		query.setParameter("patron", "%" + patron + "%");
+		resultado = (List<Recinto>) query.getResultList();
+		return resultado;
+	}
 }

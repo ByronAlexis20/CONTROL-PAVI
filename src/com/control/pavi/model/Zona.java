@@ -58,5 +58,25 @@ public class Zona implements Serializable{
 		this.estado = estado;
 	}
 
+	public List<Parroquia> getParroquias() {
+		return this.parroquias;
+	}
 
+	public void setParroquias(List<Parroquia> parroquias) {
+		this.parroquias = parroquias;
+	}
+
+	public Parroquia addParroquia(Parroquia parroquia) {
+		getParroquias().add(parroquia);
+		parroquia.setZona(this);
+
+		return parroquia;
+	}
+
+	public Parroquia removeParroquia(Parroquia parroquia) {
+		getParroquias().remove(parroquia);
+		parroquia.setZona(null);
+
+		return parroquia;
+	}
 }

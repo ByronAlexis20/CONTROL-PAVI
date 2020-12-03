@@ -83,11 +83,19 @@ public class DelegadosPoliticosController {
 			tvDatos.setItems(datos);
 			tvDatos.refresh();
 		}else if(rbParroquia.isSelected()) {
+			if(cboParroquia.getSelectionModel().getSelectedItem() == null) {
+				helper.mostrarAlertaAdvertencia("Debe seleccionar Parroquia", Context.getInstance().getStage());
+				return;
+			}
 			lista = asignacionDAO.buscarPorParroquia(cboParroquia.getSelectionModel().getSelectedItem().getIdParroquia());
 			datos.setAll(lista);
 			tvDatos.setItems(datos);
 			tvDatos.refresh();
 		}else if(rbRecinto.isSelected()) {
+			if(cboRecinto.getSelectionModel().getSelectedItem() == null) {
+				helper.mostrarAlertaAdvertencia("Debe seleccionar Recinto", Context.getInstance().getStage());
+				return;
+			}
 			lista = asignacionDAO.buscarPorRecinto(cboRecinto.getSelectionModel().getSelectedItem().getIdRecinto());
 			datos.setAll(lista);
 			tvDatos.setItems(datos);
@@ -262,11 +270,8 @@ public class DelegadosPoliticosController {
 			rbRecinto.setSelected(false);
 
 			cboProvincia.setDisable(false);
-			cboCanton.getItems().clear();
 			cboCanton.setDisable(false);
-			cboParroquia.getItems().clear();
 			cboParroquia.setDisable(true);
-			cboRecinto.getItems().clear();
 			cboRecinto.setDisable(true);
 
 		}
