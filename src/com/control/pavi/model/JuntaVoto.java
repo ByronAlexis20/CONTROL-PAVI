@@ -11,7 +11,22 @@ import java.util.List;
  */
 @Entity
 @Table(name="junta_voto")
-@NamedQuery(name="JuntaVoto.bucarPorRecinto", query="SELECT j FROM JuntaVoto j where j.recinto.idRecinto = :id and j.estado = 1")
+@NamedQueries({
+	@NamedQuery(name="JuntaVoto.bucarPorRecinto", query="SELECT j FROM JuntaVoto j where j.recinto.idRecinto = :id and j.estado = 1"),
+	@NamedQuery(name="JuntaVoto.buscarTodosActivo", query="SELECT j FROM JuntaVoto j where j.estado = 1 order by j.recinto.parroquia.idParroquia asc"),
+	@NamedQuery(name="JuntaVoto.buscarTodosActivoProvincia", query="SELECT j FROM JuntaVoto j where j.estado = 1 "
+			+ "and lower(j.recinto.parroquia.canton.provincia.provincia) like (:patron) "
+			+ "order by j.recinto.parroquia.idParroquia asc"),
+	@NamedQuery(name="JuntaVoto.buscarTodosActivoCanton", query="SELECT j FROM JuntaVoto j where j.estado = 1 "
+			+ "and lower(j.recinto.parroquia.canton.canton) like (:patron) "
+			+ "order by j.recinto.parroquia.idParroquia asc"),
+	@NamedQuery(name="JuntaVoto.buscarTodosActivoParroquia", query="SELECT j FROM JuntaVoto j where j.estado = 1 "
+			+ "and lower(j.recinto.parroquia.parroquia) like (:patron) "
+			+ "order by j.recinto.parroquia.idParroquia asc"),
+	@NamedQuery(name="JuntaVoto.buscarTodosActivoRecinto", query="SELECT j FROM JuntaVoto j where j.estado = 1 "
+			+ "and lower(j.recinto.recinto) like (:patron) "
+			+ "order by j.recinto.parroquia.idParroquia asc")
+})
 public class JuntaVoto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,7 +44,7 @@ public class JuntaVoto implements Serializable {
 	private int numero;
 
 	//bi-directional many-to-one association to AsignacionSupervisor
-	@OneToMany(mappedBy="juntaVoto")
+	@OneToMany(mappedBy="juntaVoto" , cascade = CascadeType.ALL)
 	private List<AsignacionSupervisor> asignacionSupervisors;
 	
 	@OneToMany(mappedBy="junta",cascade = CascadeType.ALL)

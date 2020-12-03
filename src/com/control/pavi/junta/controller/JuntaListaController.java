@@ -35,6 +35,7 @@ public class JuntaListaController {
 	@FXML private RadioButton rbCanton;
 	@FXML private TextField txtBuscar;
 	
+	
 	RecintoDAO recintoDAO = new RecintoDAO();
 	ControllerHelper helper = new ControllerHelper();
 

@@ -10,7 +10,7 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Supervisor.findAll", query="SELECT s FROM Supervisor s")
+@NamedQuery(name="Supervisor.bucarPatron", query="SELECT s FROM Supervisor s where s.estado = 1 and (lower(s.nombres) like lower(:patron) or lower(s.apellidos) like lower(:patron))")
 public class Supervisor implements Serializable {
 	private static final long serialVersionUID = 1L;
 

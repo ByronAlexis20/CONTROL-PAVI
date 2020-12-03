@@ -17,4 +17,49 @@ public class JuntaVotoDAO extends ClaseDAO{
 		resultado = (List<JuntaVoto>) query.getResultList();
 		return resultado;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<JuntaVoto> buscarTodosActivo(){
+		List<JuntaVoto> resultado = new ArrayList<JuntaVoto>();
+		Query query = getEntityManager().createNamedQuery("JuntaVoto.buscarTodosActivo");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		resultado = (List<JuntaVoto>) query.getResultList();
+		return resultado;
+	}
+	@SuppressWarnings("unchecked")
+	public List<JuntaVoto> buscarTodosActivoProvincia(String patron){
+		List<JuntaVoto> resultado = new ArrayList<JuntaVoto>();
+		Query query = getEntityManager().createNamedQuery("JuntaVoto.buscarTodosActivoProvincia");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		query.setParameter("patron", "%" + patron + "%");
+		resultado = (List<JuntaVoto>) query.getResultList();
+		return resultado;
+	}
+	@SuppressWarnings("unchecked")
+	public List<JuntaVoto> buscarTodosActivoCanton(String patron){
+		List<JuntaVoto> resultado = new ArrayList<JuntaVoto>();
+		Query query = getEntityManager().createNamedQuery("JuntaVoto.buscarTodosActivoCanton");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		query.setParameter("patron", "%" + patron + "%");
+		resultado = (List<JuntaVoto>) query.getResultList();
+		return resultado;
+	}
+	@SuppressWarnings("unchecked")
+	public List<JuntaVoto> buscarTodosActivoParroquia(String patron){
+		List<JuntaVoto> resultado = new ArrayList<JuntaVoto>();
+		Query query = getEntityManager().createNamedQuery("JuntaVoto.buscarTodosActivoParroquia");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		query.setParameter("patron", "%" + patron + "%");
+		resultado = (List<JuntaVoto>) query.getResultList();
+		return resultado;
+	}
+	@SuppressWarnings("unchecked")
+	public List<JuntaVoto> buscarTodosActivoRecinto(String patron){
+		List<JuntaVoto> resultado = new ArrayList<JuntaVoto>();
+		Query query = getEntityManager().createNamedQuery("JuntaVoto.buscarTodosActivoRecinto");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		query.setParameter("patron", "%" + patron + "%");
+		resultado = (List<JuntaVoto>) query.getResultList();
+		return resultado;
+	}
 }
