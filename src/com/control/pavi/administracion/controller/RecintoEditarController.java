@@ -48,6 +48,10 @@ public class RecintoEditarController {
     	try {
     		btnGrabar.setStyle("-fx-cursor: hand;");
 			btnSalir.setStyle("-fx-cursor: hand;");
+			
+			btnGrabar.getStyleClass().add("botonGrabar");
+			btnSalir.getStyleClass().add("botonSalir");
+			
 			llenarComboProvincia();
 			txtCodigo.setText("0");
 			txtCodigo.setDisable(true);

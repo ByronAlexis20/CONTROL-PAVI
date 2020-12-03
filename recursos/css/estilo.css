@@ -49,7 +49,6 @@
     linear-gradient(#A9BCF5 0%, #A9BCF5 25%, #A9BCF5 75%, #A9BCF5 100%),
     linear-gradient(#A9BCF5, #A9BCF5),
     linear-gradient(#A9BCF5 0%, #A9BCF5 20%, #A9BCF5 80%, #A9BCF5 100%);*/
-    -fx-background-image:url('informatica.png');
     -fx-background-repeat: no-repeat;
     -fx-background-size: 8% 13%;
     -fx-background-position: right bottom;
@@ -149,80 +148,26 @@
     -fx-background-color: #FFFFCC;
     -fx-border-radius: 2px;
 }
-.botonAceptar {
-	-fx-graphic: url("Aceptar.png");
-}
-.botonCobrar {
-	-fx-graphic: url("cobrar.png");
-}
 .botonGrabar {
 	-fx-graphic: url("save.png");
 }
 .botonEliminar {
-	-fx-graphic: url("icono_eliminar.png");
-}
-.botonAnadir {
-	-fx-graphic: url("icono_derecha_one.png");
-}
-.botonAnadirTodo {
-	-fx-graphic: url("icono_derecha_two.png");
-}
-.botonQuitar {
-	-fx-graphic: url("icono_izquierda_one.png");
-}
-.botonQuitarTodo {
-	-fx-graphic: url("icono_izquierda_two.png");
+	-fx-graphic: url("eliminar.png");
 }
 .botonNuevo {
-	-fx-graphic: url("new.png");
+	-fx-graphic: url("nuevo.png");
 }
-.botonCancelar {
-	-fx-graphic: url("cancel.png");
+.botonEditar {
+	-fx-graphic: url("editar.png");
 }
-.botonLimpiar {
-	-fx-graphic: url("clear.png");
+.botonSalir {
+	-fx-graphic: url("salir.png");
 }
 .botonAgregar {
 	-fx-graphic: url("agregar.png");
 }
 .botonQuitarR {
 	-fx-graphic: url("quitar.png");
-}
-.botonBuscar {
-	-fx-graphic: url("icono_buscar.png");
-}
-.botonCargar {
-	-fx-graphic: url("preview.png");
-}
-.botonAsignacion {
-	-fx-graphic: url("icono_asignacion.png");
-}
-.botonQuitarAsignacion {
-	-fx-graphic: url("quitar_asignacion.png");
-}
-.botonCierreCiclo {
-	-fx-graphic: url("cierre_ciclo.png");
-}
-.botonEnviarEmail {
-	-fx-graphic: url("enviar_email.png");
-}
-.botonAceptarPago {
-	-fx-graphic: url("aceptar_pago.png");
-}
-.botonImprimir {
-	-fx-graphic: url("imprimir.png");
-}
-.botonResultados {
-	-fx-graphic: url("resultados.png");
-}
-.botonUpload {
-	-fx-graphic: url("upload.png");
-}
-.botonDownload {
-	-fx-graphic: url("download.png");
-}
-.botonCortarAgua {
-	-fx-graphic: url("corte_agua.png");
 }
 .imagenViewInicio{
 	-fx-background-image: url("sesiones.png");

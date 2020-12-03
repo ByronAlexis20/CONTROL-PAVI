@@ -6,9 +6,11 @@ import java.util.Optional;
 import com.control.pavi.model.Canton;
 import com.control.pavi.model.Parroquia;
 import com.control.pavi.model.Provincia;
+import com.control.pavi.model.Zona;
 import com.control.pavi.model.dao.CantonDAO;
 import com.control.pavi.model.dao.ParroquiaDAO;
 import com.control.pavi.model.dao.ProvinciaDAO;
+import com.control.pavi.model.dao.ZonaDAO;
 import com.control.pavi.util.Context;
 import com.control.pavi.util.ControllerHelper;
 
@@ -27,6 +29,7 @@ public class ParroquiaEditarController {
 	@FXML private Button btnSalir;
 	@FXML private TextField txtParroquia;
 	@FXML private ComboBox<Provincia> cboProvincia;
+	@FXML private ComboBox<Zona> cboZona;
 	@FXML private CheckBox chkEstado;
 	@FXML private TextField txtCodigo;
 	@FXML private Button btnGrabar;
@@ -37,12 +40,18 @@ public class ParroquiaEditarController {
 	Parroquia parroquia = new Parroquia();
 	ParroquiaDAO parroquiaDAO = new ParroquiaDAO();
 	ControllerHelper helper = new ControllerHelper();
+	ZonaDAO zonaDAO = new ZonaDAO();
 	
 	public void initialize() {
 		try {
 			btnGrabar.setStyle("-fx-cursor: hand;");
 			btnSalir.setStyle("-fx-cursor: hand;");
+			
+			btnGrabar.getStyleClass().add("botonGrabar");
+			btnSalir.getStyleClass().add("botonSalir");
+			
 			llenarComboProvincia();
+			llenarComboZona();
 			txtCodigo.setText("0");
 			txtCodigo.setDisable(true);
 			txtParroquia.requestFocus();
@@ -70,6 +79,8 @@ public class ParroquiaEditarController {
 		cboProvincia.getSelectionModel().select(parroquia.getCanton().getProvincia());
 		CambiarCanton();
 		cboCanton.getSelectionModel().select(parroquia.getCanton());
+		if(parroquia.getZona() != null)
+			cboZona.getSelectionModel().select(parroquia.getZona());
 	}
 	private void llenarComboProvincia(){
 		try{
@@ -84,10 +95,23 @@ public class ParroquiaEditarController {
 		}
 	}
 	
+	private void llenarComboZona(){
+		try{
+			cboZona.setPromptText("Seleccionar zona");
+			List<Zona> lista;
+			lista = zonaDAO.buscarActivos();
+			ObservableList<Zona> datos = FXCollections.observableArrayList();
+			datos.addAll(lista);
+			cboZona.setItems(datos);
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+	}
+	
 	public void grabar() {
 		try {
     		if(txtParroquia.getText().toString().isEmpty()) {
-    			helper.mostrarAlertaAdvertencia("Ingresar Nombre del Cantón", Context.getInstance().getStage());
+    			helper.mostrarAlertaAdvertencia("Ingresar Nombre de la parroquia", Context.getInstance().getStage());
     			txtParroquia.requestFocus();
     			return;
     		}
@@ -97,6 +121,10 @@ public class ParroquiaEditarController {
     		}
     		if(cboCanton.getSelectionModel().getSelectedItem() == null) {
     			helper.mostrarAlertaAdvertencia("Debe seleccionar el Cantón", Context.getInstance().getStage());
+    			return;
+    		}
+    		if(cboZona.getSelectionModel().getSelectedItem() == null) {
+    			helper.mostrarAlertaAdvertencia("Debe seleccionar la Zona", Context.getInstance().getStage());
     			return;
     		}
     		Optional<ButtonType> result = helper.mostrarAlertaConfirmacion("Desea Grabar los Datos?",Context.getInstance().getStage());

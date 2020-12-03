@@ -11,6 +11,7 @@ import com.control.pavi.util.Context;
 import com.control.pavi.util.ControllerHelper;
 import com.control.pavi.util.Encriptado;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -19,6 +20,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class InicioSesionController {
@@ -37,6 +40,9 @@ public class InicioSesionController {
 	String nombreSistema = "";
 	public void initialize() {
 		try {
+			btnAceptar.setStyle("-fx-cursor: hand;");
+			btnCancelar.setStyle("-fx-cursor: hand;");
+			
 			List<Empresa> empresaLista = empresaDAO.getListaEmpresa();
 			for(Empresa emp : empresaLista) {
 				nombreSistema = emp.getNombreSistema();
@@ -45,6 +51,24 @@ public class InicioSesionController {
 			}
 			Image image = new Image("usuario_login.png");
 			ivLogin.setImage(image);
+			
+			txtUsuario.setOnKeyPressed(new EventHandler<KeyEvent>(){
+				@Override
+				public void handle(KeyEvent ke){
+					if (ke.getCode().equals(KeyCode.ENTER)){
+						aceptar();
+					}
+				}
+			});
+			txtClave.setOnKeyPressed(new EventHandler<KeyEvent>(){
+				@Override
+				public void handle(KeyEvent ke){
+					if (ke.getCode().equals(KeyCode.ENTER)){
+						aceptar();
+					}
+				}
+			});
+			
 		}catch(Exception ex) {
 		}
 	}

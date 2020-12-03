@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="zona")
 @NamedQueries({
-	@NamedQuery(name="Zona.findAll", query="SELECT z FROM Zona z")
+	@NamedQuery(name="Zona.findAll", query="SELECT z FROM Zona z where z.estado = 1")
 })
 public class Zona implements Serializable{
 	private static final long serialVersionUID = 1L;

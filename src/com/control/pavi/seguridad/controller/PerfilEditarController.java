@@ -31,6 +31,10 @@ public class PerfilEditarController {
 		try {
 			btnGrabar.setStyle("-fx-cursor: hand;");
 			btnSalir.setStyle("-fx-cursor: hand;");
+			
+			btnGrabar.getStyleClass().add("botonGrabar");
+			btnSalir.getStyleClass().add("botonSalir");
+			
 			txtPerfil.textProperty().addListener(new ChangeListener<String>() {
 				@Override
 				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {

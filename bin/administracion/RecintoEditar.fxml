@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="317.0" prefWidth="583.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.control.pavi.administracion.controller.RecintoEditarController">
+<AnchorPane prefHeight="337.0" prefWidth="583.0" xmlns="http://javafx.com/javafx/8" stylesheets="/estilo.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.control.pavi.administracion.controller.RecintoEditarController">
    <children>
-      <HBox layoutX="15.0" layoutY="20.0" prefHeight="228.0" prefWidth="556.0" style="-fx-border-color: #bbc8d0; -fx-border-width: 1px; -fx-background-radius: 6; -fx-max-height: 600; -fx-max-width: 1500; -fx-min-height: 10; -fx-min-width: 10">
+      <HBox layoutX="15.0" layoutY="20.0" prefHeight="251.0" prefWidth="556.0" style="-fx-border-color: #bbc8d0; -fx-border-width: 1px; -fx-background-radius: 6; -fx-max-height: 600; -fx-max-width: 1500; -fx-min-height: 10; -fx-min-width: 10">
          <children>
             <GridPane prefHeight="168.0" prefWidth="507.0" HBox.hgrow="ALWAYS">
                <children>
@@ -76,7 +76,7 @@
             </GridPane>
          </children>
       </HBox>
-      <GridPane alignment="CENTER" layoutX="374.0" layoutY="250.0" prefHeight="45.0" prefWidth="197.0">
+      <GridPane alignment="CENTER" layoutX="374.0" layoutY="277.0" prefHeight="45.0" prefWidth="197.0">
          <children>
             <Button fx:id="btnGrabar" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#grabar" prefHeight="45.0" prefWidth="85.0" text="Grabar" GridPane.columnIndex="1" />
             <Button fx:id="btnSalir" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#salir" prefHeight="45.0" prefWidth="85.0" text="Salir" GridPane.columnIndex="3" />
@@ -91,6 +91,6 @@
             <RowConstraints />
          </rowConstraints>
       </GridPane>
-      <Label layoutX="547.0" layoutY="295.0" prefHeight="17.0" prefWidth="16.0" />
+      <Label layoutX="543.0" layoutY="315.0" prefHeight="17.0" prefWidth="16.0" />
    </children>
 </AnchorPane>

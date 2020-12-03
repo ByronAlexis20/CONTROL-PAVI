@@ -40,6 +40,7 @@ public class AsignarListaController {
 
 	public void initialize() {
 		btnJuntas.setStyle("-fx-cursor: hand;");
+		btnJuntas.getStyleClass().add("botonEditar");
 		txtBuscar.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {

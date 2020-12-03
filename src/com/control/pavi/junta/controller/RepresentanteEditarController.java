@@ -39,6 +39,10 @@ public class RepresentanteEditarController {
     	try {
     		btnGrabar.setStyle("-fx-cursor: hand;");
 			btnSalir.setStyle("-fx-cursor: hand;");
+			
+			btnGrabar.getStyleClass().add("botonGrabar");
+			btnSalir.getStyleClass().add("botonSalir");
+			
 			llenarComboPartido();
 			if(Context.getInstance().getRepresentante() != null) {
 				representante = Context.getInstance().getRepresentante();

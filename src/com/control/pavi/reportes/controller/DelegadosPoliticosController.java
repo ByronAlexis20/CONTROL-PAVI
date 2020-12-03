@@ -1,7 +1,9 @@
 package com.control.pavi.reportes.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.control.pavi.model.AsignacionJunta;
 import com.control.pavi.model.Canton;
@@ -15,6 +17,7 @@ import com.control.pavi.model.dao.ProvinciaDAO;
 import com.control.pavi.model.dao.RecintoDAO;
 import com.control.pavi.util.Context;
 import com.control.pavi.util.ControllerHelper;
+import com.control.pavi.util.PrintReport;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -244,7 +247,55 @@ public class DelegadosPoliticosController {
 		}
 	}
 	public void imprimir() {
-
+		try {
+			if(rbProvincia.isSelected()) {
+				if(cboProvincia.getSelectionModel().getSelectedItem() == null) {
+					helper.mostrarAlertaAdvertencia("Debe seleccionar la provincia", Context.getInstance().getStage());
+					return;
+				}
+				Map<String, Object> param = new HashMap<String, Object>();
+				param.put("TITULO", "REPORTE DE DELEGADOS PARA LAS JUNTAS RECEPTORAS DE VOTOS");
+				param.put("ID_PROVINCIA", cboProvincia.getSelectionModel().getSelectedItem().getIdProvincia());
+				PrintReport reporte = new PrintReport();
+				reporte.crearReporte("/recursos/rpt/rptDelegadosProvincia.jasper", recintoDAO, param);
+				reporte.showReport("Reporte de delegados");
+			}else if(rbCanton.isSelected()) {
+				if(cboCanton.getSelectionModel().getSelectedItem() == null) {
+					helper.mostrarAlertaAdvertencia("Debe seleccionar Cantón", Context.getInstance().getStage());
+					return;
+				}
+				Map<String, Object> param = new HashMap<String, Object>();
+				param.put("TITULO", "REPORTE DE DELEGADOS PARA LAS JUNTAS RECEPTORAS DE VOTOS");
+				param.put("ID_CANTON", cboCanton.getSelectionModel().getSelectedItem().getIdCanton());
+				PrintReport reporte = new PrintReport();
+				reporte.crearReporte("/recursos/rpt/rptDelegadosCanton.jasper", recintoDAO, param);
+				reporte.showReport("Reporte de delegados");
+			}else if(rbParroquia.isSelected()) {
+				if(cboParroquia.getSelectionModel().getSelectedItem() == null) {
+					helper.mostrarAlertaAdvertencia("Debe seleccionar Parroquia", Context.getInstance().getStage());
+					return;
+				}
+				Map<String, Object> param = new HashMap<String, Object>();
+				param.put("TITULO", "REPORTE DE DELEGADOS PARA LAS JUNTAS RECEPTORAS DE VOTOS");
+				param.put("ID_PARROQUIA", cboParroquia.getSelectionModel().getSelectedItem().getIdParroquia());
+				PrintReport reporte = new PrintReport();
+				reporte.crearReporte("/recursos/rpt/rptDelegadosParroquia.jasper", recintoDAO, param);
+				reporte.showReport("Reporte de delegados");
+			}else if(rbRecinto.isSelected()) {
+				if(cboRecinto.getSelectionModel().getSelectedItem() == null) {
+					helper.mostrarAlertaAdvertencia("Debe seleccionar Recinto", Context.getInstance().getStage());
+					return;
+				}
+				Map<String, Object> param = new HashMap<String, Object>();
+				param.put("TITULO", "REPORTE DE DELEGADOS PARA LAS JUNTAS RECEPTORAS DE VOTOS");
+				param.put("ID_RECINTO", cboRecinto.getSelectionModel().getSelectedItem().getIdRecinto());
+				PrintReport reporte = new PrintReport();
+				reporte.crearReporte("/recursos/rpt/rptDelegadosRecinto.jasper", recintoDAO, param);
+				reporte.showReport("Reporte de delegados");
+			}
+		}catch(Exception ex) {
+			
+		}
 	}
 	public void cambiaProvincia() {
 		if(rbProvincia.isSelected()) {

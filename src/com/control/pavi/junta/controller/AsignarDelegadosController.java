@@ -47,6 +47,10 @@ public class AsignarDelegadosController {
     	try {
     		btnGrabar.setStyle("-fx-cursor: hand;");
 			btnSalir.setStyle("-fx-cursor: hand;");
+			
+			btnGrabar.getStyleClass().add("botonGrabar");
+			btnSalir.getStyleClass().add("botonSalir");
+			
 			llenarComboPartido();
 			if(Context.getInstance().getJuntaVoto() != null) {
 				junta = Context.getInstance().getJuntaVoto();

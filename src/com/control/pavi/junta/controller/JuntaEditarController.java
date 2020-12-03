@@ -39,6 +39,10 @@ public class JuntaEditarController {
 		try {
 			btnEliminar.setStyle("-fx-cursor: hand;");
 			btnNuevo.setStyle("-fx-cursor: hand;");
+			
+			btnEliminar.getStyleClass().add("botonEliminar");
+			btnNuevo.getStyleClass().add("botonNuevo");
+			
 			if(Context.getInstance().getRecinto() != null) {
 				recinto = Context.getInstance().getRecinto();
 				txtCanton.setText(recinto.getParroquia().getCanton().getCanton());

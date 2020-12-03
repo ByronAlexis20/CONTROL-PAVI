@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="412.0" prefWidth="783.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.control.pavi.junta.controller.JuntaEditarController">
+<AnchorPane prefHeight="412.0" prefWidth="783.0" xmlns="http://javafx.com/javafx/8" stylesheets="/estilo.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.control.pavi.junta.controller.JuntaEditarController">
    <children>
       <GridPane layoutX="31.0" layoutY="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>

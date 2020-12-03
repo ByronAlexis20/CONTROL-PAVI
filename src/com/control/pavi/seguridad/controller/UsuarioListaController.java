@@ -41,6 +41,10 @@ public class UsuarioListaController {
 			btnEditar.setStyle("-fx-cursor: hand;");
 			btnEliminar.setStyle("-fx-cursor: hand;");
 			btnNuevo.setStyle("-fx-cursor: hand;");
+			
+			btnEditar.getStyleClass().add("botonEditar");
+			btnNuevo.getStyleClass().add("botonNuevo");
+			btnEliminar.getStyleClass().add("botonEliminar");
 			txtBuscar.textProperty().addListener(new ChangeListener<String>() {
 				@Override
 				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {

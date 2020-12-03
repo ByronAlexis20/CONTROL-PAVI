@@ -1,7 +1,6 @@
-/reportes/
+/rptDelegadosProvincia.jasper
 /com/
-/rptDelegadosProvincia.jrxml
-/.project
-/rptDelegadosCanton.jrxml
-/rptDelegadosParroquia.jrxml
-/rptDelegadosRecinto.jrxml
+/seguridad/
+/partido/
+/junta/
+/administracion/

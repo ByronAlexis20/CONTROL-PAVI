@@ -100,7 +100,18 @@ public class ParroquiaListaController {
 					return new SimpleObjectProperty<String>(param.getValue().getCanton().getCanton());
 				}
 			});
-			
+			TableColumn<Parroquia, String> zonaColum = new TableColumn<>("Zona");
+			zonaColum.setMinWidth(10);
+			zonaColum.setPrefWidth(200);
+			zonaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Parroquia,String>, ObservableValue<String>>() {
+				@Override
+				public ObservableValue<String> call(CellDataFeatures<Parroquia, String> param) {
+					String zona = "";
+					if(param.getValue().getZona() != null)
+						zona = param.getValue().getZona().getZona();
+					return new SimpleObjectProperty<String>(zona);
+				}
+			});
 			TableColumn<Parroquia, String> parroquiaColum = new TableColumn<>("Parroquia");
 			parroquiaColum.setMinWidth(10);
 			parroquiaColum.setPrefWidth(200);
@@ -127,7 +138,7 @@ public class ParroquiaListaController {
 			});
 
 			
-			tvDatos.getColumns().addAll(idColum,provinciaColum,cantonColum,parroquiaColum,estadoColum);
+			tvDatos.getColumns().addAll(idColum,provinciaColum,cantonColum,zonaColum,parroquiaColum,estadoColum);
 			tvDatos.setItems(datos);
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());

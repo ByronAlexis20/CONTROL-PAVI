@@ -49,6 +49,10 @@ public class UsuarioEditarController {
 		try {
 			btnGrabar.setStyle("-fx-cursor: hand;");
 			btnSalir.setStyle("-fx-cursor: hand;");
+			
+			btnGrabar.getStyleClass().add("botonGrabar");
+			btnSalir.getStyleClass().add("botonSalir");
+			
 			llenarComboPerfil();
 			//validar solo numeros
 			txtCedula.textProperty().addListener(new ChangeListener<String>() {
