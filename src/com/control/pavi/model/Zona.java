@@ -74,4 +74,9 @@ public class Zona implements Serializable {
 		return parroquia;
 	}
 
+	@Override
+	public String toString() {
+		return this.zona;
+	}
+
 }

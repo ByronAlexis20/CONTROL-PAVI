@@ -133,6 +133,7 @@ public class ParroquiaEditarController {
 				
 				parroquia.setCanton(cboCanton.getSelectionModel().getSelectedItem());
 				parroquia.setParroquia(txtParroquia.getText());
+				parroquia.setZona(cboZona.getSelectionModel().getSelectedItem());
 				parroquia.setEstado(true);
 				if(parroquia.getIdParroquia() == null)
 					parroquiaDAO.getEntityManager().persist(parroquia);
