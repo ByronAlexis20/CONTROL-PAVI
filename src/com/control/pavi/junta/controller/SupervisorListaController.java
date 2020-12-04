@@ -10,6 +10,8 @@ import com.control.pavi.model.Supervisor;
 import com.control.pavi.model.dao.AsignacionSupervisorDAO;
 import com.control.pavi.model.dao.JuntaVotoDAO;
 import com.control.pavi.model.dao.SupervisorDAO;
+import com.control.pavi.util.Context;
+import com.control.pavi.util.ControllerHelper;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -43,6 +45,7 @@ public class SupervisorListaController {
 	JuntaVotoDAO juntaDAO = new JuntaVotoDAO();
 	AsignacionSupervisorDAO asignacionDAO = new AsignacionSupervisorDAO();
 	SupervisorDAO supervisorDAO = new SupervisorDAO();
+	ControllerHelper helper = new ControllerHelper();
 	
 	public void initialize() {
 		try {
@@ -332,17 +335,29 @@ public class SupervisorListaController {
 	}
 	
 	public void nuevo() {
-
+		try {
+			Context.getInstance().setSupervisor(null);
+			helper.abrirPantallaModal("/junta/SupervisorEditar.fxml","Supervisor", Context.getInstance().getStage());
+			cargarSupervisoresAsignador();
+		}catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
 	}
 
 	
 	public void editar() {
-
+		try {
+			Context.getInstance().setSupervisor(tvDatos.getSelectionModel().getSelectedItem());
+			helper.abrirPantallaModal("/junta/SupervisorEditar.fxml","Supervisor", Context.getInstance().getStage());
+			cargarSupervisoresAsignador();
+		}catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
 	}
 
 	
 	public void eliminar() {
-
+		
 	}
 
 	public void cambiaProvincia() {

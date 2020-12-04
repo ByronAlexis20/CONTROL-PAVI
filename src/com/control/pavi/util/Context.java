@@ -11,6 +11,7 @@ import com.control.pavi.model.Perfil;
 import com.control.pavi.model.Provincia;
 import com.control.pavi.model.Recinto;
 import com.control.pavi.model.Representante;
+import com.control.pavi.model.Supervisor;
 import com.control.pavi.model.Usuario;
 
 import javafx.scene.layout.AnchorPane;
@@ -38,6 +39,7 @@ public class Context {
 	private Candidato candidato;
 	private Representante representante;
 	private JuntaVoto juntaVoto;
+	private Supervisor supervisor;
 	
 	public static Context getInstance() {
 		return instance;
@@ -176,6 +178,14 @@ public class Context {
 
 	public void setJuntaVoto(JuntaVoto juntaVoto) {
 		this.juntaVoto = juntaVoto;
+	}
+
+	public Supervisor getSupervisor() {
+		return supervisor;
+	}
+
+	public void setSupervisor(Supervisor supervisor) {
+		this.supervisor = supervisor;
 	}
 	
 }
