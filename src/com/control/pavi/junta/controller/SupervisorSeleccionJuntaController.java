@@ -62,7 +62,6 @@ public class SupervisorSeleccionJuntaController {
 			} 
 		}); 
 		rbProvincia.setSelected(true);
-		llenarDatos("");
 		if(Context.getInstance().getListaJuntaVoto() != null) {
 			listaAsignados = Context.getInstance().getListaJuntaVoto();
 			Context.getInstance().setListaJuntaVoto(null);
@@ -73,13 +72,13 @@ public class SupervisorSeleccionJuntaController {
 				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
 					if(tvDatos.getSelectionModel().getSelectedItem() != null){
 						Context.getInstance().setJuntaVoto(tvDatos.getSelectionModel().getSelectedItem());
-						Context.getInstance().getStageModal().close();
+						Context.getInstance().getStageModalSecundario().close();
 					}
 				}
 			});
 			return row ;
 		});
-		
+		llenarDatos("");
 	}
 	public void buscar() {
 		try {

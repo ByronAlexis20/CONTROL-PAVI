@@ -3,19 +3,14 @@ package com.control.pavi.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
-/**
- * The persistent class for the asignacion_junta database table.
- * 
- */
 @Entity
 @Table(name="asignacion_junta")
 @NamedQueries({
 @NamedQuery(name="AsignacionJunta.buscarDelegadoJunta", query="SELECT a FROM AsignacionJunta a where a.representante.idRepresentante = :idRep and a.estado = 1"),
-@NamedQuery(name="AsignacionJunta.buscarPorProvincia", query="SELECT a FROM AsignacionJunta a where a.junta.recinto.parroquia.canton.provincia.idProvincia = :id and a.estado = 1"),
-@NamedQuery(name="AsignacionJunta.buscarPorCanton", query="SELECT a FROM AsignacionJunta a where a.junta.recinto.parroquia.canton.idCanton = :id and a.estado = 1"),
-@NamedQuery(name="AsignacionJunta.buscarPorParroquia", query="SELECT a FROM AsignacionJunta a where a.junta.recinto.parroquia.idParroquia = :id and a.estado = 1"),
-@NamedQuery(name="AsignacionJunta.buscarPorRecinto", query="SELECT a FROM AsignacionJunta a where a.junta.recinto.idRecinto = :id and a.estado = 1"),
+@NamedQuery(name="AsignacionJunta.buscarPorProvincia", query="SELECT a FROM AsignacionJunta a where a.juntaVoto.recinto.parroquia.canton.provincia.idProvincia = :id and a.estado = 1"),
+@NamedQuery(name="AsignacionJunta.buscarPorCanton", query="SELECT a FROM AsignacionJunta a where a.juntaVoto.recinto.parroquia.canton.idCanton = :id and a.estado = 1"),
+@NamedQuery(name="AsignacionJunta.buscarPorParroquia", query="SELECT a FROM AsignacionJunta a where a.juntaVoto.recinto.parroquia.idParroquia = :id and a.estado = 1"),
+@NamedQuery(name="AsignacionJunta.buscarPorRecinto", query="SELECT a FROM AsignacionJunta a where a.juntaVoto.recinto.idRecinto = :id and a.estado = 1"),
 })
 public class AsignacionJunta implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -33,11 +28,11 @@ public class AsignacionJunta implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_representante")
 	private Representante representante;
-	
+
+	//bi-directional many-to-one association to JuntaVoto
 	@ManyToOne
 	@JoinColumn(name="id_junta")
-	private JuntaVoto junta;
-	
+	private JuntaVoto juntaVoto;
 
 	public AsignacionJunta() {
 	}
@@ -74,12 +69,12 @@ public class AsignacionJunta implements Serializable {
 		this.representante = representante;
 	}
 
-	public JuntaVoto getJunta() {
-		return junta;
+	public JuntaVoto getJuntaVoto() {
+		return this.juntaVoto;
 	}
 
-	public void setJunta(JuntaVoto junta) {
-		this.junta = junta;
+	public void setJuntaVoto(JuntaVoto juntaVoto) {
+		this.juntaVoto = juntaVoto;
 	}
 
 }

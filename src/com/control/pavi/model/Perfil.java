@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
 @Table(name="perfil")
 @NamedQueries({
@@ -26,11 +25,11 @@ public class Perfil implements Serializable {
 	private String perfil;
 
 	//bi-directional many-to-one association to Permiso
-	@OneToMany(mappedBy="perfil")
+	@OneToMany(mappedBy="perfil", cascade = CascadeType.ALL)
 	private List<Permiso> permisos;
 
 	//bi-directional many-to-one association to Usuario
-	@OneToMany(mappedBy="perfil")
+	@OneToMany(mappedBy="perfil", cascade = CascadeType.ALL)
 	private List<Usuario> usuarios;
 
 	public Perfil() {
@@ -111,10 +110,8 @@ public class Perfil implements Serializable {
 
 		return usuario;
 	}
-
 	@Override
 	public String toString() {
 		return this.perfil;
 	}
-
 }

@@ -30,7 +30,7 @@ public class Candidato implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-one association to PartidoPolitico
-	@OneToMany(mappedBy="candidato")
+	@OneToMany(mappedBy="candidato", cascade = CascadeType.ALL)
 	private List<PartidoPolitico> partidoPoliticos;
 
 	public Candidato() {

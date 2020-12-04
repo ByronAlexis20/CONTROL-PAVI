@@ -4,11 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
-/**
- * The persistent class for the junta_voto database table.
- * 
- */
 @Entity
 @Table(name="junta_voto")
 @NamedQueries({
@@ -43,12 +38,13 @@ public class JuntaVoto implements Serializable {
 
 	private int numero;
 
-	//bi-directional many-to-one association to AsignacionSupervisor
-	@OneToMany(mappedBy="juntaVoto" , cascade = CascadeType.ALL)
-	private List<AsignacionSupervisor> asignacionSupervisors;
-	
-	@OneToMany(mappedBy="junta",cascade = CascadeType.ALL)
+	//bi-directional many-to-one association to AsignacionJunta
+	@OneToMany(mappedBy="juntaVoto", cascade = CascadeType.ALL)
 	private List<AsignacionJunta> asignacionJuntas;
+
+	//bi-directional many-to-one association to AsignacionSupervisor
+	@OneToMany(mappedBy="juntaVoto", cascade = CascadeType.ALL)
+	private List<AsignacionSupervisor> asignacionSupervisors;
 
 	//bi-directional many-to-one association to Recinto
 	@ManyToOne
@@ -98,6 +94,28 @@ public class JuntaVoto implements Serializable {
 		this.numero = numero;
 	}
 
+	public List<AsignacionJunta> getAsignacionJuntas() {
+		return this.asignacionJuntas;
+	}
+
+	public void setAsignacionJuntas(List<AsignacionJunta> asignacionJuntas) {
+		this.asignacionJuntas = asignacionJuntas;
+	}
+
+	public AsignacionJunta addAsignacionJunta(AsignacionJunta asignacionJunta) {
+		getAsignacionJuntas().add(asignacionJunta);
+		asignacionJunta.setJuntaVoto(this);
+
+		return asignacionJunta;
+	}
+
+	public AsignacionJunta removeAsignacionJunta(AsignacionJunta asignacionJunta) {
+		getAsignacionJuntas().remove(asignacionJunta);
+		asignacionJunta.setJuntaVoto(null);
+
+		return asignacionJunta;
+	}
+
 	public List<AsignacionSupervisor> getAsignacionSupervisors() {
 		return this.asignacionSupervisors;
 	}
@@ -128,24 +146,4 @@ public class JuntaVoto implements Serializable {
 		this.recinto = recinto;
 	}
 
-	public List<AsignacionJunta> getAsignacionJuntas() {
-		return asignacionJuntas;
-	}
-
-	public void setAsignacionJuntas(List<AsignacionJunta> asignacionJuntas) {
-		this.asignacionJuntas = asignacionJuntas;
-	}
-	public AsignacionJunta addAsignacionJunta(AsignacionJunta asignacionJunta) {
-		getAsignacionJuntas().add(asignacionJunta);
-		asignacionJunta.setJunta(this);
-
-		return asignacionJunta;
-	}
-
-	public AsignacionJunta removeAsignacionJunta(AsignacionJunta asignacionJunta) {
-		getAsignacionJuntas().remove(asignacionJunta);
-		asignacionJunta.setJunta(null);
-
-		return asignacionJunta;
-	}
 }

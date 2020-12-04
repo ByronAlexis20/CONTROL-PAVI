@@ -44,7 +44,7 @@ public class PartidoPolitico implements Serializable {
 	private Candidato candidato;
 
 	//bi-directional many-to-one association to Representante
-	@OneToMany(mappedBy="partidoPolitico")
+	@OneToMany(mappedBy="partidoPolitico", cascade = CascadeType.ALL)
 	private List<Representante> representantes;
 
 	public PartidoPolitico() {
@@ -151,10 +151,8 @@ public class PartidoPolitico implements Serializable {
 
 		return representante;
 	}
-
 	@Override
 	public String toString() {
 		return this.lista;
 	}
-
 }

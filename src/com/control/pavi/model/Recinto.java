@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
 @Table(name="recinto")
 @NamedQueries({
@@ -35,7 +34,7 @@ public class Recinto implements Serializable {
 	private String telefono;
 
 	//bi-directional many-to-one association to JuntaVoto
-	@OneToMany(mappedBy="recinto")
+	@OneToMany(mappedBy="recinto", cascade = CascadeType.ALL)
 	private List<JuntaVoto> juntaVotos;
 
 	//bi-directional many-to-one association to Parroquia
@@ -115,10 +114,8 @@ public class Recinto implements Serializable {
 	public void setParroquia(Parroquia parroquia) {
 		this.parroquia = parroquia;
 	}
-
 	@Override
 	public String toString() {
 		return this.recinto;
 	}
-
 }

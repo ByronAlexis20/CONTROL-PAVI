@@ -4,11 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
-/**
- * The persistent class for the representante database table.
- * 
- */
 @Entity
 @NamedQueries({
 	@NamedQuery(name="Representante.buscarPorPatron", query="SELECT r FROM Representante r where r.estado = 1 and (lower(r.nombre) like lower(:patron) or lower(r.apellidos) like lower(:patron))"),
@@ -36,7 +31,7 @@ public class Representante implements Serializable {
 	private String telefono;
 
 	//bi-directional many-to-one association to AsignacionJunta
-	@OneToMany(mappedBy="representante",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="representante", cascade = CascadeType.ALL)
 	private List<AsignacionJunta> asignacionJuntas;
 
 	//bi-directional many-to-one association to PartidoPolitico

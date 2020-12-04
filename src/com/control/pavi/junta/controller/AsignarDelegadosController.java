@@ -115,7 +115,7 @@ public class AsignarDelegadosController {
 			AsignacionJunta asignacion = new AsignacionJunta();
 			asignacion.setEstado(true);
 			asignacion.setDescripcion("");
-			asignacion.setJunta(junta);
+			asignacion.setJuntaVoto(junta);
 			asignacion.setRepresentante(representante);
 			
 			List<AsignacionJunta> lista = new ArrayList<AsignacionJunta>();

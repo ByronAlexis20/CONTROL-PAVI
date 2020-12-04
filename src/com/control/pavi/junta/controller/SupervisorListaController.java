@@ -2,6 +2,7 @@ package com.control.pavi.junta.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.control.pavi.model.AsignacionJunta;
 import com.control.pavi.model.AsignacionSupervisor;
@@ -20,6 +21,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -96,6 +98,8 @@ public class SupervisorListaController {
 	@SuppressWarnings("unchecked")
 	private void cargarSupervisoresAsignador() {
 		try {
+			tvDatos.getItems().clear();
+			tvDatos.getColumns().clear();
 			List<Supervisor> lista = supervisorDAO.buscarPorPatron("");
 			ObservableList<Supervisor> datos = FXCollections.observableArrayList();
 			datos.setAll(lista);
@@ -339,6 +343,7 @@ public class SupervisorListaController {
 			Context.getInstance().setSupervisor(null);
 			helper.abrirPantallaModal("/junta/SupervisorEditar.fxml","Supervisor", Context.getInstance().getStage());
 			cargarSupervisoresAsignador();
+			llenarDatosJuntaFaltantesDeAsignar();
 		}catch(Exception ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -357,7 +362,31 @@ public class SupervisorListaController {
 
 	
 	public void eliminar() {
-		
+		try {
+			if(tvDatos.getSelectionModel().getSelectedItem() == null) {
+				helper.mostrarAlertaAdvertencia("Debe seleccionar un registro", Context.getInstance().getStage());
+    			return;
+			}
+			Optional<ButtonType> result = helper.mostrarAlertaConfirmacion( "Se procederá a eliminar el supervisor, por consiguiente se eliminaran las asignaciones de juntas realizadas .. Desea Continuar?", Context.getInstance().getStage());
+			if (result.get() == ButtonType.OK) {
+				Supervisor seleccion = tvDatos.getSelectionModel().getSelectedItem();
+				seleccion.setEstado(false);
+				supervisorDAO.getEntityManager().getTransaction().begin();
+				supervisorDAO.getEntityManager().merge(seleccion);
+				
+				for(AsignacionSupervisor asig : seleccion.getAsignacionSupervisors()) {
+					AsignacionSupervisor dato = asig;
+					dato.setEstado(false);
+					supervisorDAO.getEntityManager().merge(dato);
+				}
+				supervisorDAO.getEntityManager().getTransaction().commit();
+				helper.mostrarAlertaInformacion("Supervisor dado de baja", Context.getInstance().getStage());
+				llenarDatosJuntaFaltantesDeAsignar();
+				cargarSupervisoresAsignador();
+			}
+		}catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
 	}
 
 	public void cambiaProvincia() {

@@ -6,12 +6,13 @@ import java.util.List;
 
 
 /**
- * The persistent class for the supervisor database table.
+ * The persistent class for the supervisor_principal database table.
  * 
  */
 @Entity
-@NamedQuery(name="Supervisor.bucarPatron", query="SELECT s FROM Supervisor s where s.estado = 1 and (lower(s.nombres) like lower(:patron) or lower(s.apellidos) like lower(:patron))")
-public class Supervisor implements Serializable {
+@Table(name="supervisor_principal")
+@NamedQuery(name="SupervisorPrincipal.bucarPatron", query="SELECT s FROM SupervisorPrincipal s where s.estado = 1 and (lower(s.nombres) like lower(:patron) or lower(s.apellidos) like lower(:patron))")
+public class SupervisorPrincipal implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -21,31 +22,21 @@ public class Supervisor implements Serializable {
 
 	private String apellidos;
 
+	private String cedula;
+
 	private String direccion;
 
 	private boolean estado;
-
-	@Column(name="no_identificacion")
-	private String noIdentificacion;
 
 	private String nombres;
 
 	private String telefono;
 
-	//bi-directional many-to-one association to AsignacionSupervisor
-	@OneToMany(mappedBy="supervisor", cascade = CascadeType.ALL)
-	private List<AsignacionSupervisor> asignacionSupervisors;
-
 	//bi-directional many-to-one association to AsignacionSupervisorPrincipal
-	@OneToMany(mappedBy="supervisor", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="supervisorPrincipal", cascade = CascadeType.ALL)
 	private List<AsignacionSupervisorPrincipal> asignacionSupervisorPrincipals;
 
-	//bi-directional many-to-one association to TipoSupervisor
-	@ManyToOne
-	@JoinColumn(name="id_tipo_supervisor")
-	private TipoSupervisor tipoSupervisor;
-
-	public Supervisor() {
+	public SupervisorPrincipal() {
 	}
 
 	public Integer getIdSupervisor() {
@@ -64,6 +55,14 @@ public class Supervisor implements Serializable {
 		this.apellidos = apellidos;
 	}
 
+	public String getCedula() {
+		return this.cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+
 	public String getDireccion() {
 		return this.direccion;
 	}
@@ -78,14 +77,6 @@ public class Supervisor implements Serializable {
 
 	public void setEstado(boolean estado) {
 		this.estado = estado;
-	}
-
-	public String getNoIdentificacion() {
-		return this.noIdentificacion;
-	}
-
-	public void setNoIdentificacion(String noIdentificacion) {
-		this.noIdentificacion = noIdentificacion;
 	}
 
 	public String getNombres() {
@@ -104,28 +95,6 @@ public class Supervisor implements Serializable {
 		this.telefono = telefono;
 	}
 
-	public List<AsignacionSupervisor> getAsignacionSupervisors() {
-		return this.asignacionSupervisors;
-	}
-
-	public void setAsignacionSupervisors(List<AsignacionSupervisor> asignacionSupervisors) {
-		this.asignacionSupervisors = asignacionSupervisors;
-	}
-
-	public AsignacionSupervisor addAsignacionSupervisor(AsignacionSupervisor asignacionSupervisor) {
-		getAsignacionSupervisors().add(asignacionSupervisor);
-		asignacionSupervisor.setSupervisor(this);
-
-		return asignacionSupervisor;
-	}
-
-	public AsignacionSupervisor removeAsignacionSupervisor(AsignacionSupervisor asignacionSupervisor) {
-		getAsignacionSupervisors().remove(asignacionSupervisor);
-		asignacionSupervisor.setSupervisor(null);
-
-		return asignacionSupervisor;
-	}
-
 	public List<AsignacionSupervisorPrincipal> getAsignacionSupervisorPrincipals() {
 		return this.asignacionSupervisorPrincipals;
 	}
@@ -136,24 +105,16 @@ public class Supervisor implements Serializable {
 
 	public AsignacionSupervisorPrincipal addAsignacionSupervisorPrincipal(AsignacionSupervisorPrincipal asignacionSupervisorPrincipal) {
 		getAsignacionSupervisorPrincipals().add(asignacionSupervisorPrincipal);
-		asignacionSupervisorPrincipal.setSupervisor(this);
+		asignacionSupervisorPrincipal.setSupervisorPrincipal(this);
 
 		return asignacionSupervisorPrincipal;
 	}
 
 	public AsignacionSupervisorPrincipal removeAsignacionSupervisorPrincipal(AsignacionSupervisorPrincipal asignacionSupervisorPrincipal) {
 		getAsignacionSupervisorPrincipals().remove(asignacionSupervisorPrincipal);
-		asignacionSupervisorPrincipal.setSupervisor(null);
+		asignacionSupervisorPrincipal.setSupervisorPrincipal(null);
 
 		return asignacionSupervisorPrincipal;
-	}
-
-	public TipoSupervisor getTipoSupervisor() {
-		return this.tipoSupervisor;
-	}
-
-	public void setTipoSupervisor(TipoSupervisor tipoSupervisor) {
-		this.tipoSupervisor = tipoSupervisor;
 	}
 
 }

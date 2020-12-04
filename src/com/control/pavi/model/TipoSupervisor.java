@@ -4,14 +4,9 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
-/**
- * The persistent class for the tipo_supervisor database table.
- * 
- */
 @Entity
 @Table(name="tipo_supervisor")
-@NamedQuery(name="TipoSupervisor.findAll", query="SELECT t FROM TipoSupervisor t")
+@NamedQuery(name="TipoSupervisor.buscarPorId", query="SELECT t FROM TipoSupervisor t where t.idTipoSupervisor = :id")
 public class TipoSupervisor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +23,7 @@ public class TipoSupervisor implements Serializable {
 	private String tipoSupervisor;
 
 	//bi-directional many-to-one association to Supervisor
-	@OneToMany(mappedBy="tipoSupervisor")
+	@OneToMany(mappedBy="tipoSupervisor", cascade = CascadeType.ALL)
 	private List<Supervisor> supervisors;
 
 	public TipoSupervisor() {

@@ -61,7 +61,7 @@ public class ControllerHelper {
 			e.printStackTrace(); //Retorna Connection reset cuando demora mucho
 		}
 	}
-	public void abrirPantallaModalSolicitud(String uriVista, String titulo,Stage parent){
+	public void abrirPantallaModalSecundario(String uriVista, String titulo,Stage parent){
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(ControlPaviApplication.class.getResource(uriVista));
@@ -72,7 +72,7 @@ public class ControllerHelper {
 			stage.initModality(Modality.APPLICATION_MODAL);
 			Scene scene = new Scene(page);
 			stage.setScene(scene);
-			Context.getInstance().setStageModalSolicitud(stage);
+			Context.getInstance().setStageModalSecundario(stage);
 			stage.showAndWait();
 		} catch(Exception e) {
 			e.printStackTrace(); //Retorna Connection reset cuando demora mucho

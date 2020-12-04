@@ -13,6 +13,7 @@ import com.control.pavi.model.Provincia;
 import com.control.pavi.model.Recinto;
 import com.control.pavi.model.Representante;
 import com.control.pavi.model.Supervisor;
+import com.control.pavi.model.SupervisorPrincipal;
 import com.control.pavi.model.Usuario;
 
 import javafx.scene.layout.AnchorPane;
@@ -25,7 +26,7 @@ public class Context {
 
 	private Stage stage;
 	private Stage stageModal;
-	private Stage stageModalSolicitud;
+	private Stage stageModalSecundario;
 	private Stage stagePrincipal;
 	private AnchorPane apInicioSesion;
 	
@@ -41,7 +42,9 @@ public class Context {
 	private Representante representante;
 	private JuntaVoto juntaVoto;
 	private Supervisor supervisor;
+	private SupervisorPrincipal supervisorPrincipal;
 	private List<JuntaVoto> listaJuntaVoto;
+	private List<Supervisor> listaSupervisor;
 	
 	public static Context getInstance() {
 		return instance;
@@ -70,12 +73,12 @@ public class Context {
 		this.stageModal = stageModal;
 	}
 
-	public Stage getStageModalSolicitud() {
-		return stageModalSolicitud;
+	public Stage getStageModalSecundario() {
+		return stageModalSecundario;
 	}
 
-	public void setStageModalSolicitud(Stage stageModalSolicitud) {
-		this.stageModalSolicitud = stageModalSolicitud;
+	public void setStageModalSecundario(Stage stageModalSecundario) {
+		this.stageModalSecundario = stageModalSecundario;
 	}
 
 	public Stage getStagePrincipal() {
@@ -196,6 +199,22 @@ public class Context {
 
 	public void setListaJuntaVoto(List<JuntaVoto> listaJuntaVoto) {
 		this.listaJuntaVoto = listaJuntaVoto;
+	}
+
+	public SupervisorPrincipal getSupervisorPrincipal() {
+		return supervisorPrincipal;
+	}
+
+	public void setSupervisorPrincipal(SupervisorPrincipal supervisorPrincipal) {
+		this.supervisorPrincipal = supervisorPrincipal;
+	}
+
+	public List<Supervisor> getListaSupervisor() {
+		return listaSupervisor;
+	}
+
+	public void setListaSupervisor(List<Supervisor> listaSupervisor) {
+		this.listaSupervisor = listaSupervisor;
 	}
 	
 }

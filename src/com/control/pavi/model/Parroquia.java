@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
 @Table(name="parroquia")
 @NamedQueries({
@@ -23,18 +22,19 @@ public class Parroquia implements Serializable {
 	private boolean estado;
 
 	private String parroquia;
-	
-	@ManyToOne
-	@JoinColumn(name="id_zona")
-	private Zona zona;
 
 	//bi-directional many-to-one association to Canton
 	@ManyToOne
 	@JoinColumn(name="id_canton")
 	private Canton canton;
 
+	//bi-directional many-to-one association to Zona
+	@ManyToOne
+	@JoinColumn(name="id_zona")
+	private Zona zona;
+
 	//bi-directional many-to-one association to Recinto
-	@OneToMany(mappedBy="parroquia")
+	@OneToMany(mappedBy="parroquia", cascade = CascadeType.ALL)
 	private List<Recinto> recintos;
 
 	public Parroquia() {
@@ -72,6 +72,14 @@ public class Parroquia implements Serializable {
 		this.canton = canton;
 	}
 
+	public Zona getZona() {
+		return this.zona;
+	}
+
+	public void setZona(Zona zona) {
+		this.zona = zona;
+	}
+
 	public List<Recinto> getRecintos() {
 		return this.recintos;
 	}
@@ -93,18 +101,8 @@ public class Parroquia implements Serializable {
 
 		return recinto;
 	}
-
-	public Zona getZona() {
-		return zona;
-	}
-
-	public void setZona(Zona zona) {
-		this.zona = zona;
-	}
-
 	@Override
 	public String toString() {
 		return this.parroquia;
 	}
-
 }

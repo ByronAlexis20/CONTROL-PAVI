@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
 @Table(name="menu")
 @NamedQueries({
@@ -13,7 +12,7 @@ import java.util.List;
 	@NamedQuery(name="Menu.BuscarPadre", query="SELECT s FROM Menu s where s.idMenuPadre = 0"),
 	@NamedQuery(name="Menu.BuscarPadrePorId", query="SELECT s FROM Menu s where (s.idMenu = :patron) ORDER BY s.posicion")
 })
-public class Menu implements Serializable, Comparable<Menu>  {
+public class Menu implements Serializable, Comparable<Menu> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -35,7 +34,7 @@ public class Menu implements Serializable, Comparable<Menu>  {
 	private int posicion;
 
 	//bi-directional many-to-one association to Permiso
-	@OneToMany(mappedBy="menu")
+	@OneToMany(mappedBy="menu", cascade = CascadeType.ALL)
 	private List<Permiso> permisos;
 
 	public Menu() {
@@ -118,6 +117,7 @@ public class Menu implements Serializable, Comparable<Menu>  {
 
 		return permiso;
 	}
+	
 	@Override
 	public int compareTo(Menu o) {
 		if (this.posicion < o.posicion) {
@@ -128,4 +128,5 @@ public class Menu implements Serializable, Comparable<Menu>  {
 		}
 		return 0;
 	}
+
 }

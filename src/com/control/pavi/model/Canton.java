@@ -30,7 +30,7 @@ public class Canton implements Serializable {
 	private Provincia provincia;
 
 	//bi-directional many-to-one association to Parroquia
-	@OneToMany(mappedBy="canton")
+	@OneToMany(mappedBy="canton", cascade = CascadeType.ALL)
 	private List<Parroquia> parroquias;
 
 	public Canton() {
@@ -89,7 +89,7 @@ public class Canton implements Serializable {
 
 		return parroquia;
 	}
-
+	
 	@Override
 	public String toString() {
 		return this.canton;

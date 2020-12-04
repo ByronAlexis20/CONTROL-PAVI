@@ -8,7 +8,10 @@ import com.control.pavi.model.AsignacionJunta;
 import com.control.pavi.model.AsignacionSupervisor;
 import com.control.pavi.model.JuntaVoto;
 import com.control.pavi.model.Supervisor;
+import com.control.pavi.model.TipoSupervisor;
 import com.control.pavi.model.dao.AsignacionSupervisorDAO;
+import com.control.pavi.model.dao.TipoSupervisorDAO;
+import com.control.pavi.util.Constantes;
 import com.control.pavi.util.Context;
 import com.control.pavi.util.ControllerHelper;
 
@@ -50,6 +53,7 @@ public class SupervisorEditarController {
 	private Button btnQuitar;
 
 	Supervisor supervisor;
+	TipoSupervisorDAO supervisorDAO = new TipoSupervisorDAO();
 	ControllerHelper helper = new ControllerHelper();
 	AsignacionSupervisorDAO asignacionDAO = new AsignacionSupervisorDAO();
 
@@ -70,7 +74,7 @@ public class SupervisorEditarController {
 			if (Context.getInstance().getSupervisor() != null) {
 				supervisor = Context.getInstance().getSupervisor();
 				cargarDatos();
-				Context.getInstance().setCanton(null);
+				Context.getInstance().setSupervisor(null);
 			} else {
 				supervisor = new Supervisor();
 			}
@@ -191,8 +195,7 @@ public class SupervisorEditarController {
 						}
 					});
 
-			tvDatosJunta.getColumns().addAll(provinciaColum, parroquiaColum, recintoColum, juntaColum, delegadoColum,
-					partidoPoliticoColum);
+			tvDatosJunta.getColumns().addAll(recintoColum, juntaColum, provinciaColum, parroquiaColum, delegadoColum,partidoPoliticoColum);
 			tvDatosJunta.setItems(datos);
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
@@ -201,7 +204,6 @@ public class SupervisorEditarController {
 
 	private void cargarJuntasAsignadas() {
 		try {
-			tvDatosJunta.getColumns().clear();
 			tvDatosJunta.getItems().clear();
 			List<AsignacionSupervisor> lista = new ArrayList<>();
 			for (AsignacionSupervisor asig : supervisor.getAsignacionSupervisors()) {
@@ -230,8 +232,7 @@ public class SupervisorEditarController {
 			}
 			Context.getInstance().setListaJuntaVoto(listaAsignadosTemporal);
 
-			helper.abrirPantallaModal("/junta/SupervisorSeleccionarJunta.fxml", "Seleccionar Junta",
-					Context.getInstance().getStage());
+			helper.abrirPantallaModalSecundario("/junta/SupervisorSeleccionarJunta.fxml", "Seleccionar Junta", Context.getInstance().getStageModal());
 			if (Context.getInstance().getJuntaVoto() != null) {
 				JuntaVoto juntaSeleccionada = Context.getInstance().getJuntaVoto();
 				AsignacionSupervisor agregar = new AsignacionSupervisor();
@@ -260,20 +261,19 @@ public class SupervisorEditarController {
 	public void quitarJunta() {
 		try {
 			if (tvDatosJunta.getSelectionModel().getSelectedItem() != null) {
-				Optional<ButtonType> result = helper.mostrarAlertaConfirmacion(
-						"Se procederá a quitar la Junta .. Desea Continuar?", Context.getInstance().getStage());
+				Optional<ButtonType> result = helper.mostrarAlertaConfirmacion( "Se procederá a quitar la Junta .. Desea Continuar?", Context.getInstance().getStage());
 				if (result.get() == ButtonType.OK) {
 					AsignacionSupervisor seleccion = new AsignacionSupervisor();
 					seleccion = tvDatosJunta.getSelectionModel().getSelectedItem();
 					// cuando es una junta que tiene el id diferente de null.. se le da de baja
 					// directamente
 					if (seleccion.getIdAsignacionSupervisor() != null) {
+						tvDatosJunta.getItems().remove(seleccion);
 						seleccion.setEstado(false);
 						asignacionDAO.getEntityManager().getTransaction().begin();
 						seleccion = asignacionDAO.getEntityManager().merge(seleccion);
 						asignacionDAO.getEntityManager().getTransaction().commit();
 						helper.mostrarAlertaInformacion("Junta quitada", Context.getInstance().getStage());
-						tvDatosJunta.getItems().remove(seleccion);
 					} else {// cuando es nuevo.. no es necesario ir a la base de datos.. se la elimina
 							// directamente de la tabla
 						tvDatosJunta.getItems().remove(seleccion);
@@ -304,20 +304,62 @@ public class SupervisorEditarController {
     			txtCedula.requestFocus();
     			return;
     		}
+			if(tvDatosJunta.getItems().size() <= 0) {
+				helper.mostrarAlertaAdvertencia("No ha realizado la asignación de juntas", Context.getInstance().getStage());
+    			txtCedula.requestFocus();
+    			return;
+			}
 			Optional<ButtonType> result = helper.mostrarAlertaConfirmacion("Desea Grabar los Datos?",Context.getInstance().getStage());
 			if(result.get() == ButtonType.OK){
+				List<TipoSupervisor> listaSupervisor = supervisorDAO.buscarPorId(Constantes.ID_SUPERVISOR_SECUNDARIO);
+				supervisor.setApellidos(txtApellidos.getText());
+				supervisor.setDireccion(txtDireccion.getText());
+				supervisor.setEstado(true);
+				supervisor.setNoIdentificacion(txtCedula.getText());
+				supervisor.setNombres(txtNombres.getText());
+				supervisor.setTelefono(txtTelefono.getText());
+				supervisor.setTipoSupervisor(listaSupervisor.get(0));
+				
+				supervisorDAO.getEntityManager().getTransaction().begin();
 				//cuando el supervisor es nuevo, se graba todo
 				if(supervisor.getIdSupervisor() == null) {
-					
+					supervisor.setIdSupervisor(null);
+					//es un nuevo entonces no tiene asignaciones aun
+					List<AsignacionSupervisor> listadoAsignaciones = new ArrayList<>();
+					for(AsignacionSupervisor asig : tvDatosJunta.getItems()) {
+						asig.setSupervisor(supervisor);
+						listadoAsignaciones.add(asig);
+					}
+					supervisor.setAsignacionSupervisors(listadoAsignaciones);
+					supervisorDAO.getEntityManager().persist(supervisor);
 				}else {
-					
+
+					if(supervisor.getAsignacionSupervisors().size() > 0) {
+						for(AsignacionSupervisor asig : tvDatosJunta.getItems()) {
+							if(asig.getIdAsignacionSupervisor() == null) {
+								asig.setSupervisor(supervisor);
+								supervisor.getAsignacionSupervisors().add(asig);
+							}
+						}
+					}else {
+						List<AsignacionSupervisor> listadoAsignaciones = new ArrayList<>();
+						for(AsignacionSupervisor asig : tvDatosJunta.getItems()) {
+							if(asig.getIdAsignacionSupervisor() == null) {
+								asig.setSupervisor(supervisor);
+								listadoAsignaciones.add(asig);
+							}
+						}
+						supervisor.setAsignacionSupervisors(listadoAsignaciones);
+					}
+					supervisorDAO.getEntityManager().merge(supervisor);
 				}
-				
+				supervisorDAO.getEntityManager().getTransaction().commit();
 				Context.getInstance().getStageModal().close();
 				helper.mostrarAlertaInformacion("Datos Grabados", Context.getInstance().getStage());
 			}
 		}catch(Exception ex) {
-			
+			System.out.println(ex.getMessage());
+			supervisorDAO.getEntityManager().getTransaction().rollback();
 		}
 	}
 

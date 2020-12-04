@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
 @Table(name="provincia")
 @NamedQueries({
@@ -24,7 +23,7 @@ public class Provincia implements Serializable {
 	private String provincia;
 
 	//bi-directional many-to-one association to Canton
-	@OneToMany(mappedBy="provincia")
+	@OneToMany(mappedBy="provincia", cascade = CascadeType.ALL)
 	private List<Canton> cantons;
 
 	public Provincia() {
@@ -75,10 +74,8 @@ public class Provincia implements Serializable {
 
 		return canton;
 	}
-
 	@Override
 	public String toString() {
 		return this.provincia;
 	}
-
 }
