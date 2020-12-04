@@ -3,9 +3,12 @@ package com.control.pavi.junta.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.control.pavi.model.AsignacionSupervisor;
 import com.control.pavi.model.JuntaVoto;
-import com.control.pavi.model.Recinto;
+import com.control.pavi.model.dao.AsignacionSupervisorDAO;
+import com.control.pavi.model.dao.JuntaVotoDAO;
 import com.control.pavi.model.dao.RecintoDAO;
+import com.control.pavi.util.Context;
 import com.control.pavi.util.ControllerHelper;
 
 import javafx.beans.property.SimpleObjectProperty;
@@ -18,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -25,7 +29,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.util.Callback;
 
 public class SupervisorSeleccionJuntaController {
-	@FXML private TableView<Recinto> tvDatos;
+	@FXML private TableView<JuntaVoto> tvDatos;
 	@FXML private RadioButton rbParroquia;
 	@FXML private RadioButton rbProvincia;
 	@FXML private RadioButton rbRecinto;
@@ -35,6 +39,9 @@ public class SupervisorSeleccionJuntaController {
 	
 	RecintoDAO recintoDAO = new RecintoDAO();
 	ControllerHelper helper = new ControllerHelper();
+	JuntaVotoDAO juntaDAO = new JuntaVotoDAO();
+	AsignacionSupervisorDAO asignacionDAO = new AsignacionSupervisorDAO();
+	List<JuntaVoto> listaAsignados = new ArrayList<>();
 
 	public void initialize() {
 		
@@ -56,20 +63,59 @@ public class SupervisorSeleccionJuntaController {
 		}); 
 		rbProvincia.setSelected(true);
 		llenarDatos("");
+		if(Context.getInstance().getListaJuntaVoto() != null) {
+			listaAsignados = Context.getInstance().getListaJuntaVoto();
+			Context.getInstance().setListaJuntaVoto(null);
+		}
+		tvDatos.setRowFactory(tv -> {
+			TableRow<JuntaVoto> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+					if(tvDatos.getSelectionModel().getSelectedItem() != null){
+						Context.getInstance().setJuntaVoto(tvDatos.getSelectionModel().getSelectedItem());
+						Context.getInstance().getStageModal().close();
+					}
+				}
+			});
+			return row ;
+		});
+		
 	}
 	public void buscar() {
 		try {
-			List<Recinto> lista = new ArrayList<Recinto>();
-			ObservableList<Recinto> datos = FXCollections.observableArrayList();
+			boolean bandera = false;
+			tvDatos.getColumns().clear();
+			tvDatos.getItems().clear();
+			List<JuntaVoto> lista = new ArrayList<>();
+			List<JuntaVoto> listaLibres = new ArrayList<>();
+			ObservableList<JuntaVoto> datos = FXCollections.observableArrayList();
+			
 			if(rbProvincia.isSelected())
-				lista = recintoDAO.buscarPorProvincia(txtBuscar.getText().toString());
+				lista = juntaDAO.buscarTodosActivoProvincia(txtBuscar.getText().toString());
 			else if(rbCanton.isSelected())
-				lista = recintoDAO.buscarPorCanton(txtBuscar.getText().toString());
+				lista = juntaDAO.buscarTodosActivoCanton(txtBuscar.getText().toString());
 			else if(rbParroquia.isSelected())
-				lista = recintoDAO.buscarPorParroquia(txtBuscar.getText().toString());
+				lista = juntaDAO.buscarTodosActivoParroquia(txtBuscar.getText().toString());
 			else if(rbRecinto.isSelected())
-				lista = recintoDAO.buscarPorRecinto(txtBuscar.getText().toString());
-			datos.setAll(lista);
+				lista = juntaDAO.buscarTodosActivoRecinto(txtBuscar.getText().toString());
+			List<AsignacionSupervisor> asignados = asignacionDAO.buscarAsignaciones();//los que se encuentran asignados
+			for(JuntaVoto jun : lista) {
+				bandera = false;
+				//primer filtro es con los que estan registrados ya en la base
+				for(AsignacionSupervisor asig : asignados) {
+					if(asig.getJuntaVoto().getIdJunta() == jun.getIdJunta())
+						bandera = true;
+				}
+				//segundo filtro son los que se han agregado a la lista aun de manera temporal
+				for(JuntaVoto junta : listaAsignados) {
+					if(junta.getIdJunta() == jun.getIdJunta())
+						bandera = true;
+				}
+				if(bandera == false)
+					listaLibres.add(jun);
+			}
+			
+			datos.setAll(listaLibres);
 			tvDatos.setItems(datos);
 			tvDatos.refresh();
 		}catch(Exception ex) {
@@ -79,66 +125,80 @@ public class SupervisorSeleccionJuntaController {
 	@SuppressWarnings("unchecked")
 	void llenarDatos(String busqueda){
 		try{
+			boolean bandera = false;
 			tvDatos.getColumns().clear();
 			tvDatos.getItems().clear();
-			List<Recinto> lista;
-			ObservableList<Recinto> datos = FXCollections.observableArrayList();
-			lista = recintoDAO.buscarPorPatron(busqueda);
-			datos.setAll(lista);
+			List<JuntaVoto> lista;
+			List<JuntaVoto> listaLibres = new ArrayList<>();
+			ObservableList<JuntaVoto> datos = FXCollections.observableArrayList();
+			lista = juntaDAO.buscarTodosActivo();
+			List<AsignacionSupervisor> asignados = asignacionDAO.buscarAsignaciones();//los que se encuentran asignados
+			for(JuntaVoto jun : lista) {
+				bandera = false;
+				//primer filtro es con los que estan registrados ya en la base
+				for(AsignacionSupervisor asig : asignados) {
+					if(asig.getJuntaVoto().getIdJunta() == jun.getIdJunta())
+						bandera = true;
+				}
+				//segundo filtro son los que se han agregado a la lista aun de manera temporal
+				for(JuntaVoto junta : listaAsignados) {
+					if(junta.getIdJunta() == jun.getIdJunta())
+						bandera = true;
+				}
+				if(bandera == false)
+					listaLibres.add(jun);
+			}
+			
+			datos.setAll(listaLibres);
 
 			//llenar los datos en la tabla
-			TableColumn<Recinto, String> provinciaColum = new TableColumn<>("Provincia");
+			TableColumn<JuntaVoto, String> provinciaColum = new TableColumn<>("Provincia");
 			provinciaColum.setMinWidth(10);
 			provinciaColum.setPrefWidth(150);
-			provinciaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
+			provinciaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<JuntaVoto,String>, ObservableValue<String>>() {
 				@Override
-				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getParroquia().getCanton().getProvincia().getProvincia());
+				public ObservableValue<String> call(CellDataFeatures<JuntaVoto, String> param) {
+					return new SimpleObjectProperty<String>(param.getValue().getRecinto().getParroquia().getCanton().getProvincia().getProvincia());
 				}
 			});
 			
-			TableColumn<Recinto, String> cantonColum = new TableColumn<>("Cantón");
+			TableColumn<JuntaVoto, String> cantonColum = new TableColumn<>("Cantón");
 			cantonColum.setMinWidth(10);
 			cantonColum.setPrefWidth(150);
-			cantonColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
+			cantonColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<JuntaVoto,String>, ObservableValue<String>>() {
 				@Override
-				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getParroquia().getCanton().getCanton());
+				public ObservableValue<String> call(CellDataFeatures<JuntaVoto, String> param) {
+					return new SimpleObjectProperty<String>(param.getValue().getRecinto().getParroquia().getCanton().getCanton());
 				}
 			});
 			
-			TableColumn<Recinto, String> parroquiaColum = new TableColumn<>("Parroquia");
+			TableColumn<JuntaVoto, String> parroquiaColum = new TableColumn<>("Parroquia");
 			parroquiaColum.setMinWidth(10);
 			parroquiaColum.setPrefWidth(220);
-			parroquiaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
+			parroquiaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<JuntaVoto,String>, ObservableValue<String>>() {
 				@Override
-				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getParroquia().getParroquia());
+				public ObservableValue<String> call(CellDataFeatures<JuntaVoto, String> param) {
+					return new SimpleObjectProperty<String>(param.getValue().getRecinto().getParroquia().getParroquia());
 				}
 			});
 			
-			TableColumn<Recinto, String> recintoColum = new TableColumn<>("Recinto");
+			TableColumn<JuntaVoto, String> recintoColum = new TableColumn<>("Recinto");
 			recintoColum.setMinWidth(10);
 			recintoColum.setPrefWidth(300);
-			recintoColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
+			recintoColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<JuntaVoto,String>, ObservableValue<String>>() {
 				@Override
-				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getRecinto());
+				public ObservableValue<String> call(CellDataFeatures<JuntaVoto, String> param) {
+					return new SimpleObjectProperty<String>(param.getValue().getRecinto().getRecinto());
 				}
 			});
 				
-			TableColumn<Recinto, String> juntasColum = new TableColumn<>("Juntas");
+			TableColumn<JuntaVoto, String> juntasColum = new TableColumn<>("Junta");
 			juntasColum.setMinWidth(10);
-			juntasColum.setPrefWidth(90);
-			juntasColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
+			juntasColum.setPrefWidth(200);
+			juntasColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<JuntaVoto,String>, ObservableValue<String>>() {
 				@Override
-				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
-					int cont = 0;
-					for(JuntaVoto jun : param.getValue().getJuntaVotos()) {
-						if(jun.getEstado() == true)
-							cont ++;
-					}
-					return new SimpleObjectProperty<String>(String.valueOf(cont));
+				public ObservableValue<String> call(CellDataFeatures<JuntaVoto, String> param) {
+					return new SimpleObjectProperty<String>(param.getValue().getNumero() + " - " + param.getValue().getGenero());
 				}
 			});
 			

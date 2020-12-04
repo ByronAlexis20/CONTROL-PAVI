@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import com.control.pavi.model.Empresa;
 import com.control.pavi.model.dao.EmpresaDAO;
-import com.control.pavi.util.Constantes;
 import com.control.pavi.util.Context;
 import com.control.pavi.util.ControllerHelper;
 
@@ -194,9 +193,9 @@ public class EmpresaController {
 			if(validarDatos() == false)
 				return;
 			if(chkEstado.isSelected() == true)
-				estado = Constantes.ESTADO_ACTIVO;
+				estado = true;
 			else
-				estado = Constantes.ESTADO_INACTIVO;
+				estado = false;
 
 			Empresa empresa = new Empresa();
 			empresa.setRuc(txtRuc.getText());

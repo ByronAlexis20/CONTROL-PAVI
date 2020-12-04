@@ -1,6 +1,7 @@
 package com.control.pavi.util;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.control.pavi.model.Candidato;
 import com.control.pavi.model.Canton;
@@ -40,6 +41,7 @@ public class Context {
 	private Representante representante;
 	private JuntaVoto juntaVoto;
 	private Supervisor supervisor;
+	private List<JuntaVoto> listaJuntaVoto;
 	
 	public static Context getInstance() {
 		return instance;
@@ -186,6 +188,14 @@ public class Context {
 
 	public void setSupervisor(Supervisor supervisor) {
 		this.supervisor = supervisor;
+	}
+
+	public List<JuntaVoto> getListaJuntaVoto() {
+		return listaJuntaVoto;
+	}
+
+	public void setListaJuntaVoto(List<JuntaVoto> listaJuntaVoto) {
+		this.listaJuntaVoto = listaJuntaVoto;
 	}
 	
 }
