@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.14.0.final using JasperReports Library version 6.14.0-2ab0d8625be255bf609c78e1181801213e51db8f  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptDelegadosPorPartido" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7d44bd62-0794-4d49-a44e-15ee78191893">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ConexionPavi"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="364"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="625"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="ID_PARTIDO" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT p.lista,concat(r.nombre,' ',r.apellidos) as delegado,re.recinto,pr.parroquia,ca.canton,zn.zona
+from asignacion_junta a,partido_politico p,representante r,
+recinto re,parroquia pr,canton ca,zona zn,junta_voto jv
+WHERE a.id_representante = r.id_representante and p.id_partido = r.id_partido and
+jv.id_junta = a.id_junta and re.id_recinto = jv.id_recinto and re.id_parroquia = pr.id_parroquia AND
+pr.id_canton = ca.id_canton and pr.id_zona = zn.id_zona and 
+a.estado = 1 and p.estado = 1 and r.estado = 1 and re.estado = 1 and pr.estado = 1 and ca.estado = 1 and zn.estado = 1 and
+jv.estado = 1
+and p.id_partido = $P{ID_PARTIDO}]]>
+	</queryString>
+	<field name="lista" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="lista"/>
+		<property name="com.jaspersoft.studio.field.label" value="lista"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="partido_politico"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="delegado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="delegado"/>
+		<property name="com.jaspersoft.studio.field.label" value="delegado"/>
+	</field>
+	<field name="recinto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="recinto"/>
+		<property name="com.jaspersoft.studio.field.label" value="recinto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="recinto"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="parroquia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="parroquia"/>
+		<property name="com.jaspersoft.studio.field.label" value="parroquia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="parroquia"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="canton" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="canton"/>
+		<property name="com.jaspersoft.studio.field.label" value="canton"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="canton"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="zona" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="zona"/>
+		<property name="com.jaspersoft.studio.field.label" value="zona"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="zona"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="252" y="25" width="298" height="30" uuid="08b367ef-8836-4e3e-9a7f-68131938e79f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="16"/>
+				</textElement>
+				<text><![CDATA[Sistema Pavi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="252" y="-5" width="298" height="30" uuid="c306d35b-18ec-4000-bc4c-999bf5080eaa"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="16"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE DELEGADOS POLITICOS POR PARTIDOS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="68" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="30" width="100" height="30" uuid="69493803-299d-40c7-8c24-594451dbd82a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="81107feb-04ef-4846-892a-905f8faf2ece"/>
+				</reportElement>
+				<text><![CDATA[delegado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="31" width="100" height="30" uuid="de28e154-455f-4737-8d5f-2d1dbec9720b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="98a3fa96-d6b3-41e1-a868-95cee3582537"/>
+				</reportElement>
+				<text><![CDATA[lista]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="30" width="100" height="30" uuid="13c95b1c-60bf-4c20-9953-686bb188fd73">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9eaeb836-dca0-4c97-bc6a-a0ee87c316c4"/>
+				</reportElement>
+				<text><![CDATA[recinto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="30" width="100" height="30" uuid="01286bf7-168b-4e82-b57b-a558682bdcf2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="51b91e5c-ae88-4cda-ab69-8c1c7124a938"/>
+				</reportElement>
+				<text><![CDATA[parroquia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="690" y="35" width="100" height="30" uuid="50d76c89-e6d8-489b-b920-d56ba6f4228b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e4cab82c-2ed9-4bbf-b27d-e5258e6c35a3"/>
+				</reportElement>
+				<text><![CDATA[zona]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="20" width="801" height="1" uuid="ab98f03b-0f3e-4be4-b0ff-98cf1c8a95b1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="0" y="59" width="801" height="1" uuid="6f91a7fe-fe92-4ba0-8f79-6c22c3604684">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="-1" width="100" height="30" uuid="4143cc3e-bb50-4bbb-8d66-bc12b8c2f515">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="81107feb-04ef-4846-892a-905f8faf2ece"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{delegado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="0" width="100" height="30" uuid="50f773bc-9d27-4e93-b076-fecdb2f6365c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="98a3fa96-d6b3-41e1-a868-95cee3582537"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{lista}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="100" height="30" uuid="b56c396c-1165-468e-ac69-4d9ea7840783">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9eaeb836-dca0-4c97-bc6a-a0ee87c316c4"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{recinto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="490" y="0" width="100" height="30" uuid="cba7262e-6695-4cae-9c9f-c408256a533f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="51b91e5c-ae88-4cda-ab69-8c1c7124a938"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{parroquia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="690" y="0" width="100" height="30" uuid="dd97ee5d-9ea6-413c-8185-4db2efc2b951">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e4cab82c-2ed9-4bbf-b27d-e5258e6c35a3"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{zona}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="102" splitType="Stretch">
+			<image>
+				<reportElement x="35" y="5" width="180" height="60" uuid="ebee3474-841a-4679-84c7-d4760d8e0dc4"/>
+				<imageExpression><![CDATA["Firma.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="-1" y="65" width="249" height="1" uuid="eb48b734-2706-4a78-8b07-7ba32dc3e727">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="460" y="65" width="249" height="1" uuid="602de559-5512-4174-a3bf-73e6edaf092f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="20" y="72" width="208" height="30" uuid="144f80e6-6672-448e-9573-ac0d57961b0a"/>
+				<text><![CDATA[FIRMA DEL SUPERVISOR A CARGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="72" width="208" height="30" uuid="06bdc980-42f0-4f8e-a247-1f34e65739d0"/>
+				<text><![CDATA[FIRMA DEL SUPERVISOR ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -72,7 +72,7 @@ and s.estado = 1 and a.estado = 1 and j.estado = 1]]>
 	<group name="Supervisor">
 		<groupExpression><![CDATA[$F{id_supervisor}]]></groupExpression>
 		<groupHeader>
-			<band height="56">
+			<band height="60">
 				<textField>
 					<reportElement x="84" y="10" width="120" height="14" uuid="9f536ff1-1e98-44d0-a4cc-92108f7e4c27"/>
 					<textElement verticalAlignment="Middle"/>
@@ -137,6 +137,13 @@ and s.estado = 1 and a.estado = 1 and j.estado = 1]]>
 				<line>
 					<reportElement x="20" y="55" width="761" height="1" uuid="dd9e00b0-e3e5-43fb-a02e-7837b3b93b89"/>
 				</line>
+				<staticText>
+					<reportElement x="245" y="-6" width="298" height="30" uuid="39e2d586-7aa9-40c5-b990-517778094659"/>
+					<textElement textAlignment="Center">
+						<font fontName="Times New Roman" size="16"/>
+					</textElement>
+					<text><![CDATA[Sistema Pavi]]></text>
+				</staticText>
 			</band>
 		</groupHeader>
 		<groupFooter>
@@ -199,9 +206,32 @@ and s.estado = 1 and a.estado = 1 and j.estado = 1]]>
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="102" splitType="Stretch">
+			<image>
+				<reportElement x="30" y="0" width="180" height="60" uuid="e2878845-bde9-47e9-b733-b356064c87f2"/>
+				<imageExpression><![CDATA["Firma.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="60" width="249" height="1" uuid="1f81e2df-5e64-4c03-bfb5-12ceb0b03664">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="460" y="60" width="249" height="1" uuid="70e88fa8-fb50-409e-bdfe-46c91cb31c2d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="20" y="72" width="208" height="30" uuid="be6833c0-76d1-4894-9e74-4156d16b20b7"/>
+				<text><![CDATA[FIRMA DEL SUPERVISOR A CARGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="72" width="208" height="30" uuid="8edbe384-2ba0-4cd3-b165-e39c5477efcb"/>
+				<text><![CDATA[FIRMA DEL SUPERVISOR ]]></text>
+			</staticText>
+		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="66" splitType="Stretch"/>
 	</summary>
 </jasperReport>

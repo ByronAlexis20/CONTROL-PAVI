@@ -181,7 +181,7 @@ public class SupervisorPrincipalEditarController {
 				}
 			}
 			Context.getInstance().setListaSupervisor(listaAsignadosTemporal);
-
+			Context.getInstance().setListaSupervisor(listaAsignadosTemporal);
 			helper.abrirPantallaModalSecundario("/junta/SupervisorSeleccionarSupervisor.fxml", "Seleccionar Supervisor Secundario", Context.getInstance().getStageModal());
 			if (Context.getInstance().getSupervisor() != null) {
 				Supervisor supervisorSeleccionada = Context.getInstance().getSupervisor();

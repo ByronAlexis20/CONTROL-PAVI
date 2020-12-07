@@ -23,7 +23,7 @@ public class PrintReport {
 	
 	public void crearReporte(String path, ClaseDAO claseDAO,Map<String, Object> param) {
 		try {
-			String applicationPath = System.getProperty("user.dir");
+			String applicationPath = "C:\\reportes\\";
 			applicationPath = applicationPath + path;
 			//helper.mostrarAlertaAdvertencia(applicationPath, Context.getInstance().getStage());
 			Connection cn = claseDAO.abreConexion();

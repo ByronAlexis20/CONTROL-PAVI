@@ -61,7 +61,7 @@ and re.id_recinto =  $P{ID_RECINTO}]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="42" splitType="Stretch">
+		<band height="60" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="800" height="30" uuid="abbcc8b8-9c4d-44ab-846b-686efbc7b964"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -69,6 +69,13 @@ and re.id_recinto =  $P{ID_RECINTO}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{TITULO}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="270" y="30" width="298" height="30" uuid="f8c527e9-1d9b-4423-907b-4911d79a088a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="16"/>
+				</textElement>
+				<text><![CDATA[Sistema Pavi]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
@@ -207,9 +214,32 @@ and re.id_recinto =  $P{ID_RECINTO}]]>
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="100" splitType="Stretch">
+			<image>
+				<reportElement x="30" y="0" width="180" height="60" uuid="87958f33-964d-4ebc-b817-e85c542f11e3"/>
+				<imageExpression><![CDATA["Firma.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="70" width="249" height="1" uuid="66cbbc08-19ca-46d8-a577-f2ad0760f6cf">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="461" y="70" width="249" height="1" uuid="0f24ed3c-b371-4640-bd8c-9ae3dcb5dd07">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="70" width="208" height="30" uuid="9e1af1b1-ad62-411b-803d-4d5ec073ff03"/>
+				<text><![CDATA[FIRMA DEL SUPERVISOR A CARGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="70" width="208" height="30" uuid="f27a950f-6104-41ae-b17b-926bde8d77f0"/>
+				<text><![CDATA[FIRMA DEL SUPERVISOR ]]></text>
+			</staticText>
+		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="102" splitType="Stretch"/>
 	</summary>
 </jasperReport>
