@@ -15,6 +15,7 @@ import com.control.pavi.model.Representante;
 import com.control.pavi.model.Supervisor;
 import com.control.pavi.model.SupervisorPrincipal;
 import com.control.pavi.model.Usuario;
+import com.control.pavi.model.ZonaRural;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -45,6 +46,7 @@ public class Context {
 	private SupervisorPrincipal supervisorPrincipal;
 	private List<JuntaVoto> listaJuntaVoto;
 	private List<Supervisor> listaSupervisor;
+	private ZonaRural zonaRural;
 	
 	public static Context getInstance() {
 		return instance;
@@ -215,6 +217,14 @@ public class Context {
 
 	public void setListaSupervisor(List<Supervisor> listaSupervisor) {
 		this.listaSupervisor = listaSupervisor;
+	}
+
+	public ZonaRural getZonaRural() {
+		return zonaRural;
+	}
+
+	public void setZonaRural(ZonaRural zonaRural) {
+		this.zonaRural = zonaRural;
 	}
 	
 }
