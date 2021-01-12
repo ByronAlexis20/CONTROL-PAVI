@@ -20,7 +20,8 @@ import javax.persistence.Table;
 @Table(name = "zona_rural")
 @NamedQueries({
 	@NamedQuery(name = "ZonaRural.findAll", query = "SELECT z FROM ZonaRural z where z.estado = 'A'"),
-	@NamedQuery(name = "ZonaRural.bucarPatron", query = "SELECT z FROM ZonaRural z where z.estado = 'A' and  lower(z.nombre) like lower(:patron) ")
+	@NamedQuery(name = "ZonaRural.bucarPatron", query = "SELECT z FROM ZonaRural z where z.estado = 'A' and  lower(z.nombre) like lower(:patron) "),
+	@NamedQuery(name = "ZonaRural.bucarPorIdParroquia", query = "SELECT z FROM ZonaRural z where z.estado = 'A' and z.parroquia.idParroquia = :idParroquia")
 })
 public class ZonaRural implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -60,8 +61,6 @@ public class ZonaRural implements Serializable {
 	public void setIdZona(Integer idZona) {
 		this.idZona = idZona;
 	}
-
-	
 
 	public Parroquia getParroquia() {
 		return parroquia;

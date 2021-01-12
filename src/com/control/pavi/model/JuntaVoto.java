@@ -20,7 +20,9 @@ import java.util.List;
 			+ "order by j.recinto.zonaRural.parroquia.idParroquia asc"),
 	@NamedQuery(name="JuntaVoto.buscarTodosActivoRecinto", query="SELECT j FROM JuntaVoto j where j.estado = 1 "
 			+ "and lower(j.recinto.recinto) like (:patron) "
-			+ "order by j.recinto.zonaRural.parroquia.idParroquia asc")
+			+ "order by j.recinto.zonaRural.parroquia.idParroquia asc"),
+	@NamedQuery(name="JuntaVoto.buscarPorRecintoGeneroNumero", query="SELECT j FROM JuntaVoto j where j.estado = 1 "
+			+ "and j.recinto.idRecinto = :idRecinto and j.numero = :numero and j.genero = :genero")
 })
 public class JuntaVoto implements Serializable {
 	private static final long serialVersionUID = 1L;

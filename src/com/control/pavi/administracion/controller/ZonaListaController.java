@@ -208,7 +208,7 @@ public class ZonaListaController {
     public void eliminar() {
     	try {
     		if(tvDatos.getSelectionModel().getSelectedItem() != null) {
-				Optional<ButtonType> result = helper.mostrarAlertaConfirmacion("Se procederá a dar de baja el recinto.. Desea Continuar?",Context.getInstance().getStage());
+				Optional<ButtonType> result = helper.mostrarAlertaConfirmacion("Se procederá a dar de baja la Zona.. Desea Continuar?",Context.getInstance().getStage());
 				if(result.get() == ButtonType.OK){
 					ZonaRural seleccion = new ZonaRural();
 					seleccion = tvDatos.getSelectionModel().getSelectedItem();
@@ -216,11 +216,11 @@ public class ZonaListaController {
 					zonaRuralDAO.getEntityManager().getTransaction().begin();
 					zonaRuralDAO.getEntityManager().merge(seleccion);
 					zonaRuralDAO.getEntityManager().getTransaction().commit();
-					helper.mostrarAlertaInformacion("Recinto dado de baja", Context.getInstance().getStage());
+					helper.mostrarAlertaInformacion("Zona dado de baja", Context.getInstance().getStage());
 					llenarDatos("");
 				}
 			}else {
-				helper.mostrarAlertaError("Debe Seleccionar un Recinto a Dar de Baja", Context.getInstance().getStage());
+				helper.mostrarAlertaError("Debe Seleccionar una Zona a Dar de Baja", Context.getInstance().getStage());
 			}
     	}catch(Exception ex) {
     		System.out.println(ex.getMessage());

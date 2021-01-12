@@ -17,4 +17,14 @@ public class ZonaRuralDAO extends ClaseDAO{
 		resultado = (List<ZonaRural>) query.getResultList();
 		return resultado;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ZonaRural> buscarPorIdParroquia(Integer idParroquia){
+		List<ZonaRural> resultado = new ArrayList<ZonaRural>();
+		Query query = getEntityManager().createNamedQuery("ZonaRural.bucarPorIdParroquia");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		query.setParameter("idParroquia", idParroquia );
+		resultado = (List<ZonaRural>) query.getResultList();
+		return resultado;
+	}
 }

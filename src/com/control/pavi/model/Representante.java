@@ -29,6 +29,8 @@ public class Representante implements Serializable {
 	private String nombre;
 
 	private String telefono;
+	
+	private String correo;
 
 	//bi-directional many-to-one association to AsignacionJunta
 	@OneToMany(mappedBy="representante", cascade = CascadeType.ALL)
@@ -126,6 +128,14 @@ public class Representante implements Serializable {
 
 	public void setPartidoPolitico(PartidoPolitico partidoPolitico) {
 		this.partidoPolitico = partidoPolitico;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 }

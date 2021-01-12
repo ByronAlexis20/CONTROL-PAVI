@@ -7,9 +7,9 @@ import javax.persistence.*;
 @Table(name="asignacion_junta")
 @NamedQueries({
 @NamedQuery(name="AsignacionJunta.buscarDelegadoJunta", query="SELECT a FROM AsignacionJunta a where a.representante.idRepresentante = :idRep and a.estado = 1"),
-@NamedQuery(name="AsignacionJunta.buscarPorProvincia", query="SELECT a FROM AsignacionJunta a where a.juntaVoto.recinto.parroquia.canton.provincia.idProvincia = :id and a.estado = 1"),
-@NamedQuery(name="AsignacionJunta.buscarPorCanton", query="SELECT a FROM AsignacionJunta a where a.juntaVoto.recinto.parroquia.canton.idCanton = :id and a.estado = 1"),
-@NamedQuery(name="AsignacionJunta.buscarPorParroquia", query="SELECT a FROM AsignacionJunta a where a.juntaVoto.recinto.parroquia.idParroquia = :id and a.estado = 1"),
+@NamedQuery(name="AsignacionJunta.buscarPorProvincia", query="SELECT a FROM AsignacionJunta a where a.juntaVoto.recinto.zonaRural.parroquia.canton.provincia.idProvincia = :id and a.estado = 1"),
+@NamedQuery(name="AsignacionJunta.buscarPorCanton", query="SELECT a FROM AsignacionJunta a where a.juntaVoto.recinto.zonaRural.parroquia.canton.idCanton = :id and a.estado = 1"),
+@NamedQuery(name="AsignacionJunta.buscarPorParroquia", query="SELECT a FROM AsignacionJunta a where a.juntaVoto.recinto.zonaRural.parroquia.idParroquia = :id and a.estado = 1"),
 @NamedQuery(name="AsignacionJunta.buscarPorRecinto", query="SELECT a FROM AsignacionJunta a where a.juntaVoto.recinto.idRecinto = :id and a.estado = 1"),
 })
 public class AsignacionJunta implements Serializable {

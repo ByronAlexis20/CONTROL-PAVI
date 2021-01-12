@@ -62,4 +62,16 @@ public class JuntaVotoDAO extends ClaseDAO{
 		resultado = (List<JuntaVoto>) query.getResultList();
 		return resultado;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<JuntaVoto> buscarPorRecintoGeneroNumero(Integer idRecinto, Integer numero, String genero){
+		List<JuntaVoto> resultado = new ArrayList<JuntaVoto>();
+		Query query = getEntityManager().createNamedQuery("JuntaVoto.buscarPorRecintoGeneroNumero");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		query.setParameter("idRecinto", idRecinto);
+		query.setParameter("numero", numero);
+		query.setParameter("genero", genero);
+		resultado = (List<JuntaVoto>) query.getResultList();
+		return resultado;
+	}
 }

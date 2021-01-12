@@ -18,7 +18,7 @@ public class RecintoDAO extends ClaseDAO{
 		return resultado;
 	}
 	@SuppressWarnings("unchecked")
-	public List<Recinto> buscarPorIdParroqui(Integer id){
+	public List<Recinto> buscarPorIdParroquia(Integer id){
 		List<Recinto> resultado = new ArrayList<Recinto>();
 		Query query = getEntityManager().createNamedQuery("Recinto.bucarIdParroquia");
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");

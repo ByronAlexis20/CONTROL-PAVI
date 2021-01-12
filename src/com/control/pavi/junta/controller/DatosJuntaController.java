@@ -88,6 +88,11 @@ public class DatosJuntaController {
     			txtNumero.requestFocus();
     			return;
     		}
+			if(juntaDAO.buscarPorRecintoGeneroNumero(recinto.getIdRecinto(), Integer.parseInt(txtNumero.getText()), cboGenero.getSelectionModel().getSelectedItem()).size() > 0) {
+				helper.mostrarAlertaAdvertencia("Junta ya se encuentra registrada!", Context.getInstance().getStage());
+    			txtNumero.requestFocus();
+    			return;
+			}
 			Optional<ButtonType> result = helper.mostrarAlertaConfirmacion("Desea Grabar los Datos?",Context.getInstance().getStageModal());
 			if(result.get() == ButtonType.OK){
 				juntaDAO.getEntityManager().getTransaction().begin();

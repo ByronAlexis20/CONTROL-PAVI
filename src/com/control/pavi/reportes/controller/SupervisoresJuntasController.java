@@ -98,7 +98,7 @@ public class SupervisoresJuntasController {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<AsignacionSupervisor, String> param) {
 
-					return new SimpleObjectProperty<String>(param.getValue().getJuntaVoto().getRecinto().getParroquia().getParroquia());
+					return new SimpleObjectProperty<String>(param.getValue().getJuntaVoto().getRecinto().getZonaRural().getParroquia().getParroquia());
 				}
 			});
 
@@ -109,7 +109,7 @@ public class SupervisoresJuntasController {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<AsignacionSupervisor, String> param) {
 
-					return new SimpleObjectProperty<String>(param.getValue().getJuntaVoto().getRecinto().getParroquia().getZona().getZona());
+					return new SimpleObjectProperty<String>(param.getValue().getJuntaVoto().getRecinto().getZonaRural().getParroquia().getZona().getZona());
 				}
 			});
 

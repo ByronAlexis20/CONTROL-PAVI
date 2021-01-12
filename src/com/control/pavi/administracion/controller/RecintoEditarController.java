@@ -7,10 +7,12 @@ import com.control.pavi.model.Canton;
 import com.control.pavi.model.Parroquia;
 import com.control.pavi.model.Provincia;
 import com.control.pavi.model.Recinto;
+import com.control.pavi.model.ZonaRural;
 import com.control.pavi.model.dao.CantonDAO;
 import com.control.pavi.model.dao.ParroquiaDAO;
 import com.control.pavi.model.dao.ProvinciaDAO;
 import com.control.pavi.model.dao.RecintoDAO;
+import com.control.pavi.model.dao.ZonaRuralDAO;
 import com.control.pavi.util.Context;
 import com.control.pavi.util.ControllerHelper;
 
@@ -34,6 +36,7 @@ public class RecintoEditarController {
     @FXML private TextField txtCodigo;
     @FXML private Button btnGrabar;
     @FXML private ComboBox<Canton> cboCanton;
+    @FXML private ComboBox<ZonaRural> cboZona;
     @FXML private TextField txtTelefono;
     @FXML private TextField txtDireccion;
 
@@ -41,6 +44,7 @@ public class RecintoEditarController {
     CantonDAO cantonDAO = new CantonDAO();
     ParroquiaDAO parroquiaDAO = new ParroquiaDAO();
     RecintoDAO recintoDAO = new RecintoDAO();
+    ZonaRuralDAO zonaRuralDAO = new ZonaRuralDAO();
     Recinto recinto;
     ControllerHelper helper = new ControllerHelper();
     
@@ -127,6 +131,20 @@ public class RecintoEditarController {
 			
 		}
     }
+    
+    public void cambiarZona() {
+    	try {
+			cboZona.getItems().clear();
+			cboZona.setPromptText("Seleccionar zona");
+			List<ZonaRural> lista;
+			lista = zonaRuralDAO.buscarPorIdParroquia(cboParroquia.getSelectionModel().getSelectedItem().getIdParroquia());
+			ObservableList<ZonaRural> datos = FXCollections.observableArrayList();
+			datos.addAll(lista);
+			cboZona.setItems(datos);
+		}catch(Exception ex) {
+			
+		}
+    }
     public void grabar() {
     	try {
     		if(txtRecinto.getText().toString().isEmpty()) {
@@ -146,11 +164,15 @@ public class RecintoEditarController {
     			helper.mostrarAlertaAdvertencia("Debe seleccionar la Parroquia", Context.getInstance().getStage());
     			return;
     		}
+    		if(cboZona.getSelectionModel().getSelectedItem() == null) {
+    			helper.mostrarAlertaAdvertencia("Debe seleccionar la Zona", Context.getInstance().getStage());
+    			return;
+    		}
     		Optional<ButtonType> result = helper.mostrarAlertaConfirmacion("Desea Grabar los Datos?",Context.getInstance().getStage());
 			if(result.get() == ButtonType.OK){
 				recintoDAO.getEntityManager().getTransaction().begin();
 				
-				//recinto.setParroquia(cboParroquia.getSelectionModel().getSelectedItem());
+				recinto.setZonaRural(cboZona.getSelectionModel().getSelectedItem());
 				recinto.setRecinto(txtRecinto.getText());
 				recinto.setDireccion(txtDireccion.getText());
 				recinto.setTelefono(txtTelefono.getText());

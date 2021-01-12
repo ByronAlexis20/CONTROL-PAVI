@@ -121,7 +121,7 @@ public class DelegadosPoliticosController {
 			provinciaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AsignacionJunta,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<AsignacionJunta, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getJuntaVoto().getRecinto().getParroquia().getCanton().getProvincia().getProvincia());
+					return new SimpleObjectProperty<String>(param.getValue().getJuntaVoto().getRecinto().getZonaRural().getParroquia().getCanton().getProvincia().getProvincia());
 				}
 			});
 
@@ -131,7 +131,7 @@ public class DelegadosPoliticosController {
 			cantonColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AsignacionJunta,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<AsignacionJunta, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getJuntaVoto().getRecinto().getParroquia().getCanton().getCanton());
+					return new SimpleObjectProperty<String>(param.getValue().getJuntaVoto().getRecinto().getZonaRural().getParroquia().getCanton().getCanton());
 				}
 			});
 
@@ -141,7 +141,7 @@ public class DelegadosPoliticosController {
 			parroquiaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AsignacionJunta,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<AsignacionJunta, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getJuntaVoto().getRecinto().getParroquia().getParroquia());
+					return new SimpleObjectProperty<String>(param.getValue().getJuntaVoto().getRecinto().getZonaRural().getParroquia().getParroquia());
 				}
 			});
 

@@ -42,7 +42,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="cboParroquia" prefHeight="25.0" prefWidth="244.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="cboParroquia" onAction="#cambiarZona" prefHeight="25.0" prefWidth="244.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                   <Label text="Teléfono:" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <font>
                         <Font name="System Bold" size="12.0" />
