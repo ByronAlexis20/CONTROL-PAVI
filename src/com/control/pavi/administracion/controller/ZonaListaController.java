@@ -96,7 +96,7 @@ public class ZonaListaController {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<ZonaRural, String> param) {
 					Parroquia parroquia = new Parroquia();
-					List<Parroquia> lista = parroquiaDAO.buscarPorCodigo(param.getValue().getIdParroquia());
+					List<Parroquia> lista = parroquiaDAO.buscarPorCodigo(param.getValue().getParroquia().getIdParroquia());
 					for(Parroquia pa : lista) {
 						parroquia = pa;
 					}
@@ -111,7 +111,7 @@ public class ZonaListaController {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<ZonaRural, String> param) {
 					Parroquia parroquia = new Parroquia();
-					List<Parroquia> lista = parroquiaDAO.buscarPorCodigo(param.getValue().getIdParroquia());
+					List<Parroquia> lista = parroquiaDAO.buscarPorCodigo(param.getValue().getParroquia().getIdParroquia());
 					for(Parroquia pa : lista) {
 						parroquia = pa;
 					}
@@ -126,7 +126,7 @@ public class ZonaListaController {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<ZonaRural, String> param) {
 					String parroquia = "";
-					List<Parroquia> lista = parroquiaDAO.buscarPorCodigo(param.getValue().getIdParroquia());
+					List<Parroquia> lista = parroquiaDAO.buscarPorCodigo(param.getValue().getParroquia().getIdParroquia());
 					for(Parroquia pa : lista) {
 						parroquia = pa.getParroquia();
 					}

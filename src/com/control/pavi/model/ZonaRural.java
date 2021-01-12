@@ -1,14 +1,19 @@
 package com.control.pavi.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,21 +30,25 @@ public class ZonaRural implements Serializable {
 	@Column(name = "id_zona")
 	private Integer idZona;
 
-	@Column(name = "id_parroquia")
-	private Integer idParroquia;
+	@ManyToOne
+	@JoinColumn(name = "id_parroquia")
+	private Parroquia parroquia;
 
 	private String nombre;
 
 	private String estado;
 
+	@OneToMany(mappedBy="zonaRural", cascade = CascadeType.ALL)
+	private List<Recinto> recintos;
+	
 	public ZonaRural() {
 		super();
 	}
 
-	public ZonaRural(Integer idZona, Integer idParroquia, String estado, String nombre) {
+	public ZonaRural(Integer idZona, Parroquia parroquia, String estado, String nombre) {
 		super();
 		this.idZona = idZona;
-		this.idParroquia = idParroquia;
+		this.parroquia = parroquia;
 		this.estado = estado;
 		this.nombre = nombre;
 	}
@@ -52,12 +61,14 @@ public class ZonaRural implements Serializable {
 		this.idZona = idZona;
 	}
 
-	public Integer getIdParroquia() {
-		return idParroquia;
+	
+
+	public Parroquia getParroquia() {
+		return parroquia;
 	}
 
-	public void setIdParroquia(Integer idParroquia) {
-		this.idParroquia = idParroquia;
+	public void setParroquia(Parroquia parroquia) {
+		this.parroquia = parroquia;
 	}
 
 	public String getEstado() {
@@ -74,6 +85,14 @@ public class ZonaRural implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public List<Recinto> getRecintos() {
+		return recintos;
+	}
+
+	public void setRecintos(List<Recinto> recintos) {
+		this.recintos = recintos;
 	}
 
 	@Override

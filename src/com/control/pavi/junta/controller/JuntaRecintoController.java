@@ -42,10 +42,10 @@ public class JuntaRecintoController {
 			btnQuitar.setStyle("-fx-cursor: hand;");
 			if(Context.getInstance().getRecinto() != null) {
 				recinto = Context.getInstance().getRecinto();
-				txtCanton.setText(recinto.getParroquia().getCanton().getCanton());
+				txtCanton.setText(recinto.getZonaRural().getParroquia().getCanton().getCanton());
 				txtRecinto.setText(recinto.getRecinto());
-				txtProvincia.setText(recinto.getParroquia().getCanton().getProvincia().getProvincia());
-				txtParroquia.setText(recinto.getParroquia().getParroquia());
+				txtProvincia.setText(recinto.getZonaRural().getParroquia().getCanton().getProvincia().getProvincia());
+				txtParroquia.setText(recinto.getZonaRural().getParroquia().getParroquia());
 				llenarDatos();
 				Context.getInstance().setRecinto(null);
 			}else {

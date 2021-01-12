@@ -36,7 +36,7 @@ public class Parroquia implements Serializable {
 
 	//bi-directional many-to-one association to Recinto
 	@OneToMany(mappedBy="parroquia", cascade = CascadeType.ALL)
-	private List<Recinto> recintos;
+	private List<ZonaRural> zonaRurales;
 
 	public Parroquia() {
 	}
@@ -81,27 +81,15 @@ public class Parroquia implements Serializable {
 		this.zona = zona;
 	}
 
-	public List<Recinto> getRecintos() {
-		return this.recintos;
+	
+	public List<ZonaRural> getZonaRurales() {
+		return zonaRurales;
 	}
 
-	public void setRecintos(List<Recinto> recintos) {
-		this.recintos = recintos;
+	public void setZonaRurales(List<ZonaRural> zonaRurales) {
+		this.zonaRurales = zonaRurales;
 	}
 
-	public Recinto addRecinto(Recinto recinto) {
-		getRecintos().add(recinto);
-		recinto.setParroquia(this);
-
-		return recinto;
-	}
-
-	public Recinto removeRecinto(Recinto recinto) {
-		getRecintos().remove(recinto);
-		recinto.setParroquia(null);
-
-		return recinto;
-	}
 	@Override
 	public String toString() {
 		return this.parroquia;

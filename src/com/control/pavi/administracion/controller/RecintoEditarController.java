@@ -80,11 +80,11 @@ public class RecintoEditarController {
     	txtRecinto.setText(recinto.getRecinto());
     	txtTelefono.setText(recinto.getTelefono());
     	txtDireccion.setText(recinto.getDireccion());
-    	cboProvincia.getSelectionModel().select(recinto.getParroquia().getCanton().getProvincia());
+    	cboProvincia.getSelectionModel().select(recinto.getZonaRural().getParroquia().getCanton().getProvincia());
     	cambiarCanton();
-    	cboCanton.getSelectionModel().select(recinto.getParroquia().getCanton());
+    	cboCanton.getSelectionModel().select(recinto.getZonaRural().getParroquia().getCanton());
     	cambiarParroquia();
-    	cboParroquia.getSelectionModel().select(recinto.getParroquia());
+    	cboParroquia.getSelectionModel().select(recinto.getZonaRural().getParroquia());
     }
     private void llenarComboProvincia(){
 		try{
@@ -150,7 +150,7 @@ public class RecintoEditarController {
 			if(result.get() == ButtonType.OK){
 				recintoDAO.getEntityManager().getTransaction().begin();
 				
-				recinto.setParroquia(cboParroquia.getSelectionModel().getSelectedItem());
+				//recinto.setParroquia(cboParroquia.getSelectionModel().getSelectedItem());
 				recinto.setRecinto(txtRecinto.getText());
 				recinto.setDireccion(txtDireccion.getText());
 				recinto.setTelefono(txtTelefono.getText());

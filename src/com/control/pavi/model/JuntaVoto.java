@@ -8,19 +8,19 @@ import java.util.List;
 @Table(name="junta_voto")
 @NamedQueries({
 	@NamedQuery(name="JuntaVoto.bucarPorRecinto", query="SELECT j FROM JuntaVoto j where j.recinto.idRecinto = :id and j.estado = 1"),
-	@NamedQuery(name="JuntaVoto.buscarTodosActivo", query="SELECT j FROM JuntaVoto j where j.estado = 1 order by j.recinto.parroquia.idParroquia asc"),
+	@NamedQuery(name="JuntaVoto.buscarTodosActivo", query="SELECT j FROM JuntaVoto j where j.estado = 1 order by j.recinto.zonaRural.parroquia.idParroquia asc"),
 	@NamedQuery(name="JuntaVoto.buscarTodosActivoProvincia", query="SELECT j FROM JuntaVoto j where j.estado = 1 "
-			+ "and lower(j.recinto.parroquia.canton.provincia.provincia) like (:patron) "
-			+ "order by j.recinto.parroquia.idParroquia asc"),
+			+ "and lower(j.recinto.zonaRural.parroquia.canton.provincia.provincia) like (:patron) "
+			+ "order by j.recinto.zonaRural.parroquia.idParroquia asc"),
 	@NamedQuery(name="JuntaVoto.buscarTodosActivoCanton", query="SELECT j FROM JuntaVoto j where j.estado = 1 "
-			+ "and lower(j.recinto.parroquia.canton.canton) like (:patron) "
-			+ "order by j.recinto.parroquia.idParroquia asc"),
+			+ "and lower(j.recinto.zonaRural.parroquia.canton.canton) like (:patron) "
+			+ "order by j.recinto.zonaRural.parroquia.idParroquia asc"),
 	@NamedQuery(name="JuntaVoto.buscarTodosActivoParroquia", query="SELECT j FROM JuntaVoto j where j.estado = 1 "
-			+ "and lower(j.recinto.parroquia.parroquia) like (:patron) "
-			+ "order by j.recinto.parroquia.idParroquia asc"),
+			+ "and lower(j.recinto.zonaRural.parroquia.parroquia) like (:patron) "
+			+ "order by j.recinto.zonaRural.parroquia.idParroquia asc"),
 	@NamedQuery(name="JuntaVoto.buscarTodosActivoRecinto", query="SELECT j FROM JuntaVoto j where j.estado = 1 "
 			+ "and lower(j.recinto.recinto) like (:patron) "
-			+ "order by j.recinto.parroquia.idParroquia asc")
+			+ "order by j.recinto.zonaRural.parroquia.idParroquia asc")
 })
 public class JuntaVoto implements Serializable {
 	private static final long serialVersionUID = 1L;

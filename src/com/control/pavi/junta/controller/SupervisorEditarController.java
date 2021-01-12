@@ -117,7 +117,7 @@ public class SupervisorEditarController {
 					new Callback<TableColumn.CellDataFeatures<AsignacionSupervisor, String>, ObservableValue<String>>() {
 						@Override
 						public ObservableValue<String> call(CellDataFeatures<AsignacionSupervisor, String> param) {
-							return new SimpleObjectProperty<String>(param.getValue().getJuntaVoto().getRecinto()
+							return new SimpleObjectProperty<String>(param.getValue().getJuntaVoto().getRecinto().getZonaRural()
 									.getParroquia().getCanton().getProvincia().getProvincia());
 						}
 					});
@@ -130,7 +130,7 @@ public class SupervisorEditarController {
 						@Override
 						public ObservableValue<String> call(CellDataFeatures<AsignacionSupervisor, String> param) {
 							return new SimpleObjectProperty<String>(
-									param.getValue().getJuntaVoto().getRecinto().getParroquia().getParroquia());
+									param.getValue().getJuntaVoto().getRecinto().getZonaRural().getParroquia().getParroquia());
 						}
 					});
 

@@ -8,14 +8,13 @@ import java.util.List;
 @Table(name="recinto")
 @NamedQueries({
 	@NamedQuery(name="Recinto.findAll", query="SELECT r FROM Recinto r"),
-	@NamedQuery(name="Recinto.bucarPatron", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.recinto) like lower(:patron) order by r.parroquia.idParroquia asc"),
-	@NamedQuery(name="Recinto.bucarIdParroquia", query="SELECT r FROM Recinto r where r.estado = 1 and r.parroquia.idParroquia = :id"),
+	@NamedQuery(name="Recinto.bucarPatron", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.recinto) like lower(:patron) order by r.zonaRural.parroquia.idParroquia asc"),
+	@NamedQuery(name="Recinto.bucarIdParroquia", query="SELECT r FROM Recinto r where r.estado = 1 and r.zonaRural.parroquia.idParroquia = :id"),
 	
-	@NamedQuery(name="Recinto.bucarPorProvincia", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.parroquia.canton.provincia.provincia) like lower(:patron)"),
-	@NamedQuery(name="Recinto.bucarPorCanton", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.parroquia.canton.canton) like lower(:patron)"),
-	@NamedQuery(name="Recinto.bucarPorParroquia", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.parroquia.parroquia) like lower(:patron)"),
+	@NamedQuery(name="Recinto.bucarPorProvincia", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.zonaRural.parroquia.canton.provincia.provincia) like lower(:patron)"),
+	@NamedQuery(name="Recinto.bucarPorCanton", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.zonaRural.parroquia.canton.canton) like lower(:patron)"),
+	@NamedQuery(name="Recinto.bucarPorParroquia", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.zonaRural.parroquia.parroquia) like lower(:patron)"),
 	@NamedQuery(name="Recinto.bucarPorRecinto", query="SELECT r FROM Recinto r where r.estado = 1 and lower(r.recinto) like lower(:patron)"),
-	
 })
 public class Recinto implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -39,8 +38,8 @@ public class Recinto implements Serializable {
 
 	//bi-directional many-to-one association to Parroquia
 	@ManyToOne
-	@JoinColumn(name="id_parroquia")
-	private Parroquia parroquia;
+	@JoinColumn(name="id_zona")
+	private ZonaRural zonaRural;
 
 	public Recinto() {
 	}
@@ -107,13 +106,15 @@ public class Recinto implements Serializable {
 		return juntaVoto;
 	}
 
-	public Parroquia getParroquia() {
-		return this.parroquia;
+	
+	public ZonaRural getZonaRural() {
+		return zonaRural;
 	}
 
-	public void setParroquia(Parroquia parroquia) {
-		this.parroquia = parroquia;
+	public void setZonaRural(ZonaRural zonaRural) {
+		this.zonaRural = zonaRural;
 	}
+
 	@Override
 	public String toString() {
 		return this.recinto;

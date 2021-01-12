@@ -98,7 +98,7 @@ public class JuntaListaController {
 			provinciaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getParroquia().getCanton().getProvincia().getProvincia());
+					return new SimpleObjectProperty<String>(param.getValue().getZonaRural().getParroquia().getCanton().getProvincia().getProvincia());
 				}
 			});
 			
@@ -108,7 +108,7 @@ public class JuntaListaController {
 			cantonColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getParroquia().getCanton().getCanton());
+					return new SimpleObjectProperty<String>(param.getValue().getZonaRural().getParroquia().getCanton().getCanton());
 				}
 			});
 			
@@ -118,7 +118,7 @@ public class JuntaListaController {
 			parroquiaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getParroquia().getParroquia());
+					return new SimpleObjectProperty<String>(param.getValue().getZonaRural().getParroquia().getParroquia());
 				}
 			});
 			

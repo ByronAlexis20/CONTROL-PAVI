@@ -157,7 +157,7 @@ public class SupervisorSeleccionJuntaController {
 			provinciaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<JuntaVoto,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<JuntaVoto, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getRecinto().getParroquia().getCanton().getProvincia().getProvincia());
+					return new SimpleObjectProperty<String>(param.getValue().getRecinto().getZonaRural().getParroquia().getCanton().getProvincia().getProvincia());
 				}
 			});
 			
@@ -167,7 +167,7 @@ public class SupervisorSeleccionJuntaController {
 			cantonColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<JuntaVoto,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<JuntaVoto, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getRecinto().getParroquia().getCanton().getCanton());
+					return new SimpleObjectProperty<String>(param.getValue().getRecinto().getZonaRural().getParroquia().getCanton().getCanton());
 				}
 			});
 			
@@ -177,7 +177,7 @@ public class SupervisorSeleccionJuntaController {
 			parroquiaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<JuntaVoto,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<JuntaVoto, String> param) {
-					return new SimpleObjectProperty<String>(param.getValue().getRecinto().getParroquia().getParroquia());
+					return new SimpleObjectProperty<String>(param.getValue().getRecinto().getZonaRural().getParroquia().getParroquia());
 				}
 			});
 			
