@@ -29,6 +29,8 @@ public class Supervisor implements Serializable {
 	private String noIdentificacion;
 
 	private String nombres;
+	
+	private String correo;
 
 	private String telefono;
 
@@ -154,6 +156,14 @@ public class Supervisor implements Serializable {
 
 	public void setTipoSupervisor(TipoSupervisor tipoSupervisor) {
 		this.tipoSupervisor = tipoSupervisor;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 }
