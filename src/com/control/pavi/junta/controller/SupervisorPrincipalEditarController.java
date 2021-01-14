@@ -32,6 +32,7 @@ public class SupervisorPrincipalEditarController {
 	@FXML private TextField txtTelefono;
 	@FXML private TextField txtCodigo;
 	@FXML private TextField txtNombres;
+	@FXML private TextField txtCorreo;
 	@FXML private TableView<AsignacionSupervisorPrincipal> tvDatosJunta;
 	@FXML private Button btnAgregar;
 	@FXML private TextField txtCedula;
@@ -76,6 +77,7 @@ public class SupervisorPrincipalEditarController {
 			txtDireccion.setText(supervisor.getDireccion());
 			txtNombres.setText(supervisor.getNombres());
 			txtTelefono.setText(supervisor.getTelefono());
+			txtCorreo.setText(supervisor.getCorreo());
 			if (supervisor.getAsignacionSupervisorPrincipals().size() > 0) {
 				cargarSupervisoresAsignados();
 			}
@@ -267,6 +269,7 @@ public class SupervisorPrincipalEditarController {
 				supervisor.setCedula(txtCedula.getText());
 				supervisor.setNombres(txtNombres.getText());
 				supervisor.setTelefono(txtTelefono.getText());
+				supervisor.setCorreo(txtCorreo.getText());
 				
 				asignacionDAO.getEntityManager().getTransaction().begin();
 				//cuando el supervisor es nuevo, se graba todo

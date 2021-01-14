@@ -31,6 +31,8 @@ public class SupervisorPrincipal implements Serializable {
 	private String nombres;
 
 	private String telefono;
+	
+	private String correo;
 
 	//bi-directional many-to-one association to AsignacionSupervisorPrincipal
 	@OneToMany(mappedBy="supervisorPrincipal", cascade = CascadeType.ALL)
@@ -115,6 +117,14 @@ public class SupervisorPrincipal implements Serializable {
 		asignacionSupervisorPrincipal.setSupervisorPrincipal(null);
 
 		return asignacionSupervisorPrincipal;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 }

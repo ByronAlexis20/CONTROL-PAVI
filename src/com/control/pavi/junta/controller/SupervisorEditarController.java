@@ -42,6 +42,8 @@ public class SupervisorEditarController {
 	@FXML
 	private TextField txtNombres;
 	@FXML
+	private TextField txtCorreo;
+	@FXML
 	private TableView<AsignacionSupervisor> tvDatosJunta;
 	@FXML
 	private Button btnAgregar;
@@ -91,6 +93,7 @@ public class SupervisorEditarController {
 			txtDireccion.setText(supervisor.getDireccion());
 			txtNombres.setText(supervisor.getNombres());
 			txtTelefono.setText(supervisor.getTelefono());
+			txtCorreo.setText(supervisor.getCorreo());
 			if (supervisor.getAsignacionSupervisors().size() > 0) {
 				cargarJuntasAsignadas();
 			}
@@ -318,6 +321,7 @@ public class SupervisorEditarController {
 				supervisor.setNoIdentificacion(txtCedula.getText());
 				supervisor.setNombres(txtNombres.getText());
 				supervisor.setTelefono(txtTelefono.getText());
+				supervisor.setCorreo(txtCorreo.getText());
 				supervisor.setTipoSupervisor(listaSupervisor.get(0));
 				
 				supervisorDAO.getEntityManager().getTransaction().begin();
