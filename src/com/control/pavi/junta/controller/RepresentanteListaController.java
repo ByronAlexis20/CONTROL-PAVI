@@ -106,6 +106,16 @@ public class RepresentanteListaController {
 				}
 			});
 			
+			TableColumn<Representante, String> correoColum = new TableColumn<>("Correo");
+			correoColum.setMinWidth(10);
+			correoColum.setPrefWidth(200);
+			correoColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Representante,String>, ObservableValue<String>>() {
+				@Override
+				public ObservableValue<String> call(CellDataFeatures<Representante, String> param) {
+					return new SimpleObjectProperty<String>(param.getValue().getCorreo());
+				}
+			});
+			
 			TableColumn<Representante, String> listaColum = new TableColumn<>("Partido Político");
 			listaColum.setMinWidth(10);
 			listaColum.setPrefWidth(200);
@@ -132,7 +142,7 @@ public class RepresentanteListaController {
 			});
 
 			
-			tvDatos.getColumns().addAll(idColum,nombresColum,apellidoColum,listaColum,estadoColum);
+			tvDatos.getColumns().addAll(idColum,nombresColum,apellidoColum,correoColum,listaColum,estadoColum);
 			tvDatos.setItems(datos);
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());

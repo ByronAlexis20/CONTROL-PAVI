@@ -136,6 +136,16 @@ public class SupervisorListaController {
 				}
 			});
 			
+			TableColumn<Supervisor, String> correoColum = new TableColumn<>("Telefono");
+			correoColum.setMinWidth(10);
+			correoColum.setPrefWidth(150);
+			correoColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Supervisor,String>, ObservableValue<String>>() {
+				@Override
+				public ObservableValue<String> call(CellDataFeatures<Supervisor, String> param) {
+					return new SimpleObjectProperty<String>(param.getValue().getCorreo());
+				}
+			});
+			
 			TableColumn<Supervisor, String> asignacionColum = new TableColumn<>("Juntas Asignadas");
 			asignacionColum.setMinWidth(10);
 			asignacionColum.setPrefWidth(150);
@@ -151,7 +161,7 @@ public class SupervisorListaController {
 				}
 			});
 			
-			tvDatos.getColumns().addAll(cedulaColum,nombreColum,telefonoColum,asignacionColum);
+			tvDatos.getColumns().addAll(cedulaColum,nombreColum,telefonoColum,correoColum,asignacionColum);
 			tvDatos.setItems(datos);
 		}catch(Exception ex) {
 			
