@@ -115,6 +115,16 @@ public class RecintoListaController {
 				}
 			});
 			
+			TableColumn<Recinto, String> zonaColum = new TableColumn<>("Zona");
+			zonaColum.setMinWidth(10);
+			zonaColum.setPrefWidth(200);
+			zonaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
+				@Override
+				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
+					return new SimpleObjectProperty<String>(param.getValue().getZonaRural().getNombre());
+				}
+			});
+			
 			TableColumn<Recinto, String> recintoColum = new TableColumn<>("Recinto");
 			recintoColum.setMinWidth(10);
 			recintoColum.setPrefWidth(200);
@@ -142,7 +152,7 @@ public class RecintoListaController {
 			});
 
 			
-			tvDatos.getColumns().addAll(idColum,provinciaColum,cantonColum,parroquiaColum,recintoColum,estadoColum);
+			tvDatos.getColumns().addAll(provinciaColum,cantonColum,parroquiaColum,zonaColum,recintoColum,estadoColum);
 			tvDatos.setItems(datos);
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());

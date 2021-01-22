@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name="provincia")
 @NamedQueries({
 	@NamedQuery(name="Provincia.findAll", query="SELECT p FROM Provincia p"),
-	@NamedQuery(name="Provincia.bucarPatron", query="SELECT p FROM Provincia p where p.estado = 1 and lower(p.provincia) like lower(:patron)")
+	@NamedQuery(name="Provincia.bucarPatron", query="SELECT p FROM Provincia p where p.estado = 1 and lower(p.provincia) like lower(:patron) order by p.idProvincia asc")
 })
 public class Provincia implements Serializable {
 	private static final long serialVersionUID = 1L;

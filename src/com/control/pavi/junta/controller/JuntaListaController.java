@@ -122,6 +122,16 @@ public class JuntaListaController {
 				}
 			});
 			
+			TableColumn<Recinto, String> zonaColum = new TableColumn<>("Zona");
+			zonaColum.setMinWidth(10);
+			zonaColum.setPrefWidth(220);
+			zonaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recinto,String>, ObservableValue<String>>() {
+				@Override
+				public ObservableValue<String> call(CellDataFeatures<Recinto, String> param) {
+					return new SimpleObjectProperty<String>(param.getValue().getZonaRural().getNombre());
+				}
+			});
+			
 			TableColumn<Recinto, String> recintoColum = new TableColumn<>("Recinto");
 			recintoColum.setMinWidth(10);
 			recintoColum.setPrefWidth(300);
@@ -147,7 +157,7 @@ public class JuntaListaController {
 				}
 			});
 			
-			tvDatos.getColumns().addAll(provinciaColum,cantonColum,parroquiaColum,recintoColum,juntasColum);
+			tvDatos.getColumns().addAll(provinciaColum,cantonColum,parroquiaColum,zonaColum,recintoColum,juntasColum);
 			tvDatos.setItems(datos);
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());

@@ -89,6 +89,8 @@ public class RecintoEditarController {
     	cboCanton.getSelectionModel().select(recinto.getZonaRural().getParroquia().getCanton());
     	cambiarParroquia();
     	cboParroquia.getSelectionModel().select(recinto.getZonaRural().getParroquia());
+    	cambiarZona();
+    	cboZona.getSelectionModel().select(recinto.getZonaRural());
     }
     private void llenarComboProvincia(){
 		try{
