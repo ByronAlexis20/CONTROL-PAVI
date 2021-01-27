@@ -27,6 +27,7 @@ public class RepresentanteEditarController {
     @FXML private TextField txtNombres;
     @FXML private TextField txtCedula;
     @FXML private TextField txtCorreo;
+    @FXML private TextField txtTelefono;
     @FXML private Button btnGrabar;
     @FXML private Label lblMensajeCedula;
 
@@ -63,6 +64,7 @@ public class RepresentanteEditarController {
 			txtApellidos.setText(representante.getApellidos());
 			txtEdad.setText(String.valueOf(representante.getEdad()));
 			txtCorreo.setText(representante.getCorreo());
+			txtTelefono.setText(representante.getTelefono());
 			cboPartidoPolitico.getSelectionModel().select(representante.getPartidoPolitico());
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -93,6 +95,7 @@ public class RepresentanteEditarController {
 			representante.setNoIdentificacion(txtCedula.getText());
 			representante.setCorreo(txtCorreo.getText());
 			representante.setNombre(txtNombres.getText());
+			representante.setTelefono(txtTelefono.getText());
 			representante.setPartidoPolitico(cboPartidoPolitico.getSelectionModel().getSelectedItem());
 			
 			

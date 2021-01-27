@@ -2,7 +2,7 @@
 <!-- Created with Jaspersoft Studio version 6.14.0.final using JasperReports Library version 6.14.0-2ab0d8625be255bf609c78e1181801213e51db8f  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptDelegadosProvincia" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ea980ee3-ad47-49a8-8c2b-524f3f98e12f">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Conexion Control Pavi"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="208"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="781"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -17,13 +17,15 @@
 	<parameter name="TITULO" class="java.lang.String"/>
 	<parameter name="ID_RECINTO" class="java.lang.Integer"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT pr.provincia,ca.canton,pa.parroquia,re.recinto,concat(ju.genero,' - ',ju.numero) as junta,concat(rep.nombre,' ',rep.apellidos, ' - ',pl.lista) as delegado
-from provincia pr,canton ca,parroquia pa,recinto re,asignacion_junta aj,junta_voto ju,representante rep,partido_politico pl
-where aj.id_junta = ju.id_junta and aj.id_representante = rep.id_representante and pr.id_provincia = ca.id_provincia
-and ca.id_canton = pa.id_canton and pa.id_parroquia = re.id_parroquia and re.id_recinto = ju.id_recinto and pl.id_partido = rep.id_partido
-and pr.estado = 1 and ca.estado = 1 and pa.estado = 1 and re.estado = 1 and aj.estado = 1
-and ju.estado = 1 and rep.estado = 1
-and re.id_recinto =  $P{ID_RECINTO}]]>
+		<![CDATA[SELECT pr.provincia,ca.canton,pa.parroquia,re.recinto,concat(ju.genero,' - ',ju.numero) as junta,
+concat(rep.nombre,' ',rep.apellidos, ' - ',pl.lista) as delegado,zr.nombre as zona_rural
+from provincia pr,canton ca,parroquia pa,zona_rural zr,recinto re,asignacion_junta aj,junta_voto ju
+,representante rep,partido_politico pl where aj.id_junta = ju.id_junta and 
+aj.id_representante = rep.id_representante and pr.id_provincia = ca.id_provincia and 
+ca.id_canton = pa.id_canton and pa.id_parroquia = zr.id_parroquia and zr.id_zona = re.id_zona 
+and re.id_recinto = ju.id_recinto and pl.id_partido = rep.id_partido and pr.estado = 1 and ca.estado = 1
+ and pa.estado = 1 and re.estado = 1 and aj.estado = 1 and ju.estado = 1 and rep.estado = 1 
+ and re.id_recinto =   $P{ID_RECINTO}]]>
 	</queryString>
 	<field name="provincia" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="provincia"/>
@@ -56,6 +58,11 @@ and re.id_recinto =  $P{ID_RECINTO}]]>
 	<field name="delegado" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="delegado"/>
 		<property name="com.jaspersoft.studio.field.label" value="delegado"/>
+	</field>
+	<field name="zona_rural" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="zona_rural"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="zona_rural"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -109,7 +116,7 @@ and re.id_recinto =  $P{ID_RECINTO}]]>
 				<text><![CDATA[Cantón]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="89" y="4" width="136" height="20" uuid="7078a14b-0431-4506-b86d-7b532f17afb1">
+				<reportElement x="89" y="4" width="131" height="20" uuid="7078a14b-0431-4506-b86d-7b532f17afb1">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0a068ae0-05ef-45c2-881a-996727164f31"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -118,7 +125,7 @@ and re.id_recinto =  $P{ID_RECINTO}]]>
 				<text><![CDATA[Parroquia]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="228" y="4" width="269" height="20" uuid="8d3031c2-4ef9-4ef2-ae4a-bede1299c686">
+				<reportElement x="370" y="4" width="193" height="20" uuid="8d3031c2-4ef9-4ef2-ae4a-bede1299c686">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c7a9230d-c523-4d6c-a7bf-2a1b23db6789"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -127,7 +134,7 @@ and re.id_recinto =  $P{ID_RECINTO}]]>
 				<text><![CDATA[Recinto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="620" y="4" width="175" height="20" uuid="b03546d8-f821-4782-99c5-df7cd12c146e">
+				<reportElement x="658" y="4" width="137" height="20" uuid="b03546d8-f821-4782-99c5-df7cd12c146e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a4fed621-1dac-4250-b862-4e696110ae07"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -136,7 +143,7 @@ and re.id_recinto =  $P{ID_RECINTO}]]>
 				<text><![CDATA[Delegado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="500" y="4" width="113" height="20" uuid="b7eb6af4-b993-4817-9b5b-6e986b76d958">
+				<reportElement x="564" y="4" width="93" height="20" uuid="b7eb6af4-b993-4817-9b5b-6e986b76d958">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="483d25f4-8a19-4097-a51d-5d53e2a990de"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -154,6 +161,16 @@ and re.id_recinto =  $P{ID_RECINTO}]]>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 			</line>
+			<staticText>
+				<reportElement x="225" y="5" width="143" height="20" uuid="a7480887-5a79-4017-9d4e-ac6667692701">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="06353643-58ab-4922-aa18-97d9d028a9d2"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Zona]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -168,7 +185,7 @@ and re.id_recinto =  $P{ID_RECINTO}]]>
 				<textFieldExpression><![CDATA[$F{canton}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="91" y="0" width="134" height="20" uuid="d8e86a9c-8614-4f08-afc0-9765c10c7d64">
+				<reportElement x="91" y="0" width="129" height="20" uuid="d8e86a9c-8614-4f08-afc0-9765c10c7d64">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0a068ae0-05ef-45c2-881a-996727164f31"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -177,7 +194,7 @@ and re.id_recinto =  $P{ID_RECINTO}]]>
 				<textFieldExpression><![CDATA[$F{parroquia}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="228" y="0" width="269" height="20" uuid="dfabaa9f-dc3c-4445-a539-12dd75e4f79f">
+				<reportElement x="370" y="0" width="193" height="20" uuid="dfabaa9f-dc3c-4445-a539-12dd75e4f79f">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c7a9230d-c523-4d6c-a7bf-2a1b23db6789"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -186,7 +203,7 @@ and re.id_recinto =  $P{ID_RECINTO}]]>
 				<textFieldExpression><![CDATA[$F{recinto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="620" y="0" width="175" height="20" uuid="6ca851e9-ddde-4f2f-bfde-d52b01b3e55a">
+				<reportElement x="658" y="0" width="137" height="20" uuid="6ca851e9-ddde-4f2f-bfde-d52b01b3e55a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a4fed621-1dac-4250-b862-4e696110ae07"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -195,7 +212,7 @@ and re.id_recinto =  $P{ID_RECINTO}]]>
 				<textFieldExpression><![CDATA[$F{delegado}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="500" y="0" width="113" height="20" uuid="2a91ad38-bbae-42dc-88c2-cda6772b8bbf">
+				<reportElement x="564" y="0" width="93" height="20" uuid="2a91ad38-bbae-42dc-88c2-cda6772b8bbf">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="483d25f4-8a19-4097-a51d-5d53e2a990de"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -208,10 +225,20 @@ and re.id_recinto =  $P{ID_RECINTO}]]>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 			</line>
+			<textField>
+				<reportElement x="225" y="0" width="143" height="20" uuid="52a99efc-0101-4df1-b06a-33c25f461f2c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="06353643-58ab-4922-aa18-97d9d028a9d2"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{zona_rural}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="20" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="100" splitType="Stretch">
