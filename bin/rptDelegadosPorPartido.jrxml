@@ -17,7 +17,7 @@
 	<parameter name="ID_PARTIDO" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT p.lista,concat(r.nombre,' ',r.apellidos) as delegado,re.recinto,pr.parroquia,ca.canton,zn.zona,
-zr.nombre as zona_rural
+zr.nombre as zona_rural,r.telefono
 from asignacion_junta a,partido_politico p,representante r,
 recinto re,parroquia pr,zona_rural zr,canton ca,zona zn,junta_voto jv
 WHERE a.id_representante = r.id_representante and p.id_partido = r.id_partido and
@@ -66,6 +66,12 @@ and p.id_partido = $P{ID_PARTIDO}]]>
 		<property name="com.jaspersoft.studio.field.label" value="zona_rural"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="zona_rural"/>
 	</field>
+	<field name="telefono" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="telefono"/>
+		<property name="com.jaspersoft.studio.field.label" value="telefono"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="representante"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -100,7 +106,7 @@ and p.id_partido = $P{ID_PARTIDO}]]>
 				<text><![CDATA[Delegado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="554" y="20" width="100" height="20" uuid="de28e154-455f-4737-8d5f-2d1dbec9720b">
+				<reportElement x="532" y="20" width="54" height="20" uuid="de28e154-455f-4737-8d5f-2d1dbec9720b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="98a3fa96-d6b3-41e1-a868-95cee3582537"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -110,7 +116,7 @@ and p.id_partido = $P{ID_PARTIDO}]]>
 				<text><![CDATA[Lista]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="400" y="20" width="150" height="20" uuid="13c95b1c-60bf-4c20-9953-686bb188fd73">
+				<reportElement x="378" y="20" width="150" height="20" uuid="13c95b1c-60bf-4c20-9953-686bb188fd73">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9eaeb836-dca0-4c97-bc6a-a0ee87c316c4"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -120,7 +126,7 @@ and p.id_partido = $P{ID_PARTIDO}]]>
 				<text><![CDATA[Recinto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="104" y="20" width="144" height="20" uuid="01286bf7-168b-4e82-b57b-a558682bdcf2">
+				<reportElement x="83" y="20" width="144" height="20" uuid="01286bf7-168b-4e82-b57b-a558682bdcf2">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="51b91e5c-ae88-4cda-ab69-8c1c7124a938"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -140,7 +146,7 @@ and p.id_partido = $P{ID_PARTIDO}]]>
 				</reportElement>
 			</line>
 			<staticText>
-				<reportElement x="252" y="21" width="146" height="20" uuid="65e5042d-acd1-4b56-a148-dc636751e75a">
+				<reportElement x="230" y="21" width="146" height="20" uuid="65e5042d-acd1-4b56-a148-dc636751e75a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c708b91e-9eb2-4f69-ba15-733d64ddb26d"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -150,7 +156,7 @@ and p.id_partido = $P{ID_PARTIDO}]]>
 				<text><![CDATA[Zona]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="21" width="100" height="20" uuid="36233b1c-269d-436c-bd59-98938577a6a1">
+				<reportElement x="0" y="21" width="80" height="20" uuid="36233b1c-269d-436c-bd59-98938577a6a1">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3697b63-6cf2-4ec9-90a3-d2960908ba00"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -159,10 +165,20 @@ and p.id_partido = $P{ID_PARTIDO}]]>
 				</textElement>
 				<text><![CDATA[Cantón]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="588" y="20" width="70" height="20" uuid="862a3add-8a60-41d6-93c7-44d8c921de67">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b665d111-bb09-45b4-b247-dcad69688c21"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Teléfono]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="22" splitType="Stretch">
+		<band height="25" splitType="Stretch">
 			<textField>
 				<reportElement x="660" y="-2" width="140" height="20" uuid="4143cc3e-bb50-4bbb-8d66-bc12b8c2f515">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="81107feb-04ef-4846-892a-905f8faf2ece"/>
@@ -174,7 +190,7 @@ and p.id_partido = $P{ID_PARTIDO}]]>
 				<textFieldExpression><![CDATA[$F{delegado}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="554" y="0" width="100" height="20" uuid="50f773bc-9d27-4e93-b076-fecdb2f6365c">
+				<reportElement x="532" y="0" width="54" height="20" uuid="50f773bc-9d27-4e93-b076-fecdb2f6365c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="98a3fa96-d6b3-41e1-a868-95cee3582537"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -184,7 +200,7 @@ and p.id_partido = $P{ID_PARTIDO}]]>
 				<textFieldExpression><![CDATA[$F{lista}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="400" y="0" width="154" height="20" uuid="b56c396c-1165-468e-ac69-4d9ea7840783">
+				<reportElement x="378" y="0" width="150" height="20" uuid="b56c396c-1165-468e-ac69-4d9ea7840783">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9eaeb836-dca0-4c97-bc6a-a0ee87c316c4"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -194,7 +210,7 @@ and p.id_partido = $P{ID_PARTIDO}]]>
 				<textFieldExpression><![CDATA[$F{recinto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="104" y="0" width="146" height="20" uuid="cba7262e-6695-4cae-9c9f-c408256a533f">
+				<reportElement x="83" y="0" width="146" height="20" uuid="cba7262e-6695-4cae-9c9f-c408256a533f">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="51b91e5c-ae88-4cda-ab69-8c1c7124a938"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -204,7 +220,7 @@ and p.id_partido = $P{ID_PARTIDO}]]>
 				<textFieldExpression><![CDATA[$F{parroquia}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="252" y="0" width="146" height="20" uuid="43a80f7f-a7b0-4560-9974-94ae605be6be">
+				<reportElement x="230" y="0" width="146" height="20" uuid="43a80f7f-a7b0-4560-9974-94ae605be6be">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c708b91e-9eb2-4f69-ba15-733d64ddb26d"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -214,7 +230,7 @@ and p.id_partido = $P{ID_PARTIDO}]]>
 				<textFieldExpression><![CDATA[$F{zona_rural}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="100" height="20" uuid="536fbe26-7139-451a-8477-eb65533a51e7">
+				<reportElement x="0" y="0" width="80" height="20" uuid="536fbe26-7139-451a-8477-eb65533a51e7">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3697b63-6cf2-4ec9-90a3-d2960908ba00"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -228,10 +244,20 @@ and p.id_partido = $P{ID_PARTIDO}]]>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 			</line>
+			<textField>
+				<reportElement x="588" y="0" width="70" height="20" uuid="7cbbf372-a434-42e2-9553-8bd56398f303">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b665d111-bb09-45b4-b247-dcad69688c21"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="25" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="102" splitType="Stretch">

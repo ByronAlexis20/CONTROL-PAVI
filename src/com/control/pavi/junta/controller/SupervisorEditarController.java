@@ -137,6 +137,18 @@ public class SupervisorEditarController {
 						}
 					});
 
+			TableColumn<AsignacionSupervisor, String> zonaColum = new TableColumn<>("Zona");
+			zonaColum.setMinWidth(10);
+			zonaColum.setPrefWidth(150);
+			zonaColum.setCellValueFactory(
+					new Callback<TableColumn.CellDataFeatures<AsignacionSupervisor, String>, ObservableValue<String>>() {
+						@Override
+						public ObservableValue<String> call(CellDataFeatures<AsignacionSupervisor, String> param) {
+							return new SimpleObjectProperty<String>(
+									param.getValue().getJuntaVoto().getRecinto().getZonaRural().getNombre());
+						}
+					});
+			
 			TableColumn<AsignacionSupervisor, String> recintoColum = new TableColumn<>("Recinto");
 			recintoColum.setMinWidth(10);
 			recintoColum.setPrefWidth(220);
@@ -198,7 +210,7 @@ public class SupervisorEditarController {
 						}
 					});
 
-			tvDatosJunta.getColumns().addAll(recintoColum, juntaColum, provinciaColum, parroquiaColum, delegadoColum,partidoPoliticoColum);
+			tvDatosJunta.getColumns().addAll(provinciaColum,parroquiaColum,zonaColum,juntaColum,recintoColum,delegadoColum,partidoPoliticoColum);
 			tvDatosJunta.setItems(datos);
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());

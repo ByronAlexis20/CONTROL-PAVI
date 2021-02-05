@@ -116,9 +116,20 @@ public class RepresentanteListaController {
 				}
 			});
 			
+			TableColumn<Representante, String> telefonoColum = new TableColumn<>("Teléfono");
+			telefonoColum.setMinWidth(10);
+			telefonoColum.setPrefWidth(100);
+			telefonoColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Representante,String>, ObservableValue<String>>() {
+				@Override
+				public ObservableValue<String> call(CellDataFeatures<Representante, String> param) {
+					return new SimpleObjectProperty<String>(param.getValue().getTelefono());
+				}
+			});
+			
+			
 			TableColumn<Representante, String> listaColum = new TableColumn<>("Partido Político");
 			listaColum.setMinWidth(10);
-			listaColum.setPrefWidth(200);
+			listaColum.setPrefWidth(150);
 			listaColum.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Representante,String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(CellDataFeatures<Representante, String> param) {
@@ -142,7 +153,7 @@ public class RepresentanteListaController {
 			});
 
 			
-			tvDatos.getColumns().addAll(idColum,nombresColum,apellidoColum,correoColum,listaColum,estadoColum);
+			tvDatos.getColumns().addAll(idColum,nombresColum,apellidoColum,correoColum,telefonoColum,listaColum,estadoColum);
 			tvDatos.setItems(datos);
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());

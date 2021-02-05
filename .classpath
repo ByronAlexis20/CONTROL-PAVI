@@ -32,5 +32,6 @@
 	<classpathentry kind="lib" path="lib/silvertail.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-jdk14.jar"/>
+	<classpathentry kind="lib" path="lib/jasperreports-fonts-liberation-2.00.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
